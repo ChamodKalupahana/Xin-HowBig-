@@ -24,11 +24,22 @@ struct ARViewContainer: UIViewRepresentable {
         configuration.planeDetection = [.horizontal, .vertical]
         arView.session.run(configuration)
         
+        arView.delegate = context.coordinator
+        arView.scene = SCNScene() // init with empty scene
+        
+        // add gesture for tap
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
+        arView.addGestureRecognizer(tapGesture)
+        
         return arView
     }
     
     func updateUIView(_ uiView: ARSCNView, context: Context) {
         // No updates needed for now
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator()
     }
 }
 

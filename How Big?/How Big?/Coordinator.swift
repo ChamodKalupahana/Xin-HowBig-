@@ -37,7 +37,14 @@ class Coordinator : NSObject, ARSCNViewDelegate {
             // measure the distance
             if let start = startPoint, let end = endPoint {
                 let distance = calculateDistance(from: start.position, to: end.position)
+                displayDistance(distance, at: end.position, in: view)
             }
+        } else {
+            // reset points
+            startPoint?.removeFromParentNode()
+            endPoint?.removeFromParentNode()
+            startPoint = nil
+            endPoint = nil
         }
     }
     
