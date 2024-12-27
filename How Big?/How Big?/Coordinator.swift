@@ -92,5 +92,3 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         distanceTextNode = nil
     }
 }
-
-/// test commit

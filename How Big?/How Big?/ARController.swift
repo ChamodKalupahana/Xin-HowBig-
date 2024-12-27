@@ -24,7 +24,9 @@ struct ARController: View {
         } label: {
             Text("Reset")
                 .background(Color.white)
+                .padding()
                 .clipShape(RoundedRectangle(cornerRadius: 25.0))
+                .padding(5)
         }
 
     }
