@@ -6,6 +6,7 @@
 //
 
 import Testing
+@testable import How_Big_
 
 struct How_Big_Tests {
 
