@@ -8,9 +8,13 @@
 import Foundation
 import ARKit
 
-class Coordinator : NSObject, ARSCNViewDelegate {
+class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
+    
+    static let shared = Coordinator()
+    
     private var startPoint : SCNNode?
     private var endPoint : SCNNode?
+    private var distanceTextNode : SCNNode?
     
     @objc func handleTap(_ sender : UITapGestureRecognizer) {
         guard let view = sender.view as? ARSCNView else {
@@ -41,10 +45,7 @@ class Coordinator : NSObject, ARSCNViewDelegate {
             }
         } else {
             // reset points
-            startPoint?.removeFromParentNode()
-            endPoint?.removeFromParentNode()
-            startPoint = nil
-            endPoint = nil
+            resetPoints()
         }
     }
     
@@ -66,12 +67,28 @@ class Coordinator : NSObject, ARSCNViewDelegate {
     }
     
     private func displayDistance(_ distance : Float, at position : SCNVector3, in view : ARSCNView) {
+        
+        // Remove the previous distance text node if it exists
+        distanceTextNode?.removeFromParentNode()
+
         let SCNTextString = String(format: "%.2f meters", distance)
         let text = SCNText(string: SCNTextString, extrusionDepth: 0.1)
         text.firstMaterial?.diffuse.contents = UIColor.yellow
         let textNode = SCNNode(geometry: text)
         textNode.scale = SCNVector3(0.01, 0.01, 0.01)
-        view.scene.rootNode.addChildNode(textNode)
         
+        
+        view.scene.rootNode.addChildNode(textNode)
+        distanceTextNode = textNode
+    }
+    
+    func resetPoints() {
+        // reset points
+        startPoint?.removeFromParentNode()
+        endPoint?.removeFromParentNode()
+        distanceTextNode?.removeFromParentNode()
+        startPoint = nil
+        endPoint = nil
+        distanceTextNode = nil
     }
 }
