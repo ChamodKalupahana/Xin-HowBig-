@@ -9,8 +9,24 @@ import SwiftUI
 import ARKit
 
 struct ARController: View {
+    var arViewContainer = ARViewContainer()
+    @StateObject var coordinator = Coordinator.shared
     var body: some View {
-        ARViewContainer()
+        ZStack(alignment: .topTrailing){
+            arViewContainer
+            resetButton
+        }
+    }
+    
+    var resetButton : some View {
+        Button {
+            coordinator.resetPoints()
+        } label: {
+            Text("Reset")
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 25.0))
+        }
+
     }
 }
 
@@ -39,9 +55,10 @@ struct ARViewContainer: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator.shared
     }
 }
+
 
 #Preview {
     ARController()
