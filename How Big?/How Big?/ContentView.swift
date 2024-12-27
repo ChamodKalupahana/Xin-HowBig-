@@ -13,8 +13,14 @@ struct ContentView : View {
             
             Measure()
                 .tabItem {
-                    Image(systemName: "plus")
+                    Image(systemName: "camera.fill")
                     Text("Measure")
+                }
+            
+            Share()
+                .tabItem {
+                    Image(systemName: "paperplane.fill")
+                    Text("Share")
                 }
 
         }
