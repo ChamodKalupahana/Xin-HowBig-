@@ -9,7 +9,21 @@ import SwiftUI
 
 struct ContentView : View {
     var body: some View {
-        ARController()
+        TabView {
+            
+            Measure()
+                .tabItem {
+                    Image(systemName: "camera.fill")
+                    Text("Measure")
+                }
+            
+            Share()
+                .tabItem {
+                    Image(systemName: "paperplane.fill")
+                    Text("Share")
+                }
+
+        }
     }
 
 }
