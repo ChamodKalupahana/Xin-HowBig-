@@ -12,7 +12,7 @@ struct Share: View {
         VStack{
             HStack{
                 Text("Xin Chen's Art")
-                Image(systemName: "chchevron.down")
+                Image(systemName: "chevron.down")
             }
             
             Image(.art)
