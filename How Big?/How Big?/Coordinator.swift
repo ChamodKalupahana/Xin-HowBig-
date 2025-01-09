@@ -16,7 +16,6 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     private var endPoint : SCNNode?
     private var distanceTextNode : SCNNode?
     
-    // test commit
     
     @objc func handleTap(_ sender : UITapGestureRecognizer) {
         guard let view = sender.view as? ARSCNView else {
