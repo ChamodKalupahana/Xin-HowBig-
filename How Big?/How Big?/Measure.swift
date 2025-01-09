@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Measure: View {
+    @StateObject var coordinator = Coordinator.shared
+    
     @State var isShowingReferenceScreen : Bool = false
     var body: some View {
         NavigationStack{
@@ -18,27 +20,30 @@ struct Measure: View {
             }
             .navigationTitle("Xin's How Big?")
             
-            
+            .sheet(isPresented: $isShowingReferenceScreen) {
+                References()
+            }
         }
     }
     
     var calculateButton : some View {
         ZStack{
-            Button {
-                isShowingReferenceScreen = true
-            } label: {
-                HStack{
-                    Image(systemName: "function")
-                    Text("Calculate")
+            if coordinator.selectedDistance != nil {
+                Button {
+                    isShowingReferenceScreen = true
+                } label: {
+                    HStack{
+                        Image(systemName: "function")
+                        Text("Calculate")
+                    }
+                    .foregroundStyle(Color.white)
+                    .padding()
+                    .background(Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                    .padding(.bottom, 20)
+                    
                 }
-                .foregroundStyle(Color.white)
-                .padding()
-                .background(Color.black)
-                .clipShape(RoundedRectangle(cornerRadius: 7.5))
-                .padding(.bottom, 20)
-                
             }
-
         }
     }
 }

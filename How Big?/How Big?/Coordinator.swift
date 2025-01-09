@@ -14,7 +14,8 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     
     private var startPoint : SCNNode?
     private var endPoint : SCNNode?
-    private var distanceTextNode : SCNNode?
+    @Published private(set) var distanceTextNode : SCNNode?
+    @Published private(set) var selectedDistance : Float?
     
     
     @objc func handleTap(_ sender : UITapGestureRecognizer) {
@@ -71,16 +72,21 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         
         // Remove the previous distance text node if it exists
         distanceTextNode?.removeFromParentNode()
-
+        
+        selectedDistance = distance
+        
         let SCNTextString = String(format: "%.2f meters", distance)
         let text = SCNText(string: SCNTextString, extrusionDepth: 0.1)
         text.firstMaterial?.diffuse.contents = UIColor.yellow
         let textNode = SCNNode(geometry: text)
         textNode.scale = SCNVector3(0.01, 0.01, 0.01)
+        textNode.position = position
+        
         
         
         view.scene.rootNode.addChildNode(textNode)
         distanceTextNode = textNode
+        
     }
     
     func resetPoints() {
@@ -91,5 +97,7 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         startPoint = nil
         endPoint = nil
         distanceTextNode = nil
+        selectedDistance = nil
     }
+    
 }
