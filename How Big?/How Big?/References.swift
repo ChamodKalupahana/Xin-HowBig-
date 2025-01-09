@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReferencesScreen: View {
-    @EnvironmentObject var coordinator : Coordinator
+    @StateObject var coordinator : Coordinator = Coordinator.shared
     @StateObject var referenceViewModel = ReferencesViewModel.shared
     var body: some View {
         HStack{
@@ -17,6 +17,7 @@ struct ReferencesScreen: View {
             calculation
             
             // references
+            references
             
         }
     }
@@ -37,10 +38,38 @@ struct ReferencesScreen: View {
     }
     
     var references : some View {
-        VStack{
-            ForEach(referenceViewModel.listOfReferences) { referenceObject in
-                Text("\(referenceObject.name)")
+        ScrollView{
+            VStack{
+                ForEach(referenceViewModel.listOfReferences) { referenceObject in
+                    ReferenceObjectCard(referenceObject: referenceObject)
+                        .environmentObject(referenceViewModel)
+                    
+                }
+        }
+        }
+    }
+}
+
+struct ReferenceObjectCard : View {
+    @EnvironmentObject var referenceViewModel : ReferencesViewModel
+    var referenceObject : ReferenceObject
+    var body : some View {
+        Button {
+            
+        } label: {
+            VStack{
+                referenceObject.image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundStyle(Color.white)
+                    .padding(2)
+                    .frame(width: 100, height: 100)
+                    .padding()
+                    .background(Color.black)
+                    .background(Color.white)
                 
+                
+                Text("\(referenceObject.name)")
             }
         }
     }
