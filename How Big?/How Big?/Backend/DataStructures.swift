@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct ReferenceObject {
+struct ReferenceObject : Identifiable{
+    var id : String = UUID().uuidString
     var name : String
     var length : Float
     var image : Image

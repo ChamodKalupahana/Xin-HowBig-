@@ -9,7 +9,9 @@ import Foundation
 import SwiftUI
 
 class ReferencesViewModel : ObservableObject {
-    @Published var listOfReferences : [ReferenceObject] = [
+    static let shared = ReferencesViewModel()
+    
+    @Published private(set) var listOfReferences : [ReferenceObject] = [
         ReferenceObject(name: "Apple", length: 0.05, image: Image(systemName: "applelogo")),
         ReferenceObject(name: "Laptop", length: 0.30, image: Image(systemName: "laptopcomputer")),
         ReferenceObject(name: "Football Stadium", length: 100, image: Image(.footBallStadium)),

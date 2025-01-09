@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ReferencesScreen: View {
-    @StateObject var coordinator = Coordinator.shared
+    @EnvironmentObject var coordinator : Coordinator
+    @StateObject var referenceViewModel = ReferencesViewModel.shared
     var body: some View {
         HStack{
             
@@ -16,6 +17,7 @@ struct ReferencesScreen: View {
             calculation
             
             // references
+            
         }
     }
     
@@ -35,8 +37,11 @@ struct ReferencesScreen: View {
     }
     
     var references : some View {
-        ZStack{
-            
+        VStack{
+            ForEach(referenceViewModel.listOfReferences) { referenceObject in
+                Text("\(referenceObject.name)")
+                
+            }
         }
     }
 }

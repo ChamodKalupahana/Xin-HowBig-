@@ -22,6 +22,7 @@ struct Measure: View {
             
             .sheet(isPresented: $isShowingReferenceScreen) {
                 ReferencesScreen()
+                    .environmentObject(coordinator)
             }
         }
     }
