@@ -21,7 +21,7 @@ struct Measure: View {
             .navigationTitle("Xin's How Big?")
             
             .sheet(isPresented: $isShowingReferenceScreen) {
-                References()
+                ReferencesScreen()
             }
         }
     }
