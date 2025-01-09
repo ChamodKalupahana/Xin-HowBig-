@@ -18,6 +18,6 @@ class ReferencesViewModel : ObservableObject {
         ReferenceObject(name: "Xin", length: 1.60, image: Image(.art)),
     ]
     
-    @Published private(set) var selectedReference : ReferenceObject? = nil
+    @Published var selectedReference : ReferenceObject? = nil
     
 }

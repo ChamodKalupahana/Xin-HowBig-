@@ -75,7 +75,7 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         
         selectedDistance = distance
         
-        let SCNTextString = String(format: "%.2f meters", distance)
+        let SCNTextString = self.formatDistance(distance: distance)
         let text = SCNText(string: SCNTextString, extrusionDepth: 0.1)
         text.firstMaterial?.diffuse.contents = UIColor.yellow
         let textNode = SCNNode(geometry: text)
@@ -98,6 +98,10 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         endPoint = nil
         distanceTextNode = nil
         selectedDistance = nil
+    }
+    
+    func formatDistance(distance : Float) -> String {
+        return String(format: "%.2f meters", distance)
     }
     
 }

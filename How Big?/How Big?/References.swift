@@ -55,7 +55,7 @@ struct ReferenceObjectCard : View {
     var referenceObject : ReferenceObject
     var body : some View {
         Button {
-            
+            referenceViewModel.selectedReference = referenceObject
         } label: {
             VStack{
                 referenceObject.image
