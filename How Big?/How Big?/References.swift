@@ -26,16 +26,21 @@ struct ReferencesScreen: View {
         VStack{
             Text("Measurement")
             if let selectedDistance = coordinator.selectedDistance {
-                Text("\(selectedDistance)")
+                Text("\(coordinator.formatDistance(distance: selectedDistance))")
                     .font(.title2)
             }
             
             Text("How Big?")
+            if let howBigMeasurement = referenceViewModel.findHowBigMeasurement(selectedDistance: coordinator.selectedDistance) {
+                Text("\(howBigMeasurement)")
+            }
             
+            }
+        .font(.title)
             
         }
-        .font(.title)
-    }
+        
+
     
     var references : some View {
         ScrollView{

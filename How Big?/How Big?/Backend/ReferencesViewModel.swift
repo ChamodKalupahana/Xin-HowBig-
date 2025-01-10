@@ -20,4 +20,18 @@ class ReferencesViewModel : ObservableObject {
     
     @Published var selectedReference : ReferenceObject? = nil
     
+    func findHowBigMeasurement(selectedDistance : Float?) -> String? {
+        guard let selectedDistance, let selectedReference else {
+            return nil
+        }
+        let distanceToShow = selectedDistance / selectedReference.length
+        
+        return "\(formatDistance(distance: distanceToShow)) \(selectedReference.name)s"
+        
+    }
+    
+    func formatDistance(distance : Float) -> String {
+        return String(format: "%.2f", distance)
+    }
+    
 }
