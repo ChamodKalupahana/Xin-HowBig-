@@ -23,7 +23,7 @@ struct ReferencesScreen: View {
     }
     
     var calculation : some View {
-        VStack{
+        VStack(spacing : 20 ){
             Text("Measurement")
             if let selectedDistance = coordinator.selectedDistance {
                 Text("\(coordinator.formatDistance(distance: selectedDistance))")
@@ -33,10 +33,13 @@ struct ReferencesScreen: View {
             Text("How Big?")
             if let howBigMeasurement = referenceViewModel.findHowBigMeasurement(selectedDistance: coordinator.selectedDistance) {
                 Text("\(howBigMeasurement)")
+                    .multilineTextAlignment(.center)
+                    .font(.title2)
             }
             
             }
-        .font(.title)
+        .font(.largeTitle)
+        .padding()
             
         }
         
@@ -65,10 +68,10 @@ struct ReferenceObjectCard : View {
             VStack{
                 referenceObject.image
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .foregroundStyle(Color.white)
                     .padding(2)
-                    .frame(width: 100, height: 100)
+                    .frame(width: 90, height: 90)
                     .padding(8)
                     .background(Color.black)
                     .padding(2)
@@ -76,7 +79,9 @@ struct ReferenceObjectCard : View {
                 
                 
                 Text("\(referenceObject.name)")
+                    .foregroundStyle(Color.primary)
             }
+            .buttonStyle(.plain)
         }
     }
 }
