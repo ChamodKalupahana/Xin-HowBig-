@@ -7,6 +7,7 @@
 
 import Foundation
 import ARKit
+import SwiftUI
 
 class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     
@@ -14,7 +15,9 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     
     private var startPoint : SCNNode?
     private var endPoint : SCNNode?
-    private var distanceTextNode : SCNNode?
+    @Published private(set) var distanceTextNode : SCNNode?
+    @Published private(set) var selectedDistance : Float?
+    
     
     @objc func handleTap(_ sender : UITapGestureRecognizer) {
         guard let view = sender.view as? ARSCNView else {
@@ -30,22 +33,24 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         
         let position = SCNVector3(x: hitResult.worldTransform.columns.3.x,y: hitResult.worldTransform.columns.3.y, z: hitResult.worldTransform.columns.3.z)
         
-        if startPoint == nil {
-            // create and place start point
-            startPoint = createSphere(at: position, color: .green)
-            view.scene.rootNode.addChildNode(startPoint!)
-        } else if endPoint == nil {
-            endPoint = createSphere(at: position, color: .red)
-            view.scene.rootNode.addChildNode(endPoint!)
-            
-            // measure the distance
-            if let start = startPoint, let end = endPoint {
-                let distance = calculateDistance(from: start.position, to: end.position)
-                displayDistance(distance, at: end.position, in: view)
+        withAnimation {
+            if startPoint == nil {
+                // create and place start point
+                startPoint = createSphere(at: position, color: .green)
+                view.scene.rootNode.addChildNode(startPoint!)
+            } else if endPoint == nil {
+                endPoint = createSphere(at: position, color: .red)
+                view.scene.rootNode.addChildNode(endPoint!)
+                
+                // measure the distance
+                if let start = startPoint, let end = endPoint {
+                    let distance = calculateDistance(from: start.position, to: end.position)
+                    displayDistance(distance, at: end.position, in: view)
+                }
+            } else {
+                // reset points
+                resetPoints()
             }
-        } else {
-            // reset points
-            resetPoints()
         }
     }
     
@@ -70,25 +75,38 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         
         // Remove the previous distance text node if it exists
         distanceTextNode?.removeFromParentNode()
-
-        let SCNTextString = String(format: "%.2f meters", distance)
+        
+        selectedDistance = distance
+        
+        let SCNTextString = self.formatDistance(distance: distance)
         let text = SCNText(string: SCNTextString, extrusionDepth: 0.1)
         text.firstMaterial?.diffuse.contents = UIColor.yellow
         let textNode = SCNNode(geometry: text)
         textNode.scale = SCNVector3(0.01, 0.01, 0.01)
+        textNode.position = position
+        
         
         
         view.scene.rootNode.addChildNode(textNode)
         distanceTextNode = textNode
+        
     }
     
     func resetPoints() {
-        // reset points
-        startPoint?.removeFromParentNode()
-        endPoint?.removeFromParentNode()
-        distanceTextNode?.removeFromParentNode()
-        startPoint = nil
-        endPoint = nil
-        distanceTextNode = nil
+        withAnimation {
+            // reset points
+            startPoint?.removeFromParentNode()
+            endPoint?.removeFromParentNode()
+            distanceTextNode?.removeFromParentNode()
+            startPoint = nil
+            endPoint = nil
+            distanceTextNode = nil
+            selectedDistance = nil
+        }
     }
+    
+    func formatDistance(distance : Float) -> String {
+        return String(format: "%.2f meters", distance)
+    }
+    
 }
