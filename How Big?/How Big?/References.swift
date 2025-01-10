@@ -63,7 +63,9 @@ struct ReferenceObjectCard : View {
     var referenceObject : ReferenceObject
     var body : some View {
         Button {
-            referenceViewModel.selectedReference = referenceObject
+            withAnimation {
+                referenceViewModel.selectedReference = referenceObject
+            }
         } label: {
             VStack{
                 referenceObject.image

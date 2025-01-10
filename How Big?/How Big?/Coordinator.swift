@@ -7,6 +7,7 @@
 
 import Foundation
 import ARKit
+import SwiftUI
 
 class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     
@@ -32,22 +33,24 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
         
         let position = SCNVector3(x: hitResult.worldTransform.columns.3.x,y: hitResult.worldTransform.columns.3.y, z: hitResult.worldTransform.columns.3.z)
         
-        if startPoint == nil {
-            // create and place start point
-            startPoint = createSphere(at: position, color: .green)
-            view.scene.rootNode.addChildNode(startPoint!)
-        } else if endPoint == nil {
-            endPoint = createSphere(at: position, color: .red)
-            view.scene.rootNode.addChildNode(endPoint!)
-            
-            // measure the distance
-            if let start = startPoint, let end = endPoint {
-                let distance = calculateDistance(from: start.position, to: end.position)
-                displayDistance(distance, at: end.position, in: view)
+        withAnimation {
+            if startPoint == nil {
+                // create and place start point
+                startPoint = createSphere(at: position, color: .green)
+                view.scene.rootNode.addChildNode(startPoint!)
+            } else if endPoint == nil {
+                endPoint = createSphere(at: position, color: .red)
+                view.scene.rootNode.addChildNode(endPoint!)
+                
+                // measure the distance
+                if let start = startPoint, let end = endPoint {
+                    let distance = calculateDistance(from: start.position, to: end.position)
+                    displayDistance(distance, at: end.position, in: view)
+                }
+            } else {
+                // reset points
+                resetPoints()
             }
-        } else {
-            // reset points
-            resetPoints()
         }
     }
     
@@ -90,14 +93,16 @@ class Coordinator : NSObject, ARSCNViewDelegate, ObservableObject {
     }
     
     func resetPoints() {
-        // reset points
-        startPoint?.removeFromParentNode()
-        endPoint?.removeFromParentNode()
-        distanceTextNode?.removeFromParentNode()
-        startPoint = nil
-        endPoint = nil
-        distanceTextNode = nil
-        selectedDistance = nil
+        withAnimation {
+            // reset points
+            startPoint?.removeFromParentNode()
+            endPoint?.removeFromParentNode()
+            distanceTextNode?.removeFromParentNode()
+            startPoint = nil
+            endPoint = nil
+            distanceTextNode = nil
+            selectedDistance = nil
+        }
     }
     
     func formatDistance(distance : Float) -> String {

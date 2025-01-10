@@ -18,6 +18,8 @@ struct Share: View {
             Image(.art)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+            
+            Text("Don't look here")
         }
     }
 }
