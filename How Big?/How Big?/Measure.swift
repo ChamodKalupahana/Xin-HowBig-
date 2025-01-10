@@ -39,9 +39,10 @@ struct Measure: View {
                     }
                     .foregroundStyle(Color.white)
                     .padding()
+                    .frame(maxWidth: .infinity)
                     .background(Color.black)
                     .clipShape(RoundedRectangle(cornerRadius: 7.5))
-                    .padding(.bottom, 20)
+                    .padding()
                     
                 }
             }
