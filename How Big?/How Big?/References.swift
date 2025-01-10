@@ -65,12 +65,13 @@ struct ReferenceObjectCard : View {
             VStack{
                 referenceObject.image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .foregroundStyle(Color.white)
                     .padding(2)
                     .frame(width: 100, height: 100)
-                    .padding()
+                    .padding(8)
                     .background(Color.black)
+                    .padding(2)
                     .background(Color.white)
                 
                 
