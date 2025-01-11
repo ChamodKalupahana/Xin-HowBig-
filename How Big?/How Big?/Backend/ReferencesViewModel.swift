@@ -17,6 +17,7 @@ class ReferencesViewModel : ObservableObject {
         ReferenceObject(name: "Football Stadium", length: 100, image: Image(.footBallStadium)),
         ReferenceObject(name: "Xin", length: 1.58, image: Image(.art)),
         ReferenceObject(name: "Cham", length: 1.85, image: Image(systemName: "trash.fill")),
+        ReferenceObject(name: "Pecan", length:0.02 , image: Image(systemName: "")),
     ]
     
     @Published var selectedReference : ReferenceObject? = nil
