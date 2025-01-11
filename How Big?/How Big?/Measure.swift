@@ -35,7 +35,7 @@ struct Measure: View {
                 } label: {
                     HStack{
                         Image(systemName: "function")
-                        Text("Calculate")
+                        Text("How Big?")
                     }
                     .foregroundStyle(Color.white)
                     .padding()
