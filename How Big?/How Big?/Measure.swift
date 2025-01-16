@@ -16,7 +16,7 @@ struct Measure: View {
             ZStack(alignment : .bottom){
                 ARController()
                 
-                howBigFunShapeButton
+                calculateButton
             }
             .navigationTitle("Xin's How Big?")
             
