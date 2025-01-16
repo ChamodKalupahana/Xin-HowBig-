@@ -61,8 +61,7 @@ struct Measure: View {
                     }
                     .foregroundStyle(Color.white)
                     .padding()
-//                    .frame(maxWidth: .infinity)
-                    .clipShape(RoundedStar(cornerRadius: 5.0))
+                    .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.red.brightness(0.7))
                     
