@@ -50,6 +50,7 @@ struct ReferencesScreen: View {
             VStack{
                 ForEach(referenceViewModel.listOfReferences) { referenceObject in
                     ReferenceObjectCard(referenceObject: referenceObject)
+                        
                         .environmentObject(referenceViewModel)
                     
                 }
