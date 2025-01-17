@@ -12,13 +12,13 @@ class ReferencesViewModel : ObservableObject {
     static let shared = ReferencesViewModel()
     
     @Published private(set) var listOfReferences : [ReferenceObject] = [
-        ReferenceObject(name: "Apple", length: 0.05, image: Image(.apple)),
-        ReferenceObject(name: "Laptop", length: 0.30, image: Image(.laptop)),
-        ReferenceObject(name: "Football Stadium", length: 100, image: Image(.footballStadium)),
-        ReferenceObject(name: "Xin", length: 1.58, image: Image(.xin)),
-        ReferenceObject(name: "Cham", length: 1.85, image: Image(.cham)),
-        ReferenceObject(name: "Pecan", length: 0.02 , image: Image(.pecan)),
-        ReferenceObject(name: "Cham's foot", length: 2.50 , image: Image(.chamSFoot)),
+        ReferenceObject(name: "Apple", length: 0.05, image: Image(.apple), numberOfDimensions: 1),
+        ReferenceObject(name: "Laptop", length: 0.30, image: Image(.laptop), numberOfDimensions: 1),
+        ReferenceObject(name: "Football Stadium", length: 100, image: Image(.footballStadium), numberOfDimensions: 1),
+        ReferenceObject(name: "Xin", length: 1.58, image: Image(.xin), numberOfDimensions: 1),
+        ReferenceObject(name: "Cham", length: 1.85, image: Image(.cham), numberOfDimensions: 1),
+        ReferenceObject(name: "Pecan", length: 0.02 , image: Image(.pecan), numberOfDimensions: 1),
+        ReferenceObject(name: "Cham's foot", length: 2.50 , image: Image(.chamSFoot), numberOfDimensions: 1),
     ]
     
     @Published var selectedReference : ReferenceObject? = nil

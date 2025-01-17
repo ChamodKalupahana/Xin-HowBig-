@@ -13,5 +13,8 @@ struct ReferenceObject : Identifiable{
     var name : String
     var length : Float
     var image : Image
+    var numberOfDimensions : Int
     
+    var height : Float?
+    var width : Float?
 }
