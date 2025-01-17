@@ -23,6 +23,7 @@ struct ARController: View {
             coordinator.resetPoints()
         } label: {
             Text("Reset")
+                .foregroundStyle(Color.black)
                 .padding()
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 7.5))
