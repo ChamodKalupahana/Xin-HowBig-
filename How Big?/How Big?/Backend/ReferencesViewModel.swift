@@ -37,4 +37,8 @@ class ReferencesViewModel : ObservableObject {
         return String(format: "%.2f", distance)
     }
     
+    func addReferenceToList(referenceToAdd : ReferenceObject) {
+        self.listOfReferences.append(referenceToAdd)
+    }
+    
 }

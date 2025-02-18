@@ -11,6 +11,12 @@ struct ContentView : View { // test commit
     var body: some View {
         TabView {
             
+            ManualInput()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Manual Input")
+                }
+            
             Measure()
                 .tabItem {
                     Image(systemName: "camera.fill")
