@@ -72,4 +72,9 @@ class ReferencesViewModel : ObservableObject {
         
     }
     
+    
+    func initaliseNewObject(length : Float) {
+        self.referenceToMeasure = ReferenceObject(name: "New Reference", length: length, image: Image(systemName: "lasso"), numberOfDimensions: 1)
+    }
+    
 }
