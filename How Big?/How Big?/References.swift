@@ -30,8 +30,10 @@ struct ReferencesScreen: View {
     var calculation : some View {
         VStack(spacing : 20 ){
             Text("Measurement")
-            Text("\(coordinator.formatDistance(distance: referenceViewModel.referenceToMeasure.length ))")
-                .font(.title2)
+            if let length = referenceViewModel.referenceToMeasure?.length {
+                Text("\(coordinator.formatDistance(distance: length ))")
+                    .font(.title2)
+            }
             
             Text("How Big?")
             if let howBigMeasurement = referenceViewModel.findHowBigMeasurementWithinClass() {
@@ -61,25 +63,29 @@ struct ReferencesScreen: View {
     }
     
     var saveButton : some View {
-        Button {
-            let error = referenceViewModel.saveCurrentReference()
-            guard error != nil else {
-                
-                return
+        ZStack{
+            if (referenceViewModel.referenceToMeasure != nil) {
+                Button {
+                    let error = referenceViewModel.saveCurrentReference()
+                    guard error != nil else {
+                        
+                        return
+                    }
+                } label: {
+                    HStack{
+                        Image(systemName: "square.and.arrow.down")
+                        Text("Save as Reference")
+                    }
+                    .foregroundStyle(Color.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                    .padding()
+                    
+                    
+                }
             }
-        } label: {
-            HStack{
-                Image(systemName: "square.and.arrow.down")
-                Text("Save as Reference")
-            }
-            .foregroundStyle(Color.white)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .clipShape(RoundedRectangle(cornerRadius: 7.5))
-            .padding()
-            
-            
         }
     }
 }

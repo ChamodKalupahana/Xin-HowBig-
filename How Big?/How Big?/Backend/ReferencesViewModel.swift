@@ -23,7 +23,7 @@ class ReferencesViewModel : ObservableObject {
     
     @Published var selectedReference : ReferenceObject? = nil
     
-    @Published var referenceToMeasure : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1)
+    @Published var referenceToMeasure : ReferenceObject? = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1)
     
     
     func findHowBigMeasurement(selectedDistance : Float?) -> String? {
@@ -45,22 +45,28 @@ class ReferencesViewModel : ObservableObject {
     }
     
     func saveCurrentReference() -> Error? {
-        guard let selectedReference else {
+        guard let referenceToMeasure else {
             return URLError(.fileDoesNotExist)
         }
         
         self.listOfReferences.append(referenceToMeasure)
-        self.referenceToMeasure = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1)
+        self.referenceToMeasure = nil
+        
+        
         
         return nil
     }
     
     func findHowBigMeasurementWithinClass() -> String? {
-        guard let selectedReference else {
+        guard let selectedReference, let referenceToMeasure else {
             return nil
         }
         
-        let distanceToShow = self.referenceToMeasure.length / selectedReference.length
+        guard referenceToMeasure.length != 0 else {
+            return nil
+        }
+        
+        let distanceToShow = self.referenceToMeasure!.length / selectedReference.length
         
         return "\(formatDistance(distance: distanceToShow)) \(selectedReference.name)s"
         

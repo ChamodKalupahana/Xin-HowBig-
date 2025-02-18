@@ -104,6 +104,7 @@ struct ManualInput: View {
         ZStack{
             Button {
                 manualInputViewModel.showReferencesScreenWithReferenceToCreate()
+                manualInputViewModel.resetReferenceToCreateAndInputVariables()
                 focusField = nil
             } label: {
                 HStack{

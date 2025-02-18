@@ -54,4 +54,10 @@ class ManualInputViewModel : ObservableObject {
         isShowingReferencesScreen = true
         referenceViewModel.referenceToMeasure = referenceToCreate
     }
+    
+    func resetReferenceToCreateAndInputVariables() {
+        referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
+        selectedWidth = 0
+        selectedHeight = 0
+    }
 }
