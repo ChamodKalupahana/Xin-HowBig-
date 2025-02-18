@@ -11,27 +11,30 @@ struct ReferencesScreen: View {
     @StateObject var coordinator : Coordinator = Coordinator.shared
     @StateObject var referenceViewModel = ReferencesViewModel.shared
     var body: some View {
-        HStack{
+        ZStack{
+            HStack{
+                
+                // measurements
+                calculation
+                
+                // references
+                references
+                
+            }
             
-            // measurements
-            calculation
-            
-            // references
-            references
-            
+            // save button
+            saveButton
         }
     }
     
     var calculation : some View {
         VStack(spacing : 20 ){
             Text("Measurement")
-            if let selectedDistance = coordinator.selectedDistance {
-                Text("\(coordinator.formatDistance(distance: selectedDistance))")
-                    .font(.title2)
-            }
+            Text("\(coordinator.formatDistance(distance: referenceViewModel.referenceToMeasure.length ))")
+                .font(.title2)
             
             Text("How Big?")
-            if let howBigMeasurement = referenceViewModel.findHowBigMeasurement(selectedDistance: coordinator.selectedDistance) {
+            if let howBigMeasurement = referenceViewModel.findHowBigMeasurementWithinClass() {
                 Text("\(howBigMeasurement)")
                     .multilineTextAlignment(.center)
                     .font(.title2)
@@ -54,6 +57,28 @@ struct ReferencesScreen: View {
                     
                 }
         }
+        }
+    }
+    
+    var saveButton : some View {
+        Button {
+            let error = referenceViewModel.saveCurrentReference()
+            guard let error else {
+                
+                return
+            }
+        } label: {
+            HStack{
+                Image(systemName: "square.and.arrow.down")
+                Text("Save as Reference")
+            }
+            .foregroundStyle(Color.white)
+            .padding()
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.red.brightness(0.7))
+            
+            
         }
     }
 }
