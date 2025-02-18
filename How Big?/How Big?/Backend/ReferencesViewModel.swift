@@ -49,8 +49,8 @@ class ReferencesViewModel : ObservableObject {
             return URLError(.fileDoesNotExist)
         }
         
-        self.listOfReferences.append(selectedReference)
-        self.selectedReference = nil
+        self.listOfReferences.append(referenceToMeasure)
+        self.referenceToMeasure = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1)
         
         return nil
     }
