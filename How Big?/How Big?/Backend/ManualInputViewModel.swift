@@ -15,6 +15,11 @@ class ManualInputViewModel : ObservableObject {
     @Published var referenceToCreate : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
     
     @Published var isShowingReferencesScreen : Bool = false
+    @Published var focusedField : PossibleInputs? = nil
+    
+    enum PossibleInputs : Hashable {
+        case length, width, height
+    }
     
     func createReference() {
         referenceViewModel.addReferenceToList(referenceToAdd: referenceToCreate)

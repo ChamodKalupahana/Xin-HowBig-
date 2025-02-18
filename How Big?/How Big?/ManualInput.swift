@@ -11,11 +11,16 @@ struct ManualInput: View {
     @StateObject var referencesViewModel = ReferencesViewModel.shared
     @StateObject var manualInputViewModel = ManualInputViewModel.shared
     
+    @FocusState private var focusField: ManualInputViewModel.PossibleInputs?
+    
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
         return formatter
     }()
+    
+    
     
     var body: some View {
         VStack{
@@ -26,6 +31,7 @@ struct ManualInput: View {
             measurements
             
             // confirm button
+            saveButton
         }
         
     }
@@ -36,15 +42,24 @@ struct ManualInput: View {
             
             HStack {
                 Text("Length")
-                TextField("Reqiuried", value: $manualInputViewModel.referenceToCreate.length, formatter: formatter)
+                    .font(.headline)
+                TextField("Required", value: $manualInputViewModel.referenceToCreate.length, formatter: formatter)
+                    .keyboardType(.decimalPad)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
             }
+            .focused($focusField, equals: .length)
         }
+        .padding(20)
+        .background(Color.gray)
     }
+        
     
     var saveButton : some View {
         ZStack{
             Button {
                 manualInputViewModel.createReference()
+                focusField = nil
             } label: {
                 HStack{
                     Image(systemName: "function")
