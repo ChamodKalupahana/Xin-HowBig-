@@ -11,7 +11,7 @@ struct ReferencesScreen: View {
     @StateObject var coordinator : Coordinator = Coordinator.shared
     @StateObject var referenceViewModel = ReferencesViewModel.shared
     var body: some View {
-        ZStack{
+        ZStack(alignment : .bottom){
             HStack{
                 
                 // measurements
@@ -63,7 +63,7 @@ struct ReferencesScreen: View {
     var saveButton : some View {
         Button {
             let error = referenceViewModel.saveCurrentReference()
-            guard let error else {
+            guard error != nil else {
                 
                 return
             }
@@ -75,8 +75,9 @@ struct ReferencesScreen: View {
             .foregroundStyle(Color.white)
             .padding()
             .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .clipShape(RoundedRectangle(cornerRadius: 7.5))
             .padding()
-            .background(Color.red.brightness(0.7))
             
             
         }

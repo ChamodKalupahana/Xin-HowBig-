@@ -17,6 +17,9 @@ class ManualInputViewModel : ObservableObject {
     @Published var isShowingReferencesScreen : Bool = false
     @Published var focusedField : PossibleInputs? = nil
     
+    @Published var selectedHeight : Float = 0
+    @Published var selectedWidth : Float = 0
+    
     enum PossibleInputs : Hashable {
         case length, width, height, name
     }
@@ -38,7 +41,17 @@ class ManualInputViewModel : ObservableObject {
     }
     
     func showReferencesScreenWithReferenceToCreate() {
+        if (selectedHeight != 0) {
+            referenceToCreate.numberOfDimensions += 1
+            referenceToCreate.height = selectedHeight
+        }
+        
+        if (selectedWidth != 0) {
+            referenceToCreate.numberOfDimensions += 1
+            referenceToCreate.width = selectedWidth
+        }
+        
         isShowingReferencesScreen = true
-        referenceViewModel.selectedReference = referenceToCreate
+        referenceViewModel.referenceToMeasure = referenceToCreate
     }
 }

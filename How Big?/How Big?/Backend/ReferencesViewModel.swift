@@ -25,6 +25,7 @@ class ReferencesViewModel : ObservableObject {
     
     @Published var referenceToMeasure : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1)
     
+    
     func findHowBigMeasurement(selectedDistance : Float?) -> String? {
         guard let selectedDistance, let selectedReference else {
             return nil

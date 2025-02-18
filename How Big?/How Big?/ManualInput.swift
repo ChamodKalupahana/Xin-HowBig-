@@ -63,6 +63,8 @@ struct ManualInput: View {
         
         VStack {
             
+            Text("\(manualInputViewModel.referenceToCreate.length)")
+            
             HStack {
                 Text("Length")
                     .font(.headline)
@@ -77,7 +79,7 @@ struct ManualInput: View {
             HStack {
                 Text("Height")
                     .font(.title2)
-                TextField("Optional", value: $manualInputViewModel.referenceToCreate.height, formatter: formatter)
+                TextField("Optional", value: $manualInputViewModel.selectedHeight, formatter: formatter)
                     .keyboardType(.decimalPad)
                     .focused($focusField, equals: .length)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -87,7 +89,7 @@ struct ManualInput: View {
             HStack {
                 Text("Width")
                     .font(.title2)
-                TextField("Optional", value: $manualInputViewModel.referenceToCreate.width, formatter: formatter)
+                TextField("Optional", value: $manualInputViewModel.selectedWidth, formatter: formatter)
                     .keyboardType(.decimalPad)
                     .focused($focusField, equals: .length)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
