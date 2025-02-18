@@ -23,6 +23,13 @@ struct ContentView : View { // test commit
                     Text("Measure")
                 }
             
+            
+            Profile()
+                .tabItem {
+                    Image(systemName: "person.circle.fill")
+                    Text("You")
+                }
+            
             Share()
                 .tabItem {
                     Image(systemName: "paperplane.fill")
