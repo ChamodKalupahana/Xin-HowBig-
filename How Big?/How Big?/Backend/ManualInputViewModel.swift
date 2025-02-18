@@ -22,7 +22,17 @@ class ManualInputViewModel : ObservableObject {
     }
     
     func createReference() {
+        
+        if (referenceToCreate.height != nil) {
+            referenceToCreate.numberOfDimensions += 1
+        }
+        
+        if (referenceToCreate.width != nil) {
+            referenceToCreate.numberOfDimensions += 1
+        }
+        
         referenceViewModel.addReferenceToList(referenceToAdd: referenceToCreate)
+        
         referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
         isShowingReferencesScreen = true
     }

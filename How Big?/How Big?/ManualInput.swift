@@ -45,10 +45,31 @@ struct ManualInput: View {
                     .font(.headline)
                 TextField("Required", value: $manualInputViewModel.referenceToCreate.length, formatter: formatter)
                     .keyboardType(.decimalPad)
+                    .focused($focusField, equals: .length)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
             }
-            .focused($focusField, equals: .length)
+            
+            
+            HStack {
+                Text("Height")
+                    .font(.title2)
+                TextField("Optional", value: $manualInputViewModel.referenceToCreate.height, formatter: formatter)
+                    .keyboardType(.decimalPad)
+                    .focused($focusField, equals: .length)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+            }
+            
+            HStack {
+                Text("Width")
+                    .font(.title2)
+                TextField("Optional", value: $manualInputViewModel.referenceToCreate.width, formatter: formatter)
+                    .keyboardType(.decimalPad)
+                    .focused($focusField, equals: .length)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+            }
         }
         .padding(20)
         .background(Color.gray)

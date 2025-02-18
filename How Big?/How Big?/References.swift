@@ -50,7 +50,6 @@ struct ReferencesScreen: View {
             VStack{
                 ForEach(referenceViewModel.listOfReferences) { referenceObject in
                     ReferenceObjectCard(referenceObject: referenceObject)
-                        
                         .environmentObject(referenceViewModel)
                     
                 }
@@ -68,23 +67,27 @@ struct ReferenceObjectCard : View {
                 referenceViewModel.selectedReference = referenceObject
             }
         } label: {
-            VStack{
-                referenceObject.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(Color.white)
-                    .padding(2)
-                    .frame(width: 90, height: 90)
-                    .padding(8)
-                    .background(Color.black)
-                    .padding(2)
-                    .background(Color.white)
+            ZStack (alignment : .bottomTrailing){
+                VStack{
+                    referenceObject.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundStyle(Color.white)
+                        .padding(2)
+                        .frame(width: 90, height: 90)
+                        .padding(8)
+                        .background(Color.black)
+                        .padding(2)
+                        .background(Color.white)
+                    Text("\(referenceObject.name)")
+                        .foregroundStyle(Color.primary)
+                }
+                .buttonStyle(.plain)
                 
-                
-                Text("\(referenceObject.name)")
-                    .foregroundStyle(Color.primary)
+                Text("\(referenceObject.numberOfDimensions)D")
+                    .font(.caption)
+                    .padding(10)
             }
-            .buttonStyle(.plain)
         }
     }
 }
