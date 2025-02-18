@@ -12,6 +12,7 @@ struct ManualInput: View {
     @StateObject var manualInputViewModel = ManualInputViewModel.shared
     
     @FocusState private var focusField: ManualInputViewModel.PossibleInputs?
+    @StateObject var coordinator = Coordinator.shared
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -26,14 +27,34 @@ struct ManualInput: View {
         VStack{
             
             // title
+            title
             
             // inputs
             measurements
             
             // confirm button
             saveButton
+            
+            .sheet(isPresented: $manualInputViewModel.isShowingReferencesScreen) {
+                ReferencesScreen()
+                    .environmentObject(coordinator)
+            }
         }
         
+    }
+    
+    var title : some View {
+        HStack {
+            HStack {
+                Text("Name")
+                    .font(.headline)
+                TextField("Name", text: $manualInputViewModel.referenceToCreate.name)
+                    .keyboardType(.default)
+                    .focused($focusField, equals: .name)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+            }
+        }
     }
     
     var measurements : some View {
@@ -79,7 +100,7 @@ struct ManualInput: View {
     var saveButton : some View {
         ZStack{
             Button {
-                manualInputViewModel.createReference()
+                manualInputViewModel.showReferencesScreenWithReferenceToCreate()
                 focusField = nil
             } label: {
                 HStack{
