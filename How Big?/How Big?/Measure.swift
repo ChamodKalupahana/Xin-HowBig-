@@ -32,6 +32,7 @@ struct Measure: View {
         ZStack{
             if coordinator.selectedDistance != nil {
                 Button {
+                    referencesViewModel.referenceToMeasure.length = coordinator.selectedDistance!
                     isShowingReferenceScreen = true
                 } label: {
                     HStack{

@@ -26,23 +26,24 @@ struct ManualInput: View {
     
     
     var body: some View {
-        VStack{
-            
-            // title
-            title
-            
-            // inputs
-            measurements
-            
-            // confirm button
-            saveButton
-            
-            .sheet(isPresented: $manualInputViewModel.isShowingReferencesScreen) {
-                ReferencesScreen()
-                    .environmentObject(coordinator)
+        ScrollView{
+            VStack{
+                
+                // title
+//                title
+                
+                // inputs
+                measurements
+                
+                // confirm button
+                saveButton
+                
+                .sheet(isPresented: $manualInputViewModel.isShowingReferencesScreen) {
+                    ReferencesScreen()
+                        .environmentObject(coordinator)
+                }
             }
         }
-        
     }
     
     var title : some View {
@@ -62,8 +63,6 @@ struct ManualInput: View {
     var measurements : some View {
         
         VStack {
-            
-            Text("\(manualInputViewModel.referenceToCreate.length)")
             
             HStack {
                 Text("Length")
