@@ -18,7 +18,7 @@ struct Measure: View {
             ZStack(alignment : .bottom){
                 ARController()
                 
-                calculateButton
+                calculateButtons
             }
             .navigationTitle("Xin's How Big?")
             
@@ -29,13 +29,12 @@ struct Measure: View {
         }
     }
     
-    var calculateButton : some View {
+    var calculateButtons : some View {
         ZStack{
             if coordinator.selectedDistance != nil {
                 HStack{
                     Button {
-                        referencesViewModel.initaliseNewObject(length: coordinator.selectedDistance!)
-                        measureViewModel.isShowingReferenceScreen = true
+                        measureViewModel.addMeasurementAndDimensionToObject(measurement: coordinator.selectedDistance)
                     } label: {
                         HStack{
                             Image(systemName: "plus")
@@ -49,9 +48,9 @@ struct Measure: View {
                         .padding()
                         
                     }
+                    
                     Button {
-                        referencesViewModel.initaliseNewObject(length: coordinator.selectedDistance!)
-                        measureViewModel.isShowingReferenceScreen = true
+                        measureViewModel.showReferencesScreenWithReferenceToCreate(lastMeasurementToAdd: coordinator.selectedDistance)
                     } label: {
                         HStack{
                             Image(systemName: "function")
@@ -63,6 +62,7 @@ struct Measure: View {
                         .background(Color.black)
                         .clipShape(RoundedRectangle(cornerRadius: 7.5))
                         .padding()
+                    }
                         
                 }
             }

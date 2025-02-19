@@ -11,6 +11,7 @@ struct ManualInput: View {
     @StateObject var referencesViewModel = ReferencesViewModel.shared
     @StateObject var manualInputViewModel = ManualInputViewModel.shared
     
+    
     @FocusState private var focusField: ManualInputViewModel.PossibleInputs?
     @StateObject var coordinator = Coordinator.shared
     

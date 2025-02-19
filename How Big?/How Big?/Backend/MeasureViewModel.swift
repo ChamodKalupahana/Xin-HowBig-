@@ -16,13 +16,28 @@ class MeasureViewModel : ObservableObject {
     @Published var isShowingReferenceScreen : Bool = false
     @Published var referenceToMeasure : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1, source: .personal)
     
-    func addLength(inputLength : Float) {
-        referenceToMeasure.length = inputLength
+    func addMeasurementAndDimensionToObject(measurement : Float?) {
+        if (self.referenceToMeasure.length == 0) {
+            self.referenceToMeasure.length = measurement ?? 0
+        }
+        
+        if (self.referenceToMeasure.height != nil) {
+            self.referenceToMeasure.height = measurement
+            self.referenceToMeasure.numberOfDimensions = 2
+        }
+        
+        if (self.referenceToMeasure.width != nil) {
+            self.referenceToMeasure.width = measurement
+            self.referenceToMeasure.numberOfDimensions = 3
+        }
     }
     
-    func showReferencesScreenWithReferenceToCreate() {
-        // check dimensions
-        
+    func showReferencesScreenWithReferenceToCreate(lastMeasurementToAdd : Float?) {
+        // add in last input
+        addMeasurementAndDimensionToObject(measurement: lastMeasurementToAdd)
+    
+        referencesViewModel.referenceToMeasure = self.referenceToMeasure
+        isShowingReferenceScreen = true
         
     }
 }
