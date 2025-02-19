@@ -18,7 +18,7 @@ struct ReferenceObject : Identifiable{
     var height : Float?
     var width : Float?
     
-    var source : ReferenceObjectSource = .preset
+    var source : ReferenceObjectSource
     
 }
 

@@ -12,7 +12,7 @@ class ManualInputViewModel : ObservableObject {
     static let shared = ManualInputViewModel()
     let referenceViewModel = ReferencesViewModel.shared
     
-    @Published var referenceToCreate : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
+    @Published var referenceToCreate : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1, source: .personal)
     
     @Published var isShowingReferencesScreen : Bool = false
     @Published var focusedField : PossibleInputs? = nil
@@ -36,7 +36,7 @@ class ManualInputViewModel : ObservableObject {
         
         referenceViewModel.addReferenceToList(referenceToAdd: referenceToCreate)
         
-        referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
+        referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1, source: .personal)
         isShowingReferencesScreen = true
     }
     
@@ -56,7 +56,7 @@ class ManualInputViewModel : ObservableObject {
     }
     
     func resetReferenceToCreateAndInputVariables() {
-        referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1)
+        referenceToCreate = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1, source: .personal)
         selectedWidth = 0
         selectedHeight = 0
     }
