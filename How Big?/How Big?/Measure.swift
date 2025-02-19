@@ -10,8 +10,9 @@ import SwiftUI
 struct Measure: View {
     @StateObject var coordinator = Coordinator.shared
     @StateObject var referencesViewModel = ReferencesViewModel.shared
-    
-    @State var isShowingReferenceScreen : Bool = false
+    @StateObject var measureViewModel = MeasureViewModel.shared
+
+
     var body: some View {
         NavigationStack{
             ZStack(alignment : .bottom){
@@ -21,7 +22,7 @@ struct Measure: View {
             }
             .navigationTitle("Xin's How Big?")
             
-            .sheet(isPresented: $isShowingReferenceScreen) {
+            .sheet(isPresented: $measureViewModel.isShowingReferenceScreen) {
                 ReferencesScreen()
                     .environmentObject(coordinator)
             }
@@ -31,21 +32,38 @@ struct Measure: View {
     var calculateButton : some View {
         ZStack{
             if coordinator.selectedDistance != nil {
-                Button {
-                    referencesViewModel.initaliseNewObject(length: coordinator.selectedDistance!)
-                    isShowingReferenceScreen = true
-                } label: {
-                    HStack{
-                        Image(systemName: "function")
-                        Text("How Big?")
+                HStack{
+                    Button {
+                        referencesViewModel.initaliseNewObject(length: coordinator.selectedDistance!)
+                        measureViewModel.isShowingReferenceScreen = true
+                    } label: {
+                        HStack{
+                            Image(systemName: "plus")
+                            Text("Add Dimension")
+                        }
+                        .foregroundStyle(Color.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                        .padding()
+                        
                     }
-                    .foregroundStyle(Color.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.black)
-                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
-                    .padding()
-                    
+                    Button {
+                        referencesViewModel.initaliseNewObject(length: coordinator.selectedDistance!)
+                        measureViewModel.isShowingReferenceScreen = true
+                    } label: {
+                        HStack{
+                            Image(systemName: "function")
+                            Text("How Big?")
+                        }
+                        .foregroundStyle(Color.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.black)
+                        .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                        .padding()
+                        
                 }
             }
         }
@@ -56,7 +74,7 @@ struct Measure: View {
             if coordinator.selectedDistance != nil {
                 Button {
                     referencesViewModel.referenceToMeasure?.length = coordinator.selectedDistance!
-                    isShowingReferenceScreen = true
+                    measureViewModel.isShowingReferenceScreen = true
                 } label: {
                     HStack{
                         Image(systemName: "carrot.fill")
