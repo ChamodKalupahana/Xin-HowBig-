@@ -10,7 +10,7 @@ import Foundation
 class ProfileViewModel : ObservableObject {
     static let shared = ProfileViewModel()
     
-    @Published var selectedSource : ReferenceObjectSource = .personal
+    @Published var selectedSource : ReferenceObjectSource = .preset
     @Published var selectedDimesion : ReferenceObjectDimensionFilters = .all
     
 }

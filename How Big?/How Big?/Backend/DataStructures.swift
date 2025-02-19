@@ -40,7 +40,7 @@ enum ReferenceObjectSource : CaseIterable {
 }
 
 enum ReferenceObjectDimensionFilters : CaseIterable {
-    case one, two, three, all
+    case all ,one, two, three
     
     var toUIString : String {
         switch self {
