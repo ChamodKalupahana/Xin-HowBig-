@@ -22,6 +22,10 @@ struct ReferenceObject : Identifiable{
     
 }
 
-enum ReferenceObjectSource {
+enum ReferenceObjectSource : CaseIterable {
     case preset, personal, seasonal, sponsored
+}
+
+enum ReferenceObjectDimensionFilters : CaseIterable {
+    case one, two, three
 }

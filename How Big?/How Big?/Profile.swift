@@ -18,6 +18,9 @@ struct Profile: View {
             // image and name
             info
             
+            // filters
+            
+            
             
             // grid of references
             gridOfReferences
@@ -34,6 +37,12 @@ struct Profile: View {
             
             Text("xinxinxin_chen")
                 .font(.title)
+            
+        }
+    }
+    
+    var filters : some View {
+        HStack{
             
         }
     }
