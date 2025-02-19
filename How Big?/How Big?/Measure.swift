@@ -33,20 +33,23 @@ struct Measure: View {
         ZStack{
             if coordinator.selectedDistance != nil {
                 HStack{
-                    Button {
-                        measureViewModel.addMeasurementAndDimensionToObject(measurement: coordinator.selectedDistance)
-                    } label: {
-                        HStack{
-                            Image(systemName: "plus")
-                            Text("Add Dimension")
+                    
+                    if (measureViewModel.canAddMoreDimensionsWithoutShowingReferenceScreen()) {
+                        Button {
+                            measureViewModel.addMeasurementAndDimensionToObject(measurement: coordinator.selectedDistance)
+                        } label: {
+                            HStack{
+                                Image(systemName: "plus")
+                                Text("Add Dimension")
+                            }
+                            .foregroundStyle(Color.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                            .padding()
+                            
                         }
-                        .foregroundStyle(Color.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.black)
-                        .clipShape(RoundedRectangle(cornerRadius: 7.5))
-                        .padding()
-                        
                     }
                     
                     Button {
