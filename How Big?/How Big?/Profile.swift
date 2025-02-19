@@ -42,8 +42,21 @@ struct Profile: View {
     }
     
     var filters : some View {
-        HStack{
+        VStack{
             
+            ScrollView (.horizontal) {
+                HStack{
+                    ForEach(ReferenceObjectSource.allCases, id: \.self) { source in
+                        Button {
+                            <#code#>
+                        } label: {
+                            Text(source.toUIString)
+                                .font(.body)
+                        }
+
+                    }
+                }
+            }
         }
     }
     

@@ -24,8 +24,34 @@ struct ReferenceObject : Identifiable{
 
 enum ReferenceObjectSource : CaseIterable {
     case preset, personal, seasonal, sponsored
+    
+    var toUIString : String {
+        switch self {
+        case .preset:
+            return "Default"
+        case .personal:
+            return "Personal"
+        case .seasonal:
+            return "Seasonal"
+        case .sponsored:
+            return "Sponsered"
+        }
+    }
 }
 
 enum ReferenceObjectDimensionFilters : CaseIterable {
-    case one, two, three
+    case one, two, three, all
+    
+    var toUIString : String {
+        switch self {
+        case .one:
+            return "1D"
+        case .two:
+            return "2D"
+        case .three:
+            return "3D"
+        case .all:
+            return "All"
+        }
+    }
 }
