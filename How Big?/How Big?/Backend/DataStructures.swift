@@ -17,4 +17,11 @@ struct ReferenceObject : Identifiable{
     
     var height : Float?
     var width : Float?
+    
+    var source : ReferenceObjectSource = .preset
+    
+}
+
+enum ReferenceObjectSource {
+    case preset, personal, seasonal, sponsored
 }

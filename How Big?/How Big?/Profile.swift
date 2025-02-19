@@ -11,7 +11,7 @@ struct Profile: View {
     @StateObject var profileViewModel = ProfileViewModel.shared
     @StateObject var referencesViewModel = ReferencesViewModel.shared
     
-    let gridColumns = [GridItem(), GridItem(), GridItem(), GridItem()]
+    let gridColumns = [GridItem(), GridItem(), GridItem()]
     var body: some View {
         VStack{
             
@@ -30,7 +30,7 @@ struct Profile: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .clipShape(Circle())
-                .frame(width: 150, height: 150)
+                .frame(width: 100, height: 100)
             
             Text("xinxinxin_chen")
                 .font(.title)
@@ -43,8 +43,6 @@ struct Profile: View {
             LazyVGrid(columns: gridColumns) {
                 ForEach(referencesViewModel.listOfReferences) { reference in
                     ReferenceObjectCard(referenceObject: reference)
-                        .environmentObject(referencesViewModel)
-                    
                 }
             }
         }
