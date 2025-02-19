@@ -40,7 +40,7 @@ struct Measure: View {
                         } label: {
                             HStack{
                                 Image(systemName: "plus")
-                                Text("Add Dimension")
+                                Text("Add \(measureViewModel.findDimensionToAdd())")
                             }
                             .foregroundStyle(Color.white)
                             .padding()

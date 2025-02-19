@@ -15,7 +15,7 @@ class MeasureViewModel : ObservableObject {
     let coordinator = Coordinator.shared
     
     @Published var isShowingReferenceScreen : Bool = false
-    @Published var referenceToMeasure : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "testtube.2"), numberOfDimensions: 1, source: .personal)
+    @Published var referenceToMeasure : ReferenceObject = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName : "lasso"), numberOfDimensions: 1, source: .personal)
     
     func addMeasurementAndDimensionToObject(measurement : Float?) {
         if (self.referenceToMeasure.length == 0) {
@@ -54,5 +54,21 @@ class MeasureViewModel : ObservableObject {
     
     func canAddMoreDimensionsWithoutShowingReferenceScreen() -> Bool {
         return self.referenceToMeasure.numberOfDimensions < 2
+    }
+    
+    func findDimensionToAdd() -> String {
+        if (self.referenceToMeasure.length == 0) {
+            return "Length"
+        }
+        
+        if (self.referenceToMeasure.height == nil) {
+            return "Height"
+        }
+        
+        if (self.referenceToMeasure.width == nil) {
+            return "Width"
+        }
+        
+        return "Dimension"
     }
 }

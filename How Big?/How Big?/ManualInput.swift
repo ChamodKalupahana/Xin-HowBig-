@@ -31,7 +31,7 @@ struct ManualInput: View {
             VStack{
                 
                 // title
-//                title
+                title
                 
                 // inputs
                 measurements
@@ -97,7 +97,6 @@ struct ManualInput: View {
             }
         }
         .padding(20)
-        .background(Color.gray)
     }
         
     
