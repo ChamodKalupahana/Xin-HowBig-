@@ -11,5 +11,6 @@ class ProfileViewModel : ObservableObject {
     static let shared = ProfileViewModel()
     
     @Published var selectedSource : ReferenceObjectSource = .personal
-    @Published var selectedDimesion : ReferenceObjectDimensionFilters = .
+    @Published var selectedDimesion : ReferenceObjectDimensionFilters = .all
+    
 }

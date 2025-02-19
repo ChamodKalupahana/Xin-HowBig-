@@ -54,4 +54,24 @@ enum ReferenceObjectDimensionFilters : CaseIterable {
             return "All"
         }
     }
+    
+    var toInt : Int {
+        switch self {
+        case .one:
+            return 1
+        case .two:
+            return 2
+        case .three:
+            return 3
+        case .all:
+            return 0
+        }
+    }
+    
+    func filterByDimension(inputDimension: Int) -> Bool {
+        if self == .all {
+            return true
+        }
+        return self.toInt == inputDimension
+    }
 }
