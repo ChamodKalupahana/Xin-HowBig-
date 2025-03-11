@@ -22,8 +22,13 @@ class CoreDataManager {
         }
     }
 
-    func saveReference(name: String, value: Double) {
-        let reference = ReferenceObjectInDatabase(context: context)
+    func saveReference(referenceObject : ReferenceObject) {
+        let referenceObjectInDatabase = ReferenceObjectInDatabase(context: context)
+        referenceObjectInDatabase.id = referenceObject.id
+        referenceObjectInDatabase.name = referenceObject.name
+        referenceObjectInDatabase.length = referenceObject.length
+        referenceObjectInDatabase. =
+        "imageToAdd"
 
         do {
             try context.save()
