@@ -77,4 +77,24 @@ class ReferencesViewModel : ObservableObject {
         self.referenceToMeasure = ReferenceObject(name: "New Reference", length: length, image: Image(systemName: "lasso"), numberOfDimensions: 1, source: .preset)
     }
     
+    func fetchReferencesFromCoreDataDatabase() {
+        let listOfRerencesObjectsInDatabase = CoreDataManager.shared.fetchReferences()
+        
+        for referenceObjectInDatabase in listOfRerencesObjectsInDatabase {
+            let referenceObjectToAdd = self.convertReferenceObjectInDatabaseIntoReferenceObject(referenceObjectInDatabase: referenceObjectInDatabase)
+            listOfReferences.append(referenceObjectToAdd)
+        }
+
+        
+    }
+    
+    func convertReferenceObjectInDatabaseIntoReferenceObject(referenceObjectInDatabase : ReferenceObjectInDatabase) -> ReferenceObject {
+        return ReferenceObject(name: referenceObjectInDatabase.name ?? "New Reference",
+                        length: referenceObjectInDatabase.length,
+                        image: Image(systemName: "xmark"),
+                        numberOfDimensions: Int(referenceObjectInDatabase.numberOfDimensions),
+                        source: .personal)
+        
+    }
+    
 }
