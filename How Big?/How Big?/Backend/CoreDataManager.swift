@@ -27,8 +27,18 @@ class CoreDataManager {
         referenceObjectInDatabase.id = referenceObject.id
         referenceObjectInDatabase.name = referenceObject.name
         referenceObjectInDatabase.length = referenceObject.length
-        referenceObjectInDatabase. =
+        referenceObjectInDatabase.image =
         "imageToAdd"
+        referenceObjectInDatabase.numberOfDimensions =
+        Int16(referenceObject.numberOfDimensions)
+        
+        if let height = referenceObject.height, let width = referenceObject.width {
+            referenceObjectInDatabase.height =
+            height
+            referenceObjectInDatabase.width =
+            width
+        }
+        
 
         do {
             try context.save()
