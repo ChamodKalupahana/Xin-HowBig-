@@ -25,6 +25,9 @@ class ReferencesViewModel : ObservableObject {
     
     @Published var referenceToMeasure : ReferenceObject? = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1, source: .preset)
     
+    init() {
+        self.fetchReferencesFromCoreDataDatabase()
+    }
     
     func findHowBigMeasurement(selectedDistance : Float?) -> String? {
         guard let selectedDistance, let selectedReference else {
@@ -52,6 +55,7 @@ class ReferencesViewModel : ObservableObject {
         self.listOfReferences.append(referenceToMeasure)
         self.referenceToMeasure = nil
         
+        CoreDataManager.shared.saveReference(referenceObject: referenceToMeasure)
         
         
         return nil
