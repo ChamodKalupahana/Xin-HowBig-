@@ -11,27 +11,32 @@ struct ReferencesScreen: View {
     @StateObject var coordinator : Coordinator = Coordinator.shared
     @StateObject var referenceViewModel = ReferencesViewModel.shared
     var body: some View {
-        HStack{
+        ZStack(alignment : .bottom){
+            HStack{
+                
+                // measurements
+                calculation
+                
+                // references
+                references
+                
+            }
             
-            // measurements
-            calculation
-            
-            // references
-            references
-            
+            // save button
+            saveButton
         }
     }
     
     var calculation : some View {
         VStack(spacing : 20 ){
             Text("Measurement")
-            if let selectedDistance = coordinator.selectedDistance {
-                Text("\(coordinator.formatDistance(distance: selectedDistance))")
+            if let length = referenceViewModel.referenceToMeasure?.length {
+                Text("\(coordinator.formatDistance(distance: length ))")
                     .font(.title2)
             }
             
             Text("How Big?")
-            if let howBigMeasurement = referenceViewModel.findHowBigMeasurement(selectedDistance: coordinator.selectedDistance) {
+            if let howBigMeasurement = referenceViewModel.findHowBigMeasurementWithinClass() {
                 Text("\(howBigMeasurement)")
                     .multilineTextAlignment(.center)
                     .font(.title2)
@@ -49,17 +54,43 @@ struct ReferencesScreen: View {
         ScrollView{
             VStack{
                 ForEach(referenceViewModel.listOfReferences) { referenceObject in
-                    ReferenceObjectCard(referenceObject: referenceObject)
-                        
+                    ReferenceObjectClickToSelectReference(referenceObject: referenceObject)
                         .environmentObject(referenceViewModel)
                     
                 }
         }
         }
     }
+    
+    var saveButton : some View {
+        ZStack{
+            if (referenceViewModel.referenceToMeasure != nil) {
+                Button {
+                    let error = referenceViewModel.saveCurrentReference()
+                    guard error != nil else {
+                        
+                        return
+                    }
+                } label: {
+                    HStack{
+                        Image(systemName: "square.and.arrow.down")
+                        Text("Save as Reference")
+                    }
+                    .foregroundStyle(Color.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                    .padding()
+                    
+                    
+                }
+            }
+        }
+    }
 }
 
-struct ReferenceObjectCard : View {
+struct ReferenceObjectClickToSelectReference : View {
     @EnvironmentObject var referenceViewModel : ReferencesViewModel
     var referenceObject : ReferenceObject
     var body : some View {
@@ -68,6 +99,16 @@ struct ReferenceObjectCard : View {
                 referenceViewModel.selectedReference = referenceObject
             }
         } label: {
+            ReferenceObjectCard(referenceObject: referenceObject)
+        }
+    }
+}
+
+
+struct ReferenceObjectCard : View {
+    var referenceObject : ReferenceObject
+    var body: some View {
+        ZStack (alignment : .bottomTrailing){
             VStack{
                 referenceObject.image
                     .resizable()
@@ -79,12 +120,14 @@ struct ReferenceObjectCard : View {
                     .background(Color.black)
                     .padding(2)
                     .background(Color.white)
-                
-                
                 Text("\(referenceObject.name)")
                     .foregroundStyle(Color.primary)
             }
             .buttonStyle(.plain)
+            
+            Text("\(referenceObject.numberOfDimensions)D")
+                .font(.caption)
+                .padding(10)
         }
     }
 }

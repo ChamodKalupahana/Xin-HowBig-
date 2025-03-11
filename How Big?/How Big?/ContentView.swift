@@ -7,14 +7,27 @@
 
 import SwiftUI
 
-struct ContentView : View {
+struct ContentView : View { // test commit
     var body: some View {
         TabView {
+            
+            ManualInput()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Manual Input")
+                }
             
             Measure()
                 .tabItem {
                     Image(systemName: "camera.fill")
                     Text("Measure")
+                }
+            
+            
+            Profile()
+                .tabItem {
+                    Image(systemName: "person.circle.fill")
+                    Text("You")
                 }
             
             Share()
