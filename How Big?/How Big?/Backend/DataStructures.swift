@@ -34,7 +34,7 @@ enum ReferenceObjectSource : CaseIterable {
         case .seasonal:
             return "Seasonal"
         case .sponsored:
-            return "Sponsered"
+            return "Sponsored"
         }
     }
 }
