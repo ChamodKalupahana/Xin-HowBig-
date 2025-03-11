@@ -9,33 +9,26 @@ import Foundation
 import CoreData
 
 class CoreDataManager {
-    static let shared = CoreDataManager() // Singleton
+    static let shared = CoreDataManager()
+    private let context = PersistenceController.shared.context
 
-    let persistentContainer: NSPersistentContainer
-
-    var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-
-    private init() {
-        persistentContainer = NSPersistentContainer(name: "HowBigModel")
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
+    func fetchReferences() -> [ReferenceObjectInDatabase] {
+        let request: NSFetchRequest<ReferenceObjectInDatabase> = ReferenceObjectInDatabase.fetchRequest()
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Fetch error: \(error)")
+            return []
         }
     }
 
-    // Save context
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
+    func saveReference(name: String, value: Double) {
+        let reference = ReferenceObjectInDatabase(context: context)
+
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save reference: \(error)")
         }
     }
 }
