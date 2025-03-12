@@ -122,7 +122,7 @@ class ReferencesViewModel : ObservableObject {
         return min(reference1.numberOfDimensions, reference2.numberOfDimensions)
     }
     
-    func findUIStingForMeasurement() -> String {
+    func findUIStingForMeasurement() -> String? {
         if let referenceToMeasure = self.referenceToMeasure {
             switch referenceToMeasure.numberOfDimensions {
             case 1:
@@ -132,10 +132,10 @@ class ReferencesViewModel : ObservableObject {
             case 3:
                 return "\(referenceToMeasure.length * (referenceToMeasure.height ?? 1) * (referenceToMeasure.width ?? 1)) metres 3"
             default:
-                return "Unknown dimesions found"
+                return nil
             }
         } else {
-            return "Reference to measure not found"
+            return nil
         }
     }
     

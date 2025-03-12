@@ -34,8 +34,10 @@ struct ReferencesScreen: View {
 //                Text("\(coordinator.formatDistance(distance: length ))")
 //                    .font(.title2)
 //            }
-            Text(referenceViewModel.findUIStingForMeasurement())
-                .font(.title2)
+            if let measurement = referenceViewModel.findUIStingForMeasurement() {
+                Text(measurement)
+                    .font(.title2)
+            }
             
             Text("How Big?")
             if let howBigMeasurement = referenceViewModel.findHowBigMeasurementWithinClass() {
