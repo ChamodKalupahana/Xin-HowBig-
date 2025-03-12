@@ -101,6 +101,8 @@ class ReferencesViewModel : ObservableObject {
         
     }
     
-    func //test
+    func findLowestCommonDimesion(reference1 : ReferenceObject, reference2 : ReferenceObject) -> Int {
+        return min(reference1.numberOfDimensions, reference2.numberOfDimensions)
+    }
     
 }
