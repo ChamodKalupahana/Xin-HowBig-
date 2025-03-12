@@ -25,6 +25,9 @@ class ReferencesViewModel : ObservableObject {
     
     @Published var referenceToMeasure : ReferenceObject? = ReferenceObject(name: "New Reference", length: 0, image: Image(systemName: "lasso"), numberOfDimensions: 1, source: .preset)
     
+    init() {
+        self.fetchReferencesFromCoreDataDatabase()
+    }
     
     func findHowBigMeasurement(selectedDistance : Float?) -> String? {
         guard let selectedDistance, let selectedReference else {
@@ -52,6 +55,7 @@ class ReferencesViewModel : ObservableObject {
         self.listOfReferences.append(referenceToMeasure)
         self.referenceToMeasure = nil
         
+        CoreDataManager.shared.saveReference(referenceObject: referenceToMeasure)
         
         
         return nil
@@ -75,6 +79,26 @@ class ReferencesViewModel : ObservableObject {
     
     func initaliseNewObject(length : Float) {
         self.referenceToMeasure = ReferenceObject(name: "New Reference", length: length, image: Image(systemName: "lasso"), numberOfDimensions: 1, source: .preset)
+    }
+    
+    func fetchReferencesFromCoreDataDatabase() {
+        let listOfRerencesObjectsInDatabase = CoreDataManager.shared.fetchReferences()
+        
+        for referenceObjectInDatabase in listOfRerencesObjectsInDatabase {
+            let referenceObjectToAdd = self.convertReferenceObjectInDatabaseIntoReferenceObject(referenceObjectInDatabase: referenceObjectInDatabase)
+            listOfReferences.append(referenceObjectToAdd)
+        }
+
+        
+    }
+    
+    func convertReferenceObjectInDatabaseIntoReferenceObject(referenceObjectInDatabase : ReferenceObjectInDatabase) -> ReferenceObject {
+        return ReferenceObject(name: referenceObjectInDatabase.name ?? "New Reference",
+                        length: referenceObjectInDatabase.length,
+                        image: Image(systemName: "xmark"),
+                        numberOfDimensions: Int(referenceObjectInDatabase.numberOfDimensions),
+                        source: .personal)
+        
     }
     
 }
