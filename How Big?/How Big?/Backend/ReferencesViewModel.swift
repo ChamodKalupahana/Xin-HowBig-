@@ -70,9 +70,26 @@ class ReferencesViewModel : ObservableObject {
             return nil
         }
         
-        let distanceToShow = self.referenceToMeasure!.length / selectedReference.length
+        let lowestCommonDimension = self.findLowestCommonDimesion(reference1: selectedReference, reference2: referenceToMeasure)
         
-        return "\(formatDistance(distance: distanceToShow)) \(selectedReference.name)s"
+        switch lowestCommonDimension {
+        case 1:
+            let distanceToShow = referenceToMeasure.length / selectedReference.length
+            
+            return "\(formatDistance(distance: distanceToShow)) \(selectedReference.name)s"
+        case 2:
+            let areaOfReferenceToMeasure = (referenceToMeasure.length * (referenceToMeasure.width ?? 1))
+            let areaOfselectedReference = (selectedReference.length * (selectedReference.width ?? 1))
+            let areaToShow = areaOfReferenceToMeasure / areaOfselectedReference
+            return "\(formatDistance(distance: areaToShow)) \(selectedReference.name)s cover the surface"
+        case 3:
+            let volumeOfReferenceToMeasure = (referenceToMeasure.length * (referenceToMeasure.width ?? 1) * (referenceToMeasure.height ?? 1))
+            let volumeOfSelectedReference = (selectedReference.length * (selectedReference.width ?? 1) * (selectedReference.height ?? 1))
+            let volumeToShow = volumeOfReferenceToMeasure / volumeOfSelectedReference
+            return "\(formatDistance(distance: volumeToShow)) \(selectedReference.name)s fit inside"
+        default:
+            return nil
+        }
         
     }
     
