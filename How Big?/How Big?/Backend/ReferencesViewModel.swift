@@ -105,9 +105,9 @@ class ReferencesViewModel : ObservableObject {
         return min(reference1.numberOfDimensions, reference2.numberOfDimensions)
     }
     
-    func findUIStingForMeasurement( numberOfDimensions : Int) -> String {
+    func findUIStingForMeasurement() -> String {
         if let referenceToMeasure = self.referenceToMeasure {
-            switch numberOfDimensions {
+            switch referenceToMeasure.numberOfDimensions {
             case 1:
                 return "\(referenceToMeasure.length) metres"
             case 2:
