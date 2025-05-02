@@ -33,7 +33,9 @@ struct SceneViewController : UIViewRepresentable {
         let spin = CABasicAnimation(keyPath: "rotation")
         spin.fromValue = SCNVector4(0, 1, 0, 0)
         spin.toValue = SCNVector4(0, 1, 0, Float.pi * 2)
-        spin.duration
+        spin.duration = 10
+        spin.repeatCount = .infinity
+        node.addAnimation(spin, forKey: "spin")
     }
 }
 
