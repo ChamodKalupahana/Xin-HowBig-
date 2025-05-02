@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView : View {
+struct ContentViewOld : View {
     var body: some View {
         TabView {
             
@@ -50,5 +50,5 @@ struct ContentView : View {
 
 
 #Preview {
-    ContentView()
+    ContentViewOld()
 }
