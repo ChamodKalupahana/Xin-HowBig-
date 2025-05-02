@@ -9,7 +9,13 @@ import SwiftUI
 
 struct Compare: View {
     var body: some View {
-        Text("Hello, World!")
+        VStack{
+            
+            Text("Compare")
+            
+            SceneViewController()
+                .ignoresSafeArea()
+        }
     }
 }
 
