@@ -11,6 +11,12 @@ struct ContentView : View {
     var body: some View {
         TabView {
             
+            Compare()
+                .tabItem {
+                    Image(systemName: "scale.3d")
+                    Text("Compare")
+                }
+            
             Measure()
                 .tabItem {
                     Image(systemName: "camera.fill")
