@@ -48,18 +48,18 @@ struct SceneViewController : UIViewRepresentable {
         let thickness : CGFloat = 0.05
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
-        xAxis.firstMaterial?.diffuse.contents = Color.red
+        xAxis.firstMaterial?.diffuse.contents = UIColor.red
         let xNode = SCNNode(geometry: xAxis)
         xNode.eulerAngles = SCNVector3(0, 0, Float.pi / 2)
         xNode.position = SCNVector3(length / 2, 0, 0)
         
         let yAxis = SCNCylinder(radius: thickness, height: length)
-        yAxis.firstMaterial?.diffuse.contents = Color.green
+        yAxis.firstMaterial?.diffuse.contents = UIColor.green
         let yNode = SCNNode(geometry: yAxis)
         yNode.position = SCNVector3(length / 2, 0, 0)
         
         let zAxis = SCNCylinder(radius: thickness, height: length)
-        zAxis.firstMaterial?.diffuse.contents = Color.blue
+        zAxis.firstMaterial?.diffuse.contents = UIColor.blue
         let zNode = SCNNode(geometry: zAxis)
         zNode.eulerAngles = SCNVector3(Float.pi / 2, 0, 0)
         zNode.position = SCNVector3(0, 0, length / 2)
