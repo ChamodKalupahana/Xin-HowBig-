@@ -19,7 +19,7 @@ struct SceneViewController : UIViewRepresentable {
         sceneView.autoenablesDefaultLighting = true
         
         // Load Object
-        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE")?.rootNode.clone() {
+        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
             scene.rootNode.addChildNode(objectNode)
             rotate(node: objectNode)
             
