@@ -26,6 +26,9 @@ struct SceneViewController : UIViewRepresentable {
         }
         
         // add XYZ axes
+        addXYZAxes(to: scene.rootNode)
+        
+        return sceneView
     }
     
     func updateUIView(_ uiView: SCNView, context: Context) {
