@@ -25,7 +25,7 @@ struct SceneViewController : UIViewRepresentable {
             
         }
         
-        // add XYZ axes
+        // add XYZ axes yay
         addXYZAxes(to: scene.rootNode)
         
         return sceneView
