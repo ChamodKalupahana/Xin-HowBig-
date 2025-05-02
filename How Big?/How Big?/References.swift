@@ -30,8 +30,12 @@ struct ReferencesScreen: View {
     var calculation : some View {
         VStack(spacing : 20 ){
             Text("Measurement")
-            if let length = referenceViewModel.referenceToMeasure?.length {
-                Text("\(coordinator.formatDistance(distance: length ))")
+//            if let length = referenceViewModel.referenceToMeasure?.length {
+//                Text("\(coordinator.formatDistance(distance: length ))")
+//                    .font(.title2)
+//            }
+            if let measurement = referenceViewModel.findUIStingForMeasurement() {
+                Text(measurement)
                     .font(.title2)
             }
             

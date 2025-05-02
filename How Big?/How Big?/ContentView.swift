@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-struct ContentView : View { // test commit
+struct ContentView : View {
     var body: some View {
         TabView {
-            
-            ManualInput()
-                .tabItem {
-                    Image(systemName: "plus")
-                    Text("Manual Input")
-                }
             
             Measure()
                 .tabItem {
@@ -23,6 +17,11 @@ struct ContentView : View { // test commit
                     Text("Measure")
                 }
             
+            ManualInput()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Manual Input")
+                }
             
             Profile()
                 .tabItem {
