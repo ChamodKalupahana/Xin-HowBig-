@@ -21,9 +21,11 @@ struct SceneViewController : UIViewRepresentable {
         // Load Object
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE")?.rootNode.clone() {
             scene.rootNode.addChildNode(objectNode)
-            // rotate
+            rotate(node: objectNode)
             
         }
+        
+        // add XYZ axes
     }
     
     func updateUIView(_ uiView: SCNView, context: Context) {
@@ -36,6 +38,10 @@ struct SceneViewController : UIViewRepresentable {
         spin.duration = 10
         spin.repeatCount = .infinity
         node.addAnimation(spin, forKey: "spin")
+    }
+    
+    func addXYZAxes(to rootNode : SCNNode) {
+        let
     }
 }
 
