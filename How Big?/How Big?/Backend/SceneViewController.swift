@@ -41,7 +41,10 @@ struct SceneViewController : UIViewRepresentable {
     }
     
     func addXYZAxes(to rootNode : SCNNode) {
-        let
+        let length : CGFloat = 5.0
+        let thickness : CGFloat = 0.05
+        
+        let xAxis = SCNCylinder(radius: thic, height: <#T##CGFloat#>)
     }
 }
 
