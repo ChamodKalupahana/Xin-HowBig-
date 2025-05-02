@@ -61,7 +61,9 @@ struct SceneViewController : UIViewRepresentable {
         zNode.eulerAngles = SCNVector3(Float.pi / 2, 0, 0)
         zNode.position = SCNVector3(0, 0, length / 2)
         
-        
+        rootNode.addChildNode(xNode)
+        rootNode.addChildNode(yNode)
+        rootNode.addChildNode(zNode)
         
     }
 }
