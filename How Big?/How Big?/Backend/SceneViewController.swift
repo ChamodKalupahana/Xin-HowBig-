@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 import SceneKit
 
-
+struct SceneViewController : UIViewRepresentable {
+    func makeUIView(context: Context) -> SCNView {
+        
+    }
+}
 
 
