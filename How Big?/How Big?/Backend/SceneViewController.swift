@@ -44,7 +44,12 @@ struct SceneViewController : UIViewRepresentable {
         let length : CGFloat = 5.0
         let thickness : CGFloat = 0.05
         
-        let xAxis = SCNCylinder(radius: thic, height: <#T##CGFloat#>)
+        let xAxis = SCNCylinder(radius: thickness, height: length)
+        xAxis.firstMaterial?.diffuse.contents = Color.red
+        let xNode = SCNNode(geometry: xAxis)
+        xNode.eulerAngles = SCNVector3(0, 0, Float.pi / 2)
+        xNode.position = SCNVector3(length / 2, 0, 0)
+        
     }
 }
 
