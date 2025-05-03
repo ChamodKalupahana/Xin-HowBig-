@@ -15,6 +15,8 @@ struct Compare: View {
             
             Text("How Big?")
                 .font(.title)
+                .fontWeight(.bold)
+                .padding()
         }
         .background(Color(.background))
     }
