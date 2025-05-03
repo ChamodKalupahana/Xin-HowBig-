@@ -20,10 +20,12 @@ class ObjectInteractionCoordinator : NSObject {
         
         switch gesture.state {
         case .began:
-            let hitResults = sceneView.hitTest(location, options: nil)
-            if let hit = hitResults.first {
-                currentNode = hit.node
-            }
+            // Don't reassign currentNode on touch
+//            let hitResults = sceneView.hitTest(location, options: nil)
+//            if let hit = hitResults.first {
+//                currentNode = hit.node
+//            }
+            break
             
         case .changed:
             guard let node = currentNode else { return }
