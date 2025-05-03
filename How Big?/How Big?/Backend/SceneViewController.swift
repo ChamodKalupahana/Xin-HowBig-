@@ -45,7 +45,10 @@ struct SceneViewController : UIViewRepresentable {
         
         let distance : Float = 50
         let angle45 = Float.pi / 4
-        cameraNode.position = SCNVector3(x: 0, y: 20, z: 50)
+        let x = distance * sin(angle45)
+        let z = distance * cos(angle45)
+        
+        cameraNode.position = SCNVector3(x: x, y: 20, z: z)
         cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
 
