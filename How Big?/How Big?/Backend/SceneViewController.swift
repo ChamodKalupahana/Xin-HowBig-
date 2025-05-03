@@ -18,21 +18,26 @@ struct SceneViewController : UIViewRepresentable {
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         
-        // Load Object
+        let containerNode = SCNNode()
+        scene.rootNode.addChildNode(containerNode)
+        
+//         Load Object
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
-            scene.rootNode.addChildNode(objectNode)
-            rotate(node: objectNode)
-            context.coordinator.currentNode = objectNode
+            containerNode.addChildNode(objectNode)
+            // for automatic rotation
+//            rotate(node: objectNode)
+            context.coordinator.currentNode = containerNode
             
         } //
         
         // add XYZ axes yay
-        addXYZAxes(to: scene.rootNode)
+        addXYZAxes(to: containerNode)
         
         // add in panning
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
+        context.coordinator.currentNode = containerNode
         
         return sceneView
     }
@@ -66,7 +71,7 @@ struct SceneViewController : UIViewRepresentable {
         let yAxis = SCNCylinder(radius: thickness, height: length)
         yAxis.firstMaterial?.diffuse.contents = UIColor.green
         let yNode = SCNNode(geometry: yAxis)
-        yNode.position = SCNVector3(length / 2, 0, 0)
+        yNode.position = SCNVector3(0, length / 2, 0)
         
         let zAxis = SCNCylinder(radius: thickness, height: length)
         zAxis.firstMaterial?.diffuse.contents = UIColor.blue
