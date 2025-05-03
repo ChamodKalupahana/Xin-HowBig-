@@ -23,14 +23,15 @@ struct SceneViewController : UIViewRepresentable {
         
         // Load Object
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
-            scene.rootNode.addChildNode(objectNode)
-            rotate(node: objectNode)
-            context.coordinator.currentNode = objectNode
+            containerNode.addChildNode(objectNode)
+            // for automatic rotation
+//            rotate(node: objectNode)
+            context.coordinator.currentNode = containerNode
             
         } //
         
         // add XYZ axes yay
-        addXYZAxes(to: scene.rootNode)
+        addXYZAxes(to: containerNode)
         
         // add in panning
         context.coordinator.sceneView = sceneView
