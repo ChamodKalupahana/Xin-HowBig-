@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             
-            Compare() //
+            Compare()
                 .tabItem {
                     Image(systemName: "scale.3d")
                     Text("Compare")
