@@ -18,6 +18,9 @@ struct SceneViewController : UIViewRepresentable {
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         
+        let containerNode = SCNNode()
+        scene.rootNode.addChildNode(containerNode)
+        
         // Load Object
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
             scene.rootNode.addChildNode(objectNode)
