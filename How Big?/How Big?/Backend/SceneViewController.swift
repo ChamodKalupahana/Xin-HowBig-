@@ -31,19 +31,21 @@ struct SceneViewController : UIViewRepresentable {
             // add XYZ axes
             addXYZAxes(to: containerNode, basedOn: objectNode)
             
-            // Calculate bounding box of objectNode
-            var min = SCNVector3Zero
-            var max = SCNVector3Zero
-            objectNode.__getBoundingBoxMin(&min, max: &max)
-
-            // Shift the whole container slightly based on object size
-            let shift = SCNVector3(
-                -(min.x + max.x) / 4,
-                0,
-                -(min.z + max.z) / 4
-            )
-            containerNode.position = shift
+//            // Calculate bounding box of objectNode
+//            var min = SCNVector3Zero
+//            var max = SCNVector3Zero
+//            objectNode.__getBoundingBoxMin(&min, max: &max)
+//
+//            // Shift the whole container slightly based on object size
+//            let shift = SCNVector3(
+//                -(min.x + max.x) / 2,
+//                0,
+//                -(min.z + max.z) / 2
+//            )
+//            containerNode.position = shift
         }
+        
+        containerNode.position = SCNVector3(10, 0, 10)
         
         // add in panning
         context.coordinator.sceneView = sceneView
