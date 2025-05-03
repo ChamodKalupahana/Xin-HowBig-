@@ -58,7 +58,7 @@ struct SceneViewController : UIViewRepresentable {
         node.addAnimation(spin, forKey: "spin")
     }
     
-    func addXYZAxes(to rootNode : SCNNode) {
+    func addXYZAxes(to rootNode : SCNNode, basedOn objectNode : SCNNode) {
         let length : CGFloat = 50.0
         let thickness : CGFloat = 0.5
         
@@ -84,6 +84,9 @@ struct SceneViewController : UIViewRepresentable {
         axesContainer.addChildNode(yNode)
         axesContainer.addChildNode(zNode)
         
+        // Position axesContainer at the front-left-bottom corner of objectNode
+        var min = SCNVector3Zero
+        var max = SCNVector3Zero
         
         
         
