@@ -30,6 +30,19 @@ struct SceneViewController : UIViewRepresentable {
             
             // add XYZ axes
             addXYZAxes(to: containerNode, basedOn: objectNode)
+            
+            // Calculate bounding box of objectNode
+            var min = SCNVector3Zero
+            var max = SCNVector3Zero
+            objectNode.__getBoundingBoxMin(&min, max: &max)
+
+            // Shift the whole container slightly based on object size
+            let shift = SCNVector3(
+                -(min.x + max.x) / 4,
+                0,
+                -(min.z + max.z) / 4
+            )
+            containerNode.position = shift
         }
         
         // add in panning
@@ -37,6 +50,9 @@ struct SceneViewController : UIViewRepresentable {
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         context.coordinator.currentNode = containerNode
+        
+        // absolute translation
+//        containerNode.position = SCNVector3(5, 0, 5)tweak values as needed
         
         return sceneView
     }
@@ -88,6 +104,7 @@ struct SceneViewController : UIViewRepresentable {
         var max = SCNVector3Zero
         objectNode.__getBoundingBoxMin(&min, max: &max)
         axesContainer.position = SCNVector3(min.x, min.y, min.z)
+        
         
         // add to root
         rootNode.addChildNode(axesContainer)
