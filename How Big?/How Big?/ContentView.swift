@@ -2,46 +2,23 @@
 //  ContentView.swift
 //  How Big?
 //
-//  Created by User on 27/12/2024.
+//  Created by User on 02/05/2025.
 //
 
 import SwiftUI
 
-struct ContentView : View {
+struct ContentView: View {
     var body: some View {
         TabView {
             
-            Measure()
+            Compare()
                 .tabItem {
-                    Image(systemName: "camera.fill")
-                    Text("Measure")
+                    Image(systemName: "scale.3d")
+                    Text("Compare")
                 }
-            
-            ManualInput()
-                .tabItem {
-                    Image(systemName: "plus")
-                    Text("Manual Input")
-                }
-            
-            Profile()
-                .tabItem {
-                    Image(systemName: "person.circle.fill")
-                    Text("You")
-                }
-            
-            Share()
-                .tabItem {
-                    Image(systemName: "paperplane.fill")
-                    Text("Share")
-                }
-
         }
     }
-
 }
-
-
-
 
 #Preview {
     ContentView()

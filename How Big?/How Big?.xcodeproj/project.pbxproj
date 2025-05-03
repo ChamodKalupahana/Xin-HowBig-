@@ -34,20 +34,41 @@
 		CE82DFB32D80FCAE006DC2B0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CEDAAD8F2DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				How_Big_Tests.swift,
+			);
+			target = CE5B128C2D1F3C8F00B780AA /* How Big? */;
+		};
+		CEDAAD902DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				How_Big_Tests.swift,
+			);
+			target = CE5B129C2D1F3C9100B780AA /* How Big?Tests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CE5B128F2D1F3C8F00B780AA /* How Big? */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "How Big?";
 			sourceTree = "<group>";
 		};
-		CE5B12A02D1F3C9100B780AA /* How Big?Tests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "How Big?Tests";
-			sourceTree = "<group>";
-		};
 		CE5B12AA2D1F3C9100B780AA /* How Big?UITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "How Big?UITests";
+			sourceTree = "<group>";
+		};
+		CEDAAD8D2DC58EC500306FED /* How Big?Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CEDAAD8F2DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?" target */,
+				CEDAAD902DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?Tests" target */,
+			);
+			path = "How Big?Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5B128F2D1F3C8F00B780AA /* How Big? */,
-				CE5B12A02D1F3C9100B780AA /* How Big?Tests */,
+				CEDAAD8D2DC58EC500306FED /* How Big?Tests */,
 				CE5B12AA2D1F3C9100B780AA /* How Big?UITests */,
 				CE82DFB22D80FCAE006DC2B0 /* Frameworks */,
 				CE5B128E2D1F3C8F00B780AA /* Products */,
@@ -124,6 +145,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				CE5B128F2D1F3C8F00B780AA /* How Big? */,
+				CEDAAD8D2DC58EC500306FED /* How Big?Tests */,
 			);
 			name = "How Big?";
 			packageProductDependencies = (
@@ -144,9 +166,6 @@
 			);
 			dependencies = (
 				CE5B129F2D1F3C9100B780AA /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				CE5B12A02D1F3C9100B780AA /* How Big?Tests */,
 			);
 			name = "How Big?Tests";
 			packageProductDependencies = (
@@ -414,7 +433,7 @@
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "How Big? (AR Measure)";
+				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -429,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xin-apps.how-big-ar-measure";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xin-apps.how-big";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -448,7 +467,7 @@
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "How Big? (AR Measure)";
+				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -463,7 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xin-apps.how-big-ar-measure";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xin-apps.how-big";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
