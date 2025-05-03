@@ -23,7 +23,7 @@ struct SceneViewController : UIViewRepresentable {
             scene.rootNode.addChildNode(objectNode)
             rotate(node: objectNode)
             
-        }
+        } //
         
         // add XYZ axes yay
         addXYZAxes(to: scene.rootNode)
