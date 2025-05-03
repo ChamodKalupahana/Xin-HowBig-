@@ -9,14 +9,23 @@ import SwiftUI
 
 struct Compare: View {
     var body: some View {
-        VStack{
-            
-            Text("Compare")
-            
+        ZStack{
             SceneViewController()
                 .ignoresSafeArea()
+            
+            VStack(alignment: .leading){
+                Text("How Big?")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                Text("This is house is 20m long, same as your idol")
+                    .font(.headline)
+            }
+            .padding()
         }
-        .background(Color.cyan)
+        .background(Color(.background))
     }
 }
 
