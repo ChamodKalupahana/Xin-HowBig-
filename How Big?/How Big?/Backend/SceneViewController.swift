@@ -87,7 +87,11 @@ struct SceneViewController : UIViewRepresentable {
         // Position axesContainer at the front-left-bottom corner of objectNode
         var min = SCNVector3Zero
         var max = SCNVector3Zero
+        objectNode.__getBoundingBoxMin(&min, max: &max)
+        axesContainer.position = SCNVector3(min.x, min.y, min.z)
         
+        // add to root
+        rootNode.addChildNode(axesContainer)
         
         
     }
