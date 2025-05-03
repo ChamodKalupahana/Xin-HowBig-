@@ -16,6 +16,7 @@ class ObjectInteractionCoordinator : NSObject {
         guard let sceneView = sceneView else { return }
         
         let location = gesture.location(in: sceneView)
+        let translation = gesture.translation(in: sceneView)
         
         switch gesture.state {
         case .began:
@@ -27,12 +28,12 @@ class ObjectInteractionCoordinator : NSObject {
         case .changed:
             guard let node = currentNode else { return }
             
-            let translation = gesture.translation(in: sceneView)
             let deltaX = Float(translation.x) * 0.01
             let deltaY = Float(translation.y) * 0.01
             
-            node.position.x += deltaX
-            node.position.y -= deltaY
+            // for panning
+//            node.position.x += deltaX
+//            node.position.y -= deltaY
             
             gesture.setTranslation(.zero, in: sceneView)
             
