@@ -45,7 +45,6 @@ struct SceneViewController : UIViewRepresentable {
 //            containerNode.position = shift
         }
         
-        containerNode.position = SCNVector3(10, 0, 10)
         
         // add in panning
         context.coordinator.sceneView = sceneView
@@ -54,7 +53,13 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.currentNode = containerNode
         
         // absolute translation
-//        containerNode.position = SCNVector3(5, 0, 5)tweak values as needed
+//        containerNode.position = SCNVector3(25, 10, 25)
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3(0, 15, 40) // Tune these as needed
+        cameraNode.look(at: containerNode.position)
+        scene.rootNode.addChildNode(cameraNode)
+
         
         return sceneView
     }
