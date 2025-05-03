@@ -22,16 +22,26 @@ struct SceneViewController : UIViewRepresentable {
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
             scene.rootNode.addChildNode(objectNode)
             rotate(node: objectNode)
+            context.coordinator.currentNode = objectNode
             
-        }
+        } //
         
         // add XYZ axes yay
         addXYZAxes(to: scene.rootNode)
+        
+        // add in panning
+        context.coordinator.sceneView = sceneView
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
+        sceneView.addGestureRecognizer(panGesture)
         
         return sceneView
     }
     
     func updateUIView(_ uiView: SCNView, context: Context) {
+    }
+    
+    func makeCoordinator() -> ObjectInteractionCoordinator {
+        ObjectInteractionCoordinator()
     }
     
     func rotate(node : SCNNode) {
