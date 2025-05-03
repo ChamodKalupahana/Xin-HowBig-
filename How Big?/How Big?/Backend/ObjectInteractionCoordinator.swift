@@ -68,6 +68,13 @@ class ObjectInteractionCoordinator : NSObject {
             
             let minScale : Float = 0.1
             let maxScale : Float = 10.0
+            node.scale = SCNVector3(
+                max(minScale, min(maxScale, newScale.x)),
+                max(minScale, min(maxScale, newScale.y)),
+                max(minScale, min(maxScale, newScale.z))
+            )
+            
+            gesture.scale = 1.0
         default:
             break
         }
