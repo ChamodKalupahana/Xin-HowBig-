@@ -37,7 +37,8 @@ class ObjectInteractionCoordinator : NSObject {
 //            node.position.x += deltaX
 //            node.position.y -= deltaY
             
-            let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
+//            let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
+            let yRotation = SCNMatrix4()
             let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
             let rotation = SCNMatrix4Mult(xRotation, yRotation)
             
