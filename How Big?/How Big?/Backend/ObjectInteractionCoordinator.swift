@@ -23,7 +23,7 @@ class ObjectInteractionCoordinator : NSObject {
             // Don't reassign currentNode on touch
 //            let hitResults = sceneView.hitTest(location, options: nil)
 //            if let hit = hitResults.first {
-//                currentNode = hit.node
+//                currentNode = hit.node //
 //            }
             break
             
