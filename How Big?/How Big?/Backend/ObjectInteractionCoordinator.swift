@@ -15,7 +15,7 @@ class ObjectInteractionCoordinator : NSObject {
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
         
-        let location = gesture.location(in: sceneView)
+        _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
         switch gesture.state {
@@ -46,7 +46,8 @@ class ObjectInteractionCoordinator : NSObject {
             gesture.setTranslation(.zero, in: sceneView)
             
         case .ended, .cancelled:
-            currentNode = nil
+//            currentNode = nil
+            break
         
         default:
             break
