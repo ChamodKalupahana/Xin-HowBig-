@@ -29,6 +29,7 @@ struct SceneViewController : UIViewRepresentable {
         // add XYZ axes yay
         addXYZAxes(to: scene.rootNode)
         
+        context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
