@@ -16,7 +16,7 @@ struct Compare: View {
             SceneViewController()
                 .ignoresSafeArea()
         }
-        .background(.backgroundColour)
+        .background(Color(.backgroundColor))
     }
 }
 
