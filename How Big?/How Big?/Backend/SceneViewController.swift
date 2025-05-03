@@ -17,6 +17,7 @@ struct SceneViewController : UIViewRepresentable {
         let scene = SCNScene()
         sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
+        sceneView.backgroundColor = UIColor(resource: .background)
         
         let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
