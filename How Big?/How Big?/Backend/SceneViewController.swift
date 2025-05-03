@@ -28,12 +28,16 @@ struct SceneViewController : UIViewRepresentable {
         // add XYZ axes yay
         addXYZAxes(to: scene.rootNode)
         
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(<#T##@objc method#>))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(<#T##@objc method#>))
         
         return sceneView
     }
     
     func updateUIView(_ uiView: SCNView, context: Context) {
+    }
+    
+    func makeCoordinator() -> ObjectInteractionCoordinator {
+        ObjectInteractionCoordinator()
     }
     
     func rotate(node : SCNNode) {
