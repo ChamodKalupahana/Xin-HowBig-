@@ -8,5 +8,10 @@
 import SwiftUI
 
 class ObjectInteractionCoordinator : NSObject {
+    var sceneView : SCNView?
+    var currentNode : SCNNode?
     
+    @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
+        
+    }
 }
