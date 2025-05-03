@@ -18,20 +18,18 @@ class ObjectInteractionCoordinator : NSObject {
         let location = gesture.location(in: sceneView)
         
         switch gesture.state {
-        case .possible:
-            <#code#>
         case .began:
-            <#code#>
+            let hitResults = sceneView.hitTest(location, options: nil)
+            if let hit = hitResults.first {
+                currentNode = hit.node
+            }
+            
         case .changed:
-            <#code#>
-        case .ended:
-            <#code#>
-        case .cancelled:
-            <#code#>
-        case .failed:
-            <#code#>
-        case .recognized:
-            <#code#>
+            guard let node = currentNode else { return }
+            
+            let translation = gesture.translation(in: sceneView)
+            let deltaX = Float(translation.x) * 0.01
+            let deltaY = Float(translation.y) * 0.01
         }
     }
 }
