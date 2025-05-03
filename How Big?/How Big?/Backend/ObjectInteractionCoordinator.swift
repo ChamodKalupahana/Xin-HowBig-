@@ -23,7 +23,7 @@ class ObjectInteractionCoordinator : NSObject {
             // Don't reassign currentNode on touch
 //            let hitResults = sceneView.hitTest(location, options: nil)
 //            if let hit = hitResults.first {
-//                currentNode = hit.node
+//                currentNode = hit.node //
 //            }
             break
             
@@ -38,10 +38,10 @@ class ObjectInteractionCoordinator : NSObject {
 //            node.position.y -= deltaY
             
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-            let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
-            let rotation = SCNMatrix4Mult(xRotation, yRotation)
+//            let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
+//            let rotation = SCNMatrix4Mult(xRotation, yRotation)
             
-            node.transform = SCNMatrix4Mult(rotation, node.transform)
+            node.transform = SCNMatrix4Mult(yRotation, node.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
             
@@ -49,6 +49,32 @@ class ObjectInteractionCoordinator : NSObject {
 //            currentNode = nil
             break
         
+        default:
+            break
+        }
+    }
+    
+    @objc func handlePinch(_ gesture : UIPinchGestureRecognizer) {
+        guard let node = currentNode else { return }
+        
+        switch gesture.state {
+        case .changed:
+            let scale = Float(gesture.scale)
+            let newScale = SCNVector3(
+                node.scale.x * scale,
+                node.scale.y * scale,
+                node.scale.z * scale
+            )
+            
+            let minScale : Float = 0.1
+            let maxScale : Float = 10.0
+            node.scale = SCNVector3(
+                max(minScale, min(maxScale, newScale.x)),
+                max(minScale, min(maxScale, newScale.y)),
+                max(minScale, min(maxScale, newScale.z))
+            )
+            
+            gesture.scale = 1.0
         default:
             break
         }

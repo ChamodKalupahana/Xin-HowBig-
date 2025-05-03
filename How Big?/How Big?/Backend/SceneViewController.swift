@@ -22,22 +22,40 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(containerNode)
         
 //         Load Object
-        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
+        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() {
             containerNode.addChildNode(objectNode)
             // for automatic rotation
 //            rotate(node: objectNode)
             context.coordinator.currentNode = containerNode
             
-        } //
+            // add XYZ axes
+            addXYZAxes(to: containerNode, basedOn: objectNode)
+        }
         
-        // add XYZ axes yay
-        addXYZAxes(to: containerNode)
         
         // add in panning
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         context.coordinator.currentNode = containerNode
+        
+        // add in camera
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        
+        let distance : Float = 50
+        let angle45 = Float.pi / 4
+        let x = distance * sin(angle45)
+        let z = distance * cos(angle45)
+        
+        cameraNode.position = SCNVector3(x: x, y: 20, z: z)
+        cameraNode.look(at: containerNode.position)
+        scene.rootNode.addChildNode(cameraNode)
+        
+        // add in scaling
+        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
+        sceneView.addGestureRecognizer(pinchGesture)
+
         
         return sceneView
     }
@@ -58,9 +76,9 @@ struct SceneViewController : UIViewRepresentable {
         node.addAnimation(spin, forKey: "spin")
     }
     
-    func addXYZAxes(to rootNode : SCNNode) {
-        let length : CGFloat = 5.0
-        let thickness : CGFloat = 0.05
+    func addXYZAxes(to rootNode : SCNNode, basedOn objectNode : SCNNode) {
+        let length : CGFloat = 25.0
+        let thickness : CGFloat = 0.25
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.red
@@ -79,9 +97,21 @@ struct SceneViewController : UIViewRepresentable {
         zNode.eulerAngles = SCNVector3(Float.pi / 2, 0, 0)
         zNode.position = SCNVector3(0, 0, length / 2)
         
-        rootNode.addChildNode(xNode)
-        rootNode.addChildNode(yNode)
-        rootNode.addChildNode(zNode)
+        let axesContainer = SCNNode()
+        axesContainer.addChildNode(xNode)
+        axesContainer.addChildNode(yNode)
+        axesContainer.addChildNode(zNode)
+        
+        // Position axesContainer at the front-left-bottom corner of objectNode
+        var min = SCNVector3Zero
+        var max = SCNVector3Zero
+        objectNode.__getBoundingBoxMin(&min, max: &max)
+        axesContainer.position = SCNVector3(min.x, min.y, min.z)
+        
+        
+        // add to root
+        rootNode.addChildNode(axesContainer)
+        
         
     }
 }
