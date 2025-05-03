@@ -37,6 +37,7 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
+        context.coordinator.currentNode = containerNode
         
         return sceneView
     }
@@ -70,7 +71,7 @@ struct SceneViewController : UIViewRepresentable {
         let yAxis = SCNCylinder(radius: thickness, height: length)
         yAxis.firstMaterial?.diffuse.contents = UIColor.green
         let yNode = SCNNode(geometry: yAxis)
-        yNode.position = SCNVector3(length / 2, 0, 0)
+        yNode.position = SCNVector3(0, length / 2, 0)
         
         let zAxis = SCNCylinder(radius: thickness, height: length)
         zAxis.firstMaterial?.diffuse.contents = UIColor.blue
