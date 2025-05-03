@@ -53,4 +53,15 @@ class ObjectInteractionCoordinator : NSObject {
             break
         }
     }
+    
+    @objc func handlePinch(_ gesture : UIPinchGestureRecognizer) {
+        guard let node = currentNode else { return }
+        
+        switch gesture.state {
+        case .changed:
+            
+        default:
+            break
+        }
+    }
 }
