@@ -36,6 +36,10 @@ class ObjectInteractionCoordinator : NSObject {
 //            node.position.y -= deltaY
             
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
+            let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
+            let rotation = SCNMatrix4Mult(xRotation, yRotation)
+            
+            node.transform = SCNMatrix4Mult(rotation, node.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
             
