@@ -59,7 +59,15 @@ class ObjectInteractionCoordinator : NSObject {
         
         switch gesture.state {
         case .changed:
+            let scale = Float(gesture.scale)
+            let newScale = SCNVector3(
+                node.scale.x * scale,
+                node.scale.y * scale,
+                node.scale.z * scale
+            )
             
+            let minScale : Float = 0.1
+            let maxScale : Float = 10.0
         default:
             break
         }
