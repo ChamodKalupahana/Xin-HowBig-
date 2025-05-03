@@ -22,6 +22,7 @@ struct SceneViewController : UIViewRepresentable {
         if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.dae")?.rootNode.clone() {
             scene.rootNode.addChildNode(objectNode)
             rotate(node: objectNode)
+            context.coordinator.currentNode = objectNode
             
         } //
         
