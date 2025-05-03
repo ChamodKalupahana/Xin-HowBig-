@@ -13,7 +13,7 @@ struct Compare: View {
             SceneViewController()
                 .ignoresSafeArea()
             
-            VStack{
+            VStack(alignment: .leading){
                 Text("How Big?")
                     .font(.largeTitle)
                     .fontWeight(.bold)
