@@ -15,6 +15,23 @@ class ObjectInteractionCoordinator : NSObject {
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
         
-        let location
+        let location = gesture.location(in: sceneView)
+        
+        switch gesture.state {
+        case .possible:
+            <#code#>
+        case .began:
+            <#code#>
+        case .changed:
+            <#code#>
+        case .ended:
+            <#code#>
+        case .cancelled:
+            <#code#>
+        case .failed:
+            <#code#>
+        case .recognized:
+            <#code#>
+        }
     }
 }
