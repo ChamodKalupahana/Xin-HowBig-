@@ -28,10 +28,9 @@ struct SceneViewController : UIViewRepresentable {
 //            rotate(node: objectNode)
             context.coordinator.currentNode = containerNode
             
-        } //
-        
-        // add XYZ axes yay
-        addXYZAxes(to: containerNode)
+            // add XYZ axes
+            addXYZAxes(to: containerNode, basedOn: objectNode)
+        }
         
         // add in panning
         context.coordinator.sceneView = sceneView
