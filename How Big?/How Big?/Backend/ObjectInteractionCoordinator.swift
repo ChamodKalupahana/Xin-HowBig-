@@ -30,6 +30,17 @@ class ObjectInteractionCoordinator : NSObject {
             let translation = gesture.translation(in: sceneView)
             let deltaX = Float(translation.x) * 0.01
             let deltaY = Float(translation.y) * 0.01
+            
+            node.position.x += deltaX
+            node.position.y -= deltaY
+            
+            gesture.setTranslation(.zero, in: sceneView)
+            
+        case .ended, .cancelled:
+            currentNode = nil
+        
+        default:
+            break
         }
     }
 }
