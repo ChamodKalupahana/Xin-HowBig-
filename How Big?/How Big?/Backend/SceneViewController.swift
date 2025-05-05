@@ -30,13 +30,13 @@ struct SceneViewController : UIViewRepresentable {
         
         containerNode.addChildNode(objectNode)
         
-        guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
-            print("footballNode not found")
-            return sceneView // return early to show erorr
-        }
-        
-        footballNode.position = SCNVector3(10, 0, 0)
-        containerNode.addChildNode(footballNode)
+//        guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
+//            print("footballNode not found")
+//            return sceneView // return early to show erorr
+//        }
+//        
+//        footballNode.position = SCNVector3(10, 0, 0)
+//        containerNode.addChildNode(footballNode)
         context.coordinator.currentNode = containerNode
         
         // add XYZ axes
@@ -48,7 +48,6 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
-        context.coordinator.currentNode = containerNode
         
         // add in camera
         let cameraNode = SCNNode()
@@ -66,12 +65,6 @@ struct SceneViewController : UIViewRepresentable {
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
-        
-        var min = SCNVector3Zero
-        var max = SCNVector3Zero
-        containerNode.__getBoundingBoxMin(&min, max: &max)
-        print("Bounding box: min=\(min), max=\(max)")
-
 
         
         return sceneView
