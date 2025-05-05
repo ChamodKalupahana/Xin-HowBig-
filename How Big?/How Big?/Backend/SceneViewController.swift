@@ -26,12 +26,12 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(centerNode)
         
         // Load Object
-        guard let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
+        guard let cottageNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
             print("Cottage_FREE not found")
             return sceneView // return early to show erorr
         }
         
-        containerNode.addChildNode(objectNode)
+        containerNode.addChildNode(cottageNode)
         
         guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
             print("footballNode not found")
@@ -43,7 +43,7 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.currentNode = containerNode
         
         // add XYZ axes
-        addXYZAxes(to: containerNode, basedOn: objectNode)
+        addXYZAxes(to: containerNode, basedOn: cottageNode)
     
         
         
