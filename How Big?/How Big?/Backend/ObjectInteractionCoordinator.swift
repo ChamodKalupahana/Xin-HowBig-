@@ -103,10 +103,7 @@ class ObjectInteractionCoordinator : NSObject {
 //            cameraNode.look(at: plantNode.position)
 //        }
         
-        // Smoothly rotate the camera to look at the plant's position
-        let lookAtConstraint = SCNLookAtConstraint(target: plantNode)
-        lookAtConstraint.isGimbalLockEnabled = true
-        cameraNode.constraints = [lookAtConstraint]
+        cameraNode.look(at: plantNode.position)
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
