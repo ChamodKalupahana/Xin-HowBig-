@@ -47,6 +47,17 @@ struct SceneViewController : UIViewRepresentable {
             print("Football.scn not found")
         }
         
+        // Re-center containerNode's pivot to the center of all its children
+        let (minVec, maxVec) = containerNode.boundingBox
+        let center = SCNVector3(
+            (minVec.x + maxVec.x) / 2,
+            (minVec.y + maxVec.y) / 2,
+            (minVec.z + maxVec.z) / 2
+        )
+        containerNode.pivot = SCNMatrix4MakeTranslation(center.x, center.y, center.z)
+        sceneView.allowsCameraControl = false
+
+        
         context.coordinator.currentNode = containerNode
         
         // add XYZ axes
