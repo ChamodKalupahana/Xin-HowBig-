@@ -85,5 +85,12 @@ class ObjectInteractionCoordinator : NSObject {
     
     func focusOnPlant() {
         guard let plantNode = plantNode, let cameraNode = cameraNode else { return }
+        
+        currentNode = plantNode
+        
+        // move camera to orbut around the plant
+        let distance : Float = 20
+        let angle25 : Float = Float.pi / 4
+        
     }
 }
