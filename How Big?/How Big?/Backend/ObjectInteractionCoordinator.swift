@@ -94,5 +94,11 @@ class ObjectInteractionCoordinator : NSObject {
         let x = plantNode.position.x + distance * sin(angle45)
         let z = plantNode.position.z + distance * cos(angle45)
         let y = plantNode.position.y + 10
+        
+        let newPosition = SCNVector3(x, y, z)
+        
+        let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
+        moveAction.timingMode = .easeInEaseOut
+        
     }
 }
