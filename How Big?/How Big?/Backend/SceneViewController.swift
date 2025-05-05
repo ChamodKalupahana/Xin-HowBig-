@@ -35,6 +35,7 @@ struct SceneViewController : UIViewRepresentable {
             return sceneView // return early to show erorr
         }
         
+        footballNode.position = SCNVector3(10, 0, 0)
         containerNode.addChildNode(footballNode)
         context.coordinator.currentNode = containerNode
         
