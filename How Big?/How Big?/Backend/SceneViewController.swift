@@ -22,20 +22,23 @@ struct SceneViewController : UIViewRepresentable {
         let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
+        // Load Object
         guard let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
-            return
+            return sceneView // return early to show erorr
         }
         
-//         Load Object
-        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() {
-            containerNode.addChildNode(objectNode)
-            // for automatic rotation
-//            rotate(node: objectNode)
-            context.coordinator.currentNode = containerNode
-            
-            // add XYZ axes
-            addXYZAxes(to: containerNode, basedOn: objectNode)
+        containerNode.addChildNode(objectNode)
+        
+        guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
+            return sceneView // return early to show erorr
         }
+        
+        containerNode.addChildNode(footballNode)
+        context.coordinator.currentNode = containerNode
+        
+        // add XYZ axes
+        addXYZAxes(to: containerNode, basedOn: objectNode)
+    
         
         
         // add in panning
