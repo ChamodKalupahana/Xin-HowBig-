@@ -31,7 +31,7 @@ struct SceneViewController : UIViewRepresentable {
             return sceneView // return early to show erorr
         }
         
-        containerNode.addChildNode(cottageNode)
+        centerNode.addChildNode(cottageNode)
         
         guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
             print("footballNode not found")
@@ -39,13 +39,13 @@ struct SceneViewController : UIViewRepresentable {
         }
         
         footballNode.position = SCNVector3(10, 0, 0)
-        containerNode.addChildNode(footballNode)
-        context.coordinator.currentNode = containerNode
+        centerNode.addChildNode(footballNode)
+        
+        context.coordinator.currentNode = centerNode
+        context.coordinator.sceneView = sceneView
         
         // add XYZ axes
-        addXYZAxes(to: containerNode, basedOn: cottageNode)
-    
-        
+        addXYZAxes(to: centerNode, basedOn: cottageNode)
         
         // add in panning
         context.coordinator.sceneView = sceneView
@@ -63,7 +63,7 @@ struct SceneViewController : UIViewRepresentable {
         let z = distance * cos(angle45)
         
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
-        cameraNode.look(at: containerNode.position)
+        cameraNode.look(at: centerNode.position)
         scene.rootNode.addChildNode(cameraNode)
         
         // add in scaling
