@@ -30,7 +30,7 @@ struct SceneViewController : UIViewRepresentable {
         
         containerNode.addChildNode(objectNode)
         
-        guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
+        guard let footballNode = SCNScene(named: "art.scnassets/indoor plant_02.scn")?.rootNode.clone() else {
             print("footballNode not found")
             return sceneView // return early to show erorr
         }
