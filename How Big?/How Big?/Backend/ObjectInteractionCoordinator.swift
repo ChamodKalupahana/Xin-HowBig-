@@ -99,6 +99,8 @@ class ObjectInteractionCoordinator : NSObject {
         
         let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
         moveAction.timingMode = .easeInEaseOut
-        
+        cameraNode.runAction(moveAction) {
+            cameraNode.look(at: plantNode.position)
+        }
     }
 }
