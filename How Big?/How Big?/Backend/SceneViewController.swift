@@ -39,7 +39,7 @@ struct SceneViewController : UIViewRepresentable {
         plantNode.position = SCNVector3(12, 0, 0)
         containerNode.addChildNode(plantNode)
         context.coordinator.currentNode = containerNode
-        
+        context.coordinator.plantNode = plantNode
         
         // add XYZ axes
         addXYZAxes(to: containerNode, basedOn: cottageNode)
@@ -63,6 +63,8 @@ struct SceneViewController : UIViewRepresentable {
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
         cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
+        
+        context.coordinator.cameraNode = cameraNode
         
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))

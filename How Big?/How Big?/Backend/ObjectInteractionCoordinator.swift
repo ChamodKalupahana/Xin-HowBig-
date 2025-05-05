@@ -82,4 +82,8 @@ class ObjectInteractionCoordinator : NSObject {
             break
         }
     }
+    
+    func focusOnPlant() {
+        guard let plantNode = plantNode, let cameraNode = cameraNode else { return }
+    }
 }
