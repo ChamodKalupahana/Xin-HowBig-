@@ -30,34 +30,14 @@ struct SceneViewController : UIViewRepresentable {
         
         containerNode.addChildNode(objectNode)
         
-        if let footballScene = SCNScene(named: "art.scnassets/Football.scn") {
-            let footballWrapper = SCNNode()
-            
-            // Add each child node from the root to the wrapper
-            for child in footballScene.rootNode.childNodes {
-                footballWrapper.addChildNode(child.clone())
-            }
-            
-            // Move it to the side of the cottage
-            footballWrapper.position = SCNVector3(10, 0, 0)
-            
-            // Add to container so it transforms with the cottage
-            containerNode.addChildNode(footballWrapper)
-        } else {
-            print("Football.scn not found")
+        guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
+            print("footballNode not found")
+            return sceneView // return early to show erorr
         }
+        print("football children count: \(footballNode.childNodes.count)")
         
-        // Re-center containerNode's pivot to the center of all its children
-        let (minVec, maxVec) = containerNode.boundingBox
-        let center = SCNVector3(
-            (minVec.x + maxVec.x) / 2,
-            (minVec.y + maxVec.y) / 2,
-            (minVec.z + maxVec.z) / 2
-        )
-        containerNode.pivot = SCNMatrix4MakeTranslation(center.x, center.y, center.z)
-        sceneView.allowsCameraControl = false
-
-        
+        footballNode.position = SCNVector3(10, 0, 0)
+        containerNode.addChildNode(footballNode)
         context.coordinator.currentNode = containerNode
         
         // add XYZ axes
