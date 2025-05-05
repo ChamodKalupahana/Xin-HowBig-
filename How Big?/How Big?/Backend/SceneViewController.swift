@@ -22,6 +22,9 @@ struct SceneViewController : UIViewRepresentable {
         let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
+        let centerNode = SCNNode()
+        scene.rootNode.addChildNode(centerNode)
+        
         // Load Object
         guard let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
             print("Cottage_FREE not found")
