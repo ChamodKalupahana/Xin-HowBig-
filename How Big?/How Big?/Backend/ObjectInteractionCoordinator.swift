@@ -106,5 +106,8 @@ class ObjectInteractionCoordinator : NSObject {
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         guard let sceneView = sceneView, let plantNode = plantNode else { return }
+        
+        let location = gesture.location(in: sceneView)
+        let hitResults = sceneView.hitTest(location, options: nil)
     }
 }
