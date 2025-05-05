@@ -66,6 +66,12 @@ struct SceneViewController : UIViewRepresentable {
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
+        
+        var min = SCNVector3Zero
+        var max = SCNVector3Zero
+        containerNode.__getBoundingBoxMin(&min, max: &max)
+        print("Bounding box: min=\(min), max=\(max)")
+
 
         
         return sceneView
