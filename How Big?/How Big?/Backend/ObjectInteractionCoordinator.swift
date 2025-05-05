@@ -109,5 +109,12 @@ class ObjectInteractionCoordinator : NSObject {
         
         let location = gesture.location(in: sceneView)
         let hitResults = sceneView.hitTest(location, options: nil)
+        
+        for result in hitResults {
+            if result.node == plantNode || plantNode.childNodes.contains(result.node) {
+                focusOnPlant()
+                break
+            }
+        }
     }
 }
