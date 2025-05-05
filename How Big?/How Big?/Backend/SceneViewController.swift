@@ -70,11 +70,10 @@ struct SceneViewController : UIViewRepresentable {
         // add in lighting
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
-        lightNode.light?.type = .directional
+        lightNode.light?.type = .omni
         lightNode.light?.color = UIColor.white
-        lightNode.eulerAngles = SCNVector3(-Float.pi / 3, -Float.pi / 4, 0) // Angled light
+        lightNode.position = SCNVector3(0, 50, 50)
         scene.rootNode.addChildNode(lightNode)
-
         
         return sceneView
     }
