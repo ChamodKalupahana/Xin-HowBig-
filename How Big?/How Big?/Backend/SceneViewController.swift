@@ -34,7 +34,7 @@ struct SceneViewController : UIViewRepresentable {
             print("plantNode not found")
             return sceneView // return early to show erorr
         }
-        print("plantNode children count: \(plantNode.childNodes.count)")
+//        print("plantNode children count: \(plantNode.childNodes.count)")
         
         plantNode.position = SCNVector3(12, 0, 0)
         containerNode.addChildNode(plantNode)
