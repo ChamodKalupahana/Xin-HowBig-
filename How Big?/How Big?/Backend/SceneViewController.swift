@@ -36,7 +36,7 @@ struct SceneViewController : UIViewRepresentable {
         }
         print("football children count: \(footballNode.childNodes.count)")
         
-        footballNode.position = SCNVector3(10, 0, 0)
+        footballNode.position = SCNVector3(20, 0, 0)
         containerNode.addChildNode(footballNode)
         context.coordinator.currentNode = containerNode
         
