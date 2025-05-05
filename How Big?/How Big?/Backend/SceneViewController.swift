@@ -66,6 +66,14 @@ struct SceneViewController : UIViewRepresentable {
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
+        
+        // add in lighting
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light?.type = .directional
+        lightNode.light?.color = UIColor.white
+        lightNode.eulerAngles = SCNVector3(-Float.pi / 3, -Float.pi / 4, 0) // Angled light
+        scene.rootNode.addChildNode(lightNode)
 
         
         return sceneView
