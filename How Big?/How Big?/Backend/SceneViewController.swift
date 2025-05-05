@@ -48,10 +48,10 @@ struct SceneViewController : UIViewRepresentable {
         addXYZAxes(to: centerNode, basedOn: cottageNode)
         
         // add in panning
-        context.coordinator.sceneView = sceneView
+//        context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
-        context.coordinator.currentNode = containerNode
+//        context.coordinator.currentNode = containerNode
         
         // add in camera
         let cameraNode = SCNNode()
