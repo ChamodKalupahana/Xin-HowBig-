@@ -22,16 +22,13 @@ struct SceneViewController : UIViewRepresentable {
         let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
-        let centerNode = SCNNode()
-        scene.rootNode.addChildNode(centerNode)
-        
         // Load Object
-        guard let cottageNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
+        guard let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
             print("Cottage_FREE not found")
             return sceneView // return early to show erorr
         }
         
-        centerNode.addChildNode(cottageNode)
+        containerNode.addChildNode(objectNode)
         
         guard let footballNode = SCNScene(named: "art.scnassets/Football.scn")?.rootNode.clone() else {
             print("footballNode not found")
@@ -39,19 +36,19 @@ struct SceneViewController : UIViewRepresentable {
         }
         
         footballNode.position = SCNVector3(10, 0, 0)
-        centerNode.addChildNode(footballNode)
-        
-        context.coordinator.currentNode = centerNode
-        context.coordinator.sceneView = sceneView
+        containerNode.addChildNode(footballNode)
+        context.coordinator.currentNode = containerNode
         
         // add XYZ axes
-        addXYZAxes(to: centerNode, basedOn: cottageNode)
+        addXYZAxes(to: containerNode, basedOn: objectNode)
+    
+        
         
         // add in panning
-//        context.coordinator.sceneView = sceneView
+        context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
-//        context.coordinator.currentNode = containerNode
+        context.coordinator.currentNode = containerNode
         
         // add in camera
         let cameraNode = SCNNode()
@@ -63,7 +60,7 @@ struct SceneViewController : UIViewRepresentable {
         let z = distance * cos(angle45)
         
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
-        cameraNode.look(at: centerNode.position)
+        cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
         
         // add in scaling
