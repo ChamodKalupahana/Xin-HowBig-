@@ -36,9 +36,10 @@ struct SceneViewController : UIViewRepresentable {
         }
         print("plantNode children count: \(plantNode.childNodes.count)")
         
-        plantNode.position = SCNVector3(20, 0, 0)
+        plantNode.position = SCNVector3(12, 0, 0)
         containerNode.addChildNode(plantNode)
         context.coordinator.currentNode = containerNode
+        
         
         // add XYZ axes
         addXYZAxes(to: containerNode, basedOn: cottageNode)

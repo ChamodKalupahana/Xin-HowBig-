@@ -12,6 +12,9 @@ class ObjectInteractionCoordinator : NSObject {
     var sceneView : SCNView?
     var currentNode : SCNNode?
     
+    var plantNode : SCNNode?
+    var cameraNode : SCNNode?
+    
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
         
