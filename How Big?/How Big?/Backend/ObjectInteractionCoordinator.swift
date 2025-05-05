@@ -90,7 +90,9 @@ class ObjectInteractionCoordinator : NSObject {
         
         // move camera to orbut around the plant
         let distance : Float = 20
-        let angle25 : Float = Float.pi / 4
-        
+        let angle45 : Float = Float.pi / 4
+        let x = plantNode.position.x + distance * sin(angle45)
+        let z = plantNode.position.z + distance * cos(angle45)
+        let y = plantNode.position.y + 10
     }
 }
