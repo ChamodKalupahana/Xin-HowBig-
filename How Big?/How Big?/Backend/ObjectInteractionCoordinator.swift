@@ -31,7 +31,7 @@ class ObjectInteractionCoordinator : NSObject {
             guard let node = currentNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
-            let deltaY = Float(translation.y) * 0.01
+            _ = Float(translation.y) * 0.01
             
             // for panning
 //            node.position.x += deltaX
