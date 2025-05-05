@@ -89,19 +89,24 @@ class ObjectInteractionCoordinator : NSObject {
 //        currentNode = plantNode
         
         // move camera to orbut around the plant
-        let distance : Float = 20
-        let angle45 : Float = Float.pi / 4
-        let x = plantNode.position.x + distance * sin(angle45)
-        let z = plantNode.position.z + distance * cos(angle45)
-        let y = plantNode.position.y + 10
+//        let distance : Float = 20
+//        let angle45 : Float = Float.pi / 4
+//        let x = plantNode.position.x + distance * sin(angle45)
+//        let z = plantNode.position.z + distance * cos(angle45)
+//        let y = plantNode.position.y + 10
+//        
+//        let newPosition = SCNVector3(x, y, z)
+//        
+//        let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
+//        moveAction.timingMode = .easeInEaseOut
+//        cameraNode.runAction(moveAction) {
+//            cameraNode.look(at: plantNode.position)
+//        }
         
-        let newPosition = SCNVector3(x, y, z)
-        
-        let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
-        moveAction.timingMode = .easeInEaseOut
-        cameraNode.runAction(moveAction) {
-            cameraNode.look(at: plantNode.position)
-        }
+        // Smoothly rotate the camera to look at the plant's position
+        let lookAtConstraint = SCNLookAtConstraint(target: plantNode)
+        lookAtConstraint.isGimbalLockEnabled = true
+        cameraNode.constraints = [lookAtConstraint]
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
