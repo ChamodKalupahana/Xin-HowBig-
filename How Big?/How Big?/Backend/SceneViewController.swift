@@ -81,6 +81,9 @@ struct SceneViewController : UIViewRepresentable {
 
         scene.rootNode.addChildNode(lightNode)
         
+        // add in tap gesture
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator))
+        
         return sceneView
     }
     

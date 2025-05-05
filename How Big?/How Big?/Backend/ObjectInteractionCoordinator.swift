@@ -103,4 +103,8 @@ class ObjectInteractionCoordinator : NSObject {
             cameraNode.look(at: plantNode.position)
         }
     }
+    
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+        guard let sceneView = sceneView, let plantNode = plantNode else { return }
+    }
 }
