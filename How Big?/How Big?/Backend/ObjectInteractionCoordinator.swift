@@ -28,7 +28,10 @@ class ObjectInteractionCoordinator : NSObject {
         case .changed:
             
             let deltaX = Float(translation.x) * 0.01
-            _ = Float(translation.y) * 0.01
+            
+            // Step 1: Move node's pivot to focusTarget's position (in parent space)
+            let localFocusPosition = currentNode.convertPosition(focusTargetNode.position, to: nil)
+            
             
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
             
