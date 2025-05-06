@@ -115,7 +115,19 @@ struct SceneViewController : UIViewRepresentable {
         let thickness : CGFloat = 0.15
         let step : CGFloat = 50.0 // distnace between scale marks
         
-        let font : UIFont.systemFont(ofSize: 10)
+        let font = UIFont.systemFont(ofSize: 10)
+        
+        func makeLabel(_ text : String) -> SCNNode {
+            let textGeometry = SCNText(string : text, extrusionDepth: 0.5)
+            textGeometry.font = font
+            textGeometry.flatness = 0.1
+            textGeometry.firstMaterial?.diffuse.contents = UIColor.white
+            
+            let node = SCNNode(geometry: textGeometry)
+            let (min, max) = textGeometry.boundingBox
+            let width = max.x - min.x
+            node.pivot =
+        }
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.black
