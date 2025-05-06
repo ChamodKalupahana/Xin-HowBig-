@@ -19,7 +19,7 @@ class ObjectInteractionCoordinator : NSObject {
     var cottageNode: SCNNode?
 
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
-        guard let sceneView = sceneView, let currentNode = currentNode else { return }
+        guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
