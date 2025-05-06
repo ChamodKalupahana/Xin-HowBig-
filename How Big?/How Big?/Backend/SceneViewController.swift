@@ -22,23 +22,34 @@ struct SceneViewController : UIViewRepresentable {
         let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
-//         Load Object
-        if let objectNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() {
-            containerNode.addChildNode(objectNode)
-            // for automatic rotation
-//            rotate(node: objectNode)
-            context.coordinator.currentNode = containerNode
-            
-            // add XYZ axes
-            addXYZAxes(to: containerNode, basedOn: objectNode)
+        // Load Object
+        guard let cottageNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
+            print("Cottage_FREE not found")
+            return sceneView // return early to show erorr
         }
+        
+        containerNode.addChildNode(cottageNode)
+        
+        guard let plantNode = SCNScene(named: "art.scnassets/indoor plant_02.scn")?.rootNode.clone() else {
+            print("plantNode not found")
+            return sceneView // return early to show erorr
+        }
+//        print("plantNode children count: \(plantNode.childNodes.count)")
+        
+        plantNode.position = SCNVector3(12, 0, 0)
+        containerNode.addChildNode(plantNode)
+        context.coordinator.currentNode = containerNode
+        context.coordinator.plantNode = plantNode
+        
+        // add XYZ axes
+        addXYZAxes(to: containerNode, basedOn: cottageNode)
+    
         
         
         // add in panning
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
-        context.coordinator.currentNode = containerNode
         
         // add in camera
         let cameraNode = SCNNode()
@@ -53,10 +64,26 @@ struct SceneViewController : UIViewRepresentable {
         cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
         
+        context.coordinator.cameraNode = cameraNode
+        
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
+        
+        // add in lighting
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light?.type = .directional
+        lightNode.light?.color = UIColor.white
 
+        // Rotate the light downward and forward at an angle
+        lightNode.eulerAngles = SCNVector3(-Float.pi / 3, -Float.pi / 4, 0)
+
+        scene.rootNode.addChildNode(lightNode)
+        
+        // add in tap gesture
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleTap(_:)))
+        sceneView.addGestureRecognizer(tapGesture)
         
         return sceneView
     }

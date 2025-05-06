@@ -12,6 +12,9 @@ class ObjectInteractionCoordinator : NSObject {
     var sceneView : SCNView?
     var currentNode : SCNNode?
     
+    var plantNode : SCNNode?
+    var cameraNode : SCNNode?
+    
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
         
@@ -31,7 +34,7 @@ class ObjectInteractionCoordinator : NSObject {
             guard let node = currentNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
-            let deltaY = Float(translation.y) * 0.01
+            _ = Float(translation.y) * 0.01
             
             // for panning
 //            node.position.x += deltaX
@@ -77,6 +80,43 @@ class ObjectInteractionCoordinator : NSObject {
             gesture.scale = 1.0
         default:
             break
+        }
+    }
+    
+    func focusOnPlant() {
+        guard let plantNode = plantNode, let cameraNode = cameraNode else { return }
+        
+//        currentNode = plantNode
+        
+        // move camera to orbut around the plant
+        let distance : Float = 20
+        let angle45 : Float = Float.pi / 4
+        let x = plantNode.position.x + distance * sin(angle45)
+        let z = plantNode.position.z + distance * cos(angle45)
+        let y = plantNode.position.y + 10
+        
+        let newPosition = SCNVector3(x, y, z)
+        
+        let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
+        moveAction.timingMode = .easeInEaseOut
+        cameraNode.runAction(moveAction) {
+            cameraNode.look(at: plantNode.position)
+        }
+        
+//        cameraNode.look(at: plantNode.position)
+    }
+    
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+        guard let sceneView = sceneView, let plantNode = plantNode else { return }
+        
+        let location = gesture.location(in: sceneView)
+        let hitResults = sceneView.hitTest(location, options: nil)
+        
+        for result in hitResults {
+            if result.node == plantNode || plantNode.childNodes.contains(result.node) {
+                focusOnPlant()
+                break
+            }
         }
     }
 }
