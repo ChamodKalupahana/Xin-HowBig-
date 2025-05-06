@@ -11,8 +11,8 @@ import SceneKit
 
 struct SceneViewController : UIViewRepresentable {
     let cottageObjectPath = "art.scnassets/Cottage_FREE.scn"
-//    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
-    let plantObjectPath = "art.scnassets/Football.scn"
+    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
+//    let plantObjectPath = "art.scnassets/Football.scn"
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
