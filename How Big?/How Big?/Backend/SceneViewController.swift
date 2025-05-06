@@ -140,6 +140,10 @@ struct SceneViewController : UIViewRepresentable {
                     axis == "y" ? pos : 0,
                     axis == "z" ? pos : 0
                 )
+                labelNode.eulerAngles = axis == "x" ? SCNVector3(0, 0, -Float.pi / 2) :
+                                    axis == "z" ? SCNVector3(-Float.pi / 2, 0, 0) :
+                                    SCNVector3Zero
+                parent.addChildNode(labelNode)
             }
         }
         
@@ -164,6 +168,10 @@ struct SceneViewController : UIViewRepresentable {
         axesContainer.addChildNode(xNode)
         axesContainer.addChildNode(yNode)
         axesContainer.addChildNode(zNode)
+        
+        addScaleMarks(to: axesContainer, direction: SCNVector3(1,0,0), axis: "x")
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,1,0), axis: "y")
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,0,1), axis: "z")
         
         // Position axesContainer at the front-left-bottom corner of objectNode
         var min = SCNVector3Zero
