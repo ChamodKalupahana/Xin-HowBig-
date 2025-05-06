@@ -33,6 +33,7 @@ struct SceneViewController : UIViewRepresentable {
         }
         
         containerNode.addChildNode(cottageNode)
+        context.coordinator.cottageNode = cottageNode
         
         guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
             print("plantNode not found")
