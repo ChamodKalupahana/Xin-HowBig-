@@ -131,6 +131,18 @@ struct SceneViewController : UIViewRepresentable {
             return node
         }
         
+        func addScaleMarks(to parent: SCNNode, direction : SCNVector3, axis : String) {
+            for i in 0...Int(length / step) {
+                let pos = Float(step) * Float(i)
+                let labelNode =  makeLabel("\(i * Int(step))")
+                labelNode.position = SCNVector3(
+                    axis == "x" ? pos : 0,
+                    axis == "y" ? pos : 0,
+                    axis == "z" ? pos : 0
+                )
+            }
+        }
+        
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.black
         let xNode = SCNNode(geometry: xAxis)
