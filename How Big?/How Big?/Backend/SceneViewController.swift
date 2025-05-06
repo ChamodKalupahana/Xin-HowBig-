@@ -66,7 +66,7 @@ struct SceneViewController : UIViewRepresentable {
         let z = distance * cos(angle45)
         
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
-//        cameraNode.look(at: containerNode.position) old
+//        cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
         
         context.coordinator.cameraNode = cameraNode
@@ -115,18 +115,18 @@ struct SceneViewController : UIViewRepresentable {
         let thickness : CGFloat = 0.25
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
-        xAxis.firstMaterial?.diffuse.contents = UIColor.red
+        xAxis.firstMaterial?.diffuse.contents = UIColor.black
         let xNode = SCNNode(geometry: xAxis)
         xNode.eulerAngles = SCNVector3(0, 0, Float.pi / 2)
         xNode.position = SCNVector3(length / 2, 0, 0)
         
         let yAxis = SCNCylinder(radius: thickness, height: length)
-        yAxis.firstMaterial?.diffuse.contents = UIColor.green
+        yAxis.firstMaterial?.diffuse.contents = UIColor.black
         let yNode = SCNNode(geometry: yAxis)
         yNode.position = SCNVector3(0, length / 2, 0)
         
         let zAxis = SCNCylinder(radius: thickness, height: length)
-        zAxis.firstMaterial?.diffuse.contents = UIColor.blue
+        zAxis.firstMaterial?.diffuse.contents = UIColor.black
         let zNode = SCNNode(geometry: zAxis)
         zNode.eulerAngles = SCNVector3(Float.pi / 2, 0, 0)
         zNode.position = SCNVector3(0, 0, length / 2)
