@@ -120,6 +120,9 @@ class ObjectInteractionCoordinator : NSObject {
             if result.node == plantNode || plantNode.childNodes.contains(result.node) {
                 focusOnNode(on: plantNode)
                 break
+            } else if result.node == cottageNode || cottageNode.childNodes.contains(result.node) {
+                focusOnNode(on: cottageNode)
+                break
             }
         }
     }
