@@ -123,6 +123,18 @@ class ObjectInteractionCoordinator : NSObject {
     }
     
     func focusOnNode(on node: SCNNode) {
+        guard let cameraNode = cameraNode else { return }
+        
+        focusTargetNode = node
+        
+        // move camera to orbit around the input node
+        let distance : Float = 20
+        let angle45 : Float = Float.pi / 4
+        let x = node.position.x + distance * sin(angle45)
+        let z = node.position.z + distance * cos(angle45)
+        let y = node.position.y + 10
+        
+        let newPosition = SCNVector3(x, y, z)
         
     }
 }
