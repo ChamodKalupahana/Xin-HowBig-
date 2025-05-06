@@ -144,6 +144,9 @@ struct SceneViewController : UIViewRepresentable {
 //                labelNode.eulerAngles = axis == .x ? SCNVector3(0, 0, -Float.pi / 2) :
 //                axis == .z ? SCNVector3(-Float.pi / 2, 0, 0) :
 //                                    SCNVector3Zero
+                if (axis == .x) {
+                    labelNode.eulerAngles = SCNVector3(0, Float.pi / 2, 0)
+                }
                 parent.addChildNode(labelNode)
             }
         }
