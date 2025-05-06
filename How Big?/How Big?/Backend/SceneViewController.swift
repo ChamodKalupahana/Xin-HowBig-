@@ -113,7 +113,7 @@ struct SceneViewController : UIViewRepresentable {
     func addXYZAxes(to containerNode : SCNNode, basedOn objectNode : SCNNode) {
         let length : CGFloat = 250.0
         let thickness : CGFloat = 0.15
-        let step : CGFloat = 50.0 // distnace between scale marks
+        let step : CGFloat = 5.0 // distnace between scale marks
         
         let font = UIFont.systemFont(ofSize: 10)
         
@@ -131,21 +131,48 @@ struct SceneViewController : UIViewRepresentable {
             return node
         }
         
-        func addScaleMarks(to parent: SCNNode, direction : SCNVector3, axis : String) {
+        func addScaleMarks(to parent: SCNNode, direction: SCNVector3, axis: String) {
+            let tickLength: Float = 5.0
+            let tickThickness: CGFloat = 0.3
+
             for i in 0...Int(length / step) {
                 let pos = Float(step) * Float(i)
-                let labelNode =  makeLabel("\(i * Int(step))")
-                labelNode.position = SCNVector3(
+
+                // Position on the axis
+                let position = SCNVector3(
                     axis == "x" ? pos : 0,
                     axis == "y" ? pos : 0,
                     axis == "z" ? pos : 0
                 )
+
+                // Create tick mark (small box or cylinder)
+                let tick = SCNBox(width: axis == "y" ? CGFloat(tickLength) : CGFloat(tickThickness),
+                                  height: axis == "z" ? CGFloat(tickLength) : CGFloat(tickThickness),
+                                  length: axis == "x" ? CGFloat(tickLength) : CGFloat(tickThickness),
+                                  chamferRadius: 0)
+                tick.firstMaterial?.diffuse.contents = UIColor.white
+                let tickNode = SCNNode(geometry: tick)
+                tickNode.position = SCNVector3(
+                    position.x + (axis == "x" ? 0 : -tickLength / 2),
+                    position.y + (axis == "y" ? 0 : -tickLength / 2),
+                    position.z + (axis == "z" ? 0 : -tickLength / 2)
+                )
+                parent.addChildNode(tickNode)
+
+                // Create label
+                let labelNode = makeLabel("\(i * Int(step))")
+                labelNode.position = SCNVector3(
+                    position.x + (axis == "x" ? 0 : -tickLength - 3),
+                    position.y + (axis == "y" ? 0 : -tickLength - 3),
+                    position.z + (axis == "z" ? 0 : -tickLength - 3)
+                )
                 labelNode.eulerAngles = axis == "x" ? SCNVector3(0, 0, -Float.pi / 2) :
-                                    axis == "z" ? SCNVector3(-Float.pi / 2, 0, 0) :
-                                    SCNVector3Zero
+                                     axis == "z" ? SCNVector3(-Float.pi / 2, 0, 0) :
+                                     SCNVector3Zero
                 parent.addChildNode(labelNode)
             }
         }
+
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.black
