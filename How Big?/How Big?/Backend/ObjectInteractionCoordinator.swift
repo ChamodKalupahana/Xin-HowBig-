@@ -20,9 +20,8 @@ class ObjectInteractionCoordinator : NSObject {
 
     
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
-        guard let sceneView = sceneView, let currentNode = currentNode else { return }
+        guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
-        _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
         switch gesture.state {
@@ -33,7 +32,7 @@ class ObjectInteractionCoordinator : NSObject {
             
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
             
-            node.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
+            currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
             
