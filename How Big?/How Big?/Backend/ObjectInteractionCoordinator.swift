@@ -134,7 +134,13 @@ class ObjectInteractionCoordinator : NSObject {
         let z = node.position.z + distance * cos(angle45)
         let y = node.position.y + 10
         
-        let newPosition = SCNVector3(x, y, z)
+        let newCameraPosition = SCNVector3(x, y, z)
+        
+        let move = SCNAction.move(to: newCameraPosition, duration: 0.5)
+        move.timingMode = .easeInEaseOut
+        cameraNode.runAction(move) {
+            cameraNode.look(at: node.position)
+        }
         
     }
 }
