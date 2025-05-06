@@ -131,18 +131,18 @@ struct SceneViewController : UIViewRepresentable {
             return node
         }
         
-        func addScaleMarks(to parent: SCNNode, direction : SCNVector3, axis : Dimesion) {
+        func addScaleMarks(to parent: SCNNode, direction : SCNVector3, axis : Dimension) {
             for i in 0...Int(length / step) {
                 let pos = Float(step) * Float(i)
                 let labelNode =  makeLabel("\(i * Int(step))")
                 labelNode.position = SCNVector3(
-                    axis == "x" ? pos : 0,
-                    axis == "y" ? pos : 0,
-                    axis == "z" ? pos : 0
+                    axis == .x ? pos : 0,
+                    axis == .y ? pos : 0,
+                    axis == .z ? pos : 0
                 )
                 
-                labelNode.eulerAngles = axis == "x" ? SCNVector3(0, 0, -Float.pi / 2) :
-                                    axis == "z" ? SCNVector3(-Float.pi / 2, 0, 0) :
+                labelNode.eulerAngles = axis == .x ? SCNVector3(0, 0, -Float.pi / 2) :
+                axis == .z ? SCNVector3(-Float.pi / 2, 0, 0) :
                                     SCNVector3Zero
                 parent.addChildNode(labelNode)
             }
@@ -170,9 +170,9 @@ struct SceneViewController : UIViewRepresentable {
         axesContainer.addChildNode(yNode)
         axesContainer.addChildNode(zNode)
         
-        addScaleMarks(to: axesContainer, direction: SCNVector3(1,0,0), axis: "x")
-        addScaleMarks(to: axesContainer, direction: SCNVector3(0,1,0), axis: "y")
-        addScaleMarks(to: axesContainer, direction: SCNVector3(0,0,1), axis: "z")
+        addScaleMarks(to: axesContainer, direction: SCNVector3(1,0,0), axis: .x)
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,1,0), axis: .y)
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,0,1), axis: .z)
         
         // Position axesContainer at the front-left-bottom corner of objectNode
         var min = SCNVector3Zero
