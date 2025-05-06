@@ -69,6 +69,7 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(cameraNode)
         
         context.coordinator.cameraNode = cameraNode
+        context.coordinator.focusOnNode(on: cottageNode)
         
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
