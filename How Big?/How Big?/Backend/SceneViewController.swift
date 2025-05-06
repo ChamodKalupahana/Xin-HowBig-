@@ -10,6 +10,10 @@ import SwiftUI
 import SceneKit
 
 struct SceneViewController : UIViewRepresentable {
+    let cottageObjectPath = "art.scnassets/Cottage_FREE.scn"
+    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
+//    let plantObjectPath = "art.scnassets/Football.scn"
+    
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         
@@ -23,14 +27,15 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(containerNode)
         
         // Load Object
-        guard let cottageNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
+        guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
             print("Cottage_FREE not found")
             return sceneView // return early to show erorr
         }
         
         containerNode.addChildNode(cottageNode)
+        context.coordinator.cottageNode = cottageNode
         
-        guard let plantNode = SCNScene(named: "art.scnassets/indoor plant_02.scn")?.rootNode.clone() else {
+        guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
             print("plantNode not found")
             return sceneView // return early to show erorr
         }
@@ -61,10 +66,11 @@ struct SceneViewController : UIViewRepresentable {
         let z = distance * cos(angle45)
         
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
-        cameraNode.look(at: containerNode.position)
+//        cameraNode.look(at: containerNode.position) old
         scene.rootNode.addChildNode(cameraNode)
         
         context.coordinator.cameraNode = cameraNode
+        context.coordinator.focusOnNode(on: cottageNode)
         
         // add in scaling
         let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))

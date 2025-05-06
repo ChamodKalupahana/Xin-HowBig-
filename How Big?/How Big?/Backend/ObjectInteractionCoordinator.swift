@@ -15,36 +15,24 @@ class ObjectInteractionCoordinator : NSObject {
     var plantNode : SCNNode?
     var cameraNode : SCNNode?
     
+    var focusTargetNode : SCNNode?
+    var cottageNode: SCNNode?
+
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
-        guard let sceneView = sceneView else { return }
+        guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
         switch gesture.state {
-        case .began:
-            // Don't reassign currentNode on touch
-//            let hitResults = sceneView.hitTest(location, options: nil)
-//            if let hit = hitResults.first {
-//                currentNode = hit.node //
-//            }
-            break
-            
         case .changed:
-            guard let node = currentNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
             _ = Float(translation.y) * 0.01
             
-            // for panning
-//            node.position.x += deltaX
-//            node.position.y -= deltaY
-            
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-//            let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
-//            let rotation = SCNMatrix4Mult(xRotation, yRotation)
             
-            node.transform = SCNMatrix4Mult(yRotation, node.transform)
+            currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
             
@@ -107,16 +95,40 @@ class ObjectInteractionCoordinator : NSObject {
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        guard let sceneView = sceneView, let plantNode = plantNode else { return }
+        guard let sceneView = sceneView, let plantNode = plantNode, let cottageNode = cottageNode else { return }
         
         let location = gesture.location(in: sceneView)
         let hitResults = sceneView.hitTest(location, options: nil)
         
         for result in hitResults {
             if result.node == plantNode || plantNode.childNodes.contains(result.node) {
-                focusOnPlant()
+                focusOnNode(on: plantNode)
+                break
+            } else if result.node == cottageNode || cottageNode.childNodes.contains(result.node) {
+                focusOnNode(on: cottageNode)
                 break
             }
         }
+    }
+    
+    func focusOnNode(on node: SCNNode) {
+        guard let cameraNode = cameraNode else { return }
+        
+        focusTargetNode = node
+        
+        // move camera to orbit around the input node
+        let distance : Float = 50
+        let angle45 = Float.pi / 4
+        let x = distance * sin(angle45)
+        let z = distance * cos(angle45)
+        
+        let newCameraPosition = SCNVector3(x: x, y: 20, z: z)
+        
+        let move = SCNAction.move(to: newCameraPosition, duration: 0.5)
+        move.timingMode = .easeInEaseOut
+        cameraNode.runAction(move) {
+            cameraNode.look(at: node.position)
+        }
+
     }
 }
