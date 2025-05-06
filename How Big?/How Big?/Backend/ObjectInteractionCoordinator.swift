@@ -128,6 +128,7 @@ class ObjectInteractionCoordinator : NSObject {
     }
     
     func focusOnNode(on node: SCNNode) {
+        print("focusOnNode is running")
         guard let cameraNode = cameraNode else { return }
         
         focusTargetNode = node
