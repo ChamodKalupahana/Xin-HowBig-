@@ -110,9 +110,12 @@ struct SceneViewController : UIViewRepresentable {
         node.addAnimation(spin, forKey: "spin")
     }
     
-    func addXYZAxes(to rootNode : SCNNode, basedOn objectNode : SCNNode) {
+    func addXYZAxes(to containerNode : SCNNode, basedOn objectNode : SCNNode) {
         let length : CGFloat = 250.0
         let thickness : CGFloat = 0.15
+        let step : CGFloat = 50.0 // distnace between scale marks
+        
+        let font : UIFont.systemFont(ofSize: 10)
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.black
@@ -144,9 +147,7 @@ struct SceneViewController : UIViewRepresentable {
         
         
         // add to root
-        rootNode.addChildNode(axesContainer)
-        
-        
+        containerNode.addChildNode(axesContainer)
     }
 }
 
