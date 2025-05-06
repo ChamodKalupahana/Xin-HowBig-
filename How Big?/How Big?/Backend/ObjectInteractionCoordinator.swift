@@ -25,9 +25,9 @@ class ObjectInteractionCoordinator : NSObject {
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
-        switch gesture.state {            
+        switch gesture.state {
         case .changed:
-            guard let node = currentNode else { return }
+            guard let node = focusTargetNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
             _ = Float(translation.y) * 0.01
