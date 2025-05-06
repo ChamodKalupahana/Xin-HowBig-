@@ -141,21 +141,21 @@ struct SceneViewController : UIViewRepresentable {
                     axis == .z ? pos : 0
                 )
                 
-                labelNode.eulerAngles = axis == .x ? SCNVector3(0, 0, -Float.pi / 2) :
-                axis == .z ? SCNVector3(-Float.pi / 2, 0, 0) :
-                                    SCNVector3Zero
+//                labelNode.eulerAngles = axis == .x ? SCNVector3(0, 0, -Float.pi / 2) :
+//                axis == .z ? SCNVector3(-Float.pi / 2, 0, 0) :
+//                                    SCNVector3Zero
                 parent.addChildNode(labelNode)
             }
         }
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
-        xAxis.firstMaterial?.diffuse.contents = UIColor.black
+        xAxis.firstMaterial?.diffuse.contents = UIColor.red
         let xNode = SCNNode(geometry: xAxis)
         xNode.eulerAngles = SCNVector3(0, 0, Float.pi / 2)
         xNode.position = SCNVector3(length / 2, 0, 0)
         
         let yAxis = SCNCylinder(radius: thickness, height: length)
-        yAxis.firstMaterial?.diffuse.contents = UIColor.black
+        yAxis.firstMaterial?.diffuse.contents = UIColor.blue
         let yNode = SCNNode(geometry: yAxis)
         yNode.position = SCNVector3(0, length / 2, 0)
         
