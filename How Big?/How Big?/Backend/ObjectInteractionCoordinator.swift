@@ -25,28 +25,14 @@ class ObjectInteractionCoordinator : NSObject {
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
-        switch gesture.state {
-        case .began:
-            // Don't reassign currentNode on touch
-//            let hitResults = sceneView.hitTest(location, options: nil)
-//            if let hit = hitResults.first {
-//                currentNode = hit.node //
-//            }
-            break
-            
+        switch gesture.state {            
         case .changed:
             guard let node = currentNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
             _ = Float(translation.y) * 0.01
             
-            // for panning
-//            node.position.x += deltaX
-//            node.position.y -= deltaY
-            
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-//            let xRotation = SCNMatrix4MakeRotation(-deltaY, 1, 0, 0)
-//            let rotation = SCNMatrix4Mult(xRotation, yRotation)
             
             node.transform = SCNMatrix4Mult(yRotation, node.transform)
             
