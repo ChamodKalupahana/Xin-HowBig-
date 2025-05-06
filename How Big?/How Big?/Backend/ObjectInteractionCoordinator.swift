@@ -15,6 +15,8 @@ class ObjectInteractionCoordinator : NSObject {
     var plantNode : SCNNode?
     var cameraNode : SCNNode?
     
+    var focusTargetNode : SCNNode?
+    
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
         
@@ -118,5 +120,9 @@ class ObjectInteractionCoordinator : NSObject {
                 break
             }
         }
+    }
+    
+    func focusOnNode(on node: SCNNode) {
+        
     }
 }
