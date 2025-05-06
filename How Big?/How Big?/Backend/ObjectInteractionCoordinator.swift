@@ -16,6 +16,8 @@ class ObjectInteractionCoordinator : NSObject {
     var cameraNode : SCNNode?
     
     var focusTargetNode : SCNNode?
+    var cottageNode: SCNNode?
+
     
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView else { return }
@@ -109,14 +111,14 @@ class ObjectInteractionCoordinator : NSObject {
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        guard let sceneView = sceneView, let plantNode = plantNode else { return }
+        guard let sceneView = sceneView, let plantNode = plantNode, let cottageNode = cottageNode else { return }
         
         let location = gesture.location(in: sceneView)
         let hitResults = sceneView.hitTest(location, options: nil)
         
         for result in hitResults {
             if result.node == plantNode || plantNode.childNodes.contains(result.node) {
-                focusOnPlant()
+                focusOnNode(on: plantNode)
                 break
             }
         }
