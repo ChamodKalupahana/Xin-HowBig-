@@ -19,21 +19,20 @@ class ObjectInteractionCoordinator : NSObject {
     var cottageNode: SCNNode?
 
     @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
-        guard let sceneView = sceneView else { return }
+        guard let sceneView = sceneView, let currentNode = currentNode else { return }
         
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
         switch gesture.state {
         case .changed:
-            guard let node = currentNode else { return }
             
             let deltaX = Float(translation.x) * 0.01
             _ = Float(translation.y) * 0.01
             
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
             
-            node.transform = SCNMatrix4Mult(yRotation, node.transform)
+            currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
             
