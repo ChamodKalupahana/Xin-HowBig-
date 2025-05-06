@@ -31,12 +31,14 @@ class ObjectInteractionCoordinator : NSObject {
             
             // Step 1: Move node's pivot to focusTarget's position (in parent space)
             let localFocusPosition = currentNode.convertPosition(focusTargetNode.position, to: nil)
+            currentNode.pivot = SCNMatrix4MakeTranslation(localFocusPosition.x, localFocusPosition.y, localFocusPosition.z)
             
             
+            // Step 2: Apply rotation around Y axis
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-            
             currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
+            // Step 3: Reset translation to 0
             gesture.setTranslation(.zero, in: sceneView)
             
         case .ended, .cancelled:
