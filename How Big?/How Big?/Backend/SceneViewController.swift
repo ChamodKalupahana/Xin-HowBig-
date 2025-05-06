@@ -10,6 +10,9 @@ import SwiftUI
 import SceneKit
 
 struct SceneViewController : UIViewRepresentable {
+    let cottageObjectPath = "art.scnassets/Cottage_FREE.scn"
+    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
+    
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         
@@ -23,14 +26,14 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(containerNode)
         
         // Load Object
-        guard let cottageNode = SCNScene(named: "art.scnassets/Cottage_FREE.scn")?.rootNode.clone() else {
+        guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
             print("Cottage_FREE not found")
             return sceneView // return early to show erorr
         }
         
         containerNode.addChildNode(cottageNode)
         
-        guard let plantNode = SCNScene(named: "art.scnassets/indoor plant_02.scn")?.rootNode.clone() else {
+        guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
             print("plantNode not found")
             return sceneView // return early to show erorr
         }
