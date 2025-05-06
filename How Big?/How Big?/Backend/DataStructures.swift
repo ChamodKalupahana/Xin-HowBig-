@@ -76,6 +76,6 @@ enum ReferenceObjectDimensionFilters : CaseIterable {
     }
 }
 
-enum Dimesion {
+enum Dimension {
     case x, y, z
 }
