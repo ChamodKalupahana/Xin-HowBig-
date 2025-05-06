@@ -128,25 +128,23 @@ class ObjectInteractionCoordinator : NSObject {
     }
     
     func focusOnNode(on node: SCNNode) {
-        print("focusOnNode is running")
         guard let cameraNode = cameraNode else { return }
         
         focusTargetNode = node
         
         // move camera to orbit around the input node
-        let distance : Float = 20
-        let angle45 : Float = Float.pi / 4
-        let x = node.position.x + distance * sin(angle45)
-        let z = node.position.z + distance * cos(angle45)
-        let y = node.position.y + 10
+        let distance : Float = 50
+        let angle45 = Float.pi / 4
+        let x = distance * sin(angle45)
+        let z = distance * cos(angle45)
         
-        let newCameraPosition = SCNVector3(x, y, z)
+        let newCameraPosition = SCNVector3(x: x, y: 20, z: z)
         
         let move = SCNAction.move(to: newCameraPosition, duration: 0.5)
         move.timingMode = .easeInEaseOut
         cameraNode.runAction(move) {
             cameraNode.look(at: node.position)
         }
-        
+
     }
 }
