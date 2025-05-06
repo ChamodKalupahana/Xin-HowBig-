@@ -18,28 +18,29 @@ class ObjectInteractionCoordinator : NSObject {
     var focusTargetNode : SCNNode?
     var cottageNode: SCNNode?
 
-    
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        guard let sceneView = sceneView,
-              let currentNode = currentNode,
-              let focusTargetNode = focusTargetNode else { return }
-
+    @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
+        guard let sceneView = sceneView else { return }
+        
+        _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
-
+        
         switch gesture.state {
-        case .began:
-            // Set pivot only once at the start of the gesture
-            let localFocusPosition = currentNode.convertPosition(focusTargetNode.position, from: currentNode.parent)
-            currentNode.pivot = SCNMatrix4MakeTranslation(localFocusPosition.x, localFocusPosition.y, localFocusPosition.z)
-
         case .changed:
+            guard let node = currentNode else { return }
+            
             let deltaX = Float(translation.x) * 0.01
-
+            _ = Float(translation.y) * 0.01
+            
             let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-            currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
-
+            
+            node.transform = SCNMatrix4Mult(yRotation, node.transform)
+            
             gesture.setTranslation(.zero, in: sceneView)
-
+            
+        case .ended, .cancelled:
+//            currentNode = nil
+            break
+        
         default:
             break
         }
