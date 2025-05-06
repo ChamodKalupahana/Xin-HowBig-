@@ -75,3 +75,7 @@ enum ReferenceObjectDimensionFilters : CaseIterable {
         return self.toInt == inputDimension
     }
 }
+
+enum Dimesion {
+    case x, y, z
+}
