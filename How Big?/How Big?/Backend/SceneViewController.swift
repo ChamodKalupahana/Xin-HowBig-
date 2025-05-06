@@ -111,8 +111,8 @@ struct SceneViewController : UIViewRepresentable {
     }
     
     func addXYZAxes(to rootNode : SCNNode, basedOn objectNode : SCNNode) {
-        let length : CGFloat = 25.0
-        let thickness : CGFloat = 0.25
+        let length : CGFloat = 250.0
+        let thickness : CGFloat = 0.15
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
         xAxis.firstMaterial?.diffuse.contents = UIColor.black
