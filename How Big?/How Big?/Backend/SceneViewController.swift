@@ -126,7 +126,9 @@ struct SceneViewController : UIViewRepresentable {
             let node = SCNNode(geometry: textGeometry)
             let (min, max) = textGeometry.boundingBox
             let width = max.x - min.x
-            node.pivot =
+            node.pivot = SCNMatrix4MakeTranslation(width / 2, min.y, 0) // center the text
+            node.scale = SCNVector3(0.2, 0.2, 0.2)
+            return node
         }
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
