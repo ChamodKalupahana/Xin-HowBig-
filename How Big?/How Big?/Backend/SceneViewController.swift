@@ -14,6 +14,8 @@ struct SceneViewController : UIViewRepresentable {
     let plantObjectPath = "art.scnassets/indoor plant_02.scn"
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
+    let initalisedCameraControlMethod : CameraControlMethod = .tapToFocus
+    
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
         
@@ -49,8 +51,6 @@ struct SceneViewController : UIViewRepresentable {
         // add XYZ axes
         addXYZAxes(to: containerNode, basedOn: cottageNode)
     
-        
-        
         // add in panning
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
