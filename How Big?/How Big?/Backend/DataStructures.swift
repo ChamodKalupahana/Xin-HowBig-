@@ -81,5 +81,5 @@ enum Dimension {
 }
 
 enum CameraControlMethod {
-    
+    case tapToFocus, doubleHoldToPan, toggleRotateAndPan
 }
