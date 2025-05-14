@@ -42,14 +42,16 @@ class ObjectInteractionCoordinator : NSObject {
         switch gesture.state {
         case .changed:
             
-            let deltaX = Float(translation.x) * 0.01
-            _ = Float(translation.y) * 0.01
-            
-            let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
-            
-            currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
-            
-            gesture.setTranslation(.zero, in: sceneView)
+            if (gesture.numberOfTouches < 2) {
+                let deltaX = Float(translation.x) * 0.01
+                _ = Float(translation.y) * 0.01
+                
+                let yRotation = SCNMatrix4MakeRotation(-deltaX, 0, 1, 0)
+                
+                currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
+                
+                gesture.setTranslation(.zero, in: sceneView)
+            }
             
             let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= numberOfFingersRequired)
             if (isAddingDoubleDragToPan) {
