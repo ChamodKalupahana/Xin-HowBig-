@@ -89,6 +89,7 @@ class ObjectInteractionCoordinator : NSObject {
                 
                 // Update the camera's position
                 cameraNode?.position.x -= deltaX * panSensitivity
+                cameraNode?.position.z += deltaY * panSensitivity
             }
         default:
             break
