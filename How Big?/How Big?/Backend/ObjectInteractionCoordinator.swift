@@ -59,24 +59,27 @@ class ObjectInteractionCoordinator : NSObject {
         
         switch gesture.state {
         case .changed:
-            let scale = Float(gesture.scale)
-            let newScale = SCNVector3(
-                node.scale.x * scale,
-                node.scale.y * scale,
-                node.scale.z * scale
-            )
+            let numberOfFingersRequired = 3
+            if (gesture.numberOfTouches <= numberOfFingersRequired) {
+                let scale = Float(gesture.scale)
+                let newScale = SCNVector3(
+                    node.scale.x * scale,
+                    node.scale.y * scale,
+                    node.scale.z * scale
+                )
+                
+                let minScale : Float = 0.1
+                let maxScale : Float = 10.0
+                node.scale = SCNVector3(
+                    max(minScale, min(maxScale, newScale.x)),
+                    max(minScale, min(maxScale, newScale.y)),
+                    max(minScale, min(maxScale, newScale.z))
+                )
+                
+                gesture.scale = 1.0
+            }
             
-            let minScale : Float = 0.1
-            let maxScale : Float = 10.0
-            node.scale = SCNVector3(
-                max(minScale, min(maxScale, newScale.x)),
-                max(minScale, min(maxScale, newScale.y)),
-                max(minScale, min(maxScale, newScale.z))
-            )
-            
-            gesture.scale = 1.0
-            
-            let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= 2)
+            let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= numberOfFingersRequired)
             if (isAddingDoubleDragToPan) {
                 let translation = gesture.location(ofTouch: 0, in: gesture.view)
                 let previousTranslation = gesture.location(ofTouch: 1, in: gesture.view)
