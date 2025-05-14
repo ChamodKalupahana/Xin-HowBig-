@@ -80,29 +80,6 @@ class ObjectInteractionCoordinator : NSObject {
         }
     }
     
-    func focusOnPlant() {
-        guard let plantNode = plantNode, let cameraNode = cameraNode else { return }
-        
-//        currentNode = plantNode
-        
-        // move camera to orbut around the plant
-        let distance : Float = 20
-        let angle45 : Float = Float.pi / 4
-        let x = plantNode.position.x + distance * sin(angle45)
-        let z = plantNode.position.z + distance * cos(angle45)
-        let y = plantNode.position.y + 10
-        
-        let newPosition = SCNVector3(x, y, z)
-        
-        let moveAction = SCNAction.move(to: newPosition, duration: 0.5)
-        moveAction.timingMode = .easeInEaseOut
-        cameraNode.runAction(moveAction) {
-            cameraNode.look(at: plantNode.position)
-        }
-        
-//        cameraNode.look(at: plantNode.position)
-    }
-    
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         guard let sceneView = sceneView, let plantNode = plantNode, let cottageNode = cottageNode else { return }
         
