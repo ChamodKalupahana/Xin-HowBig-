@@ -66,7 +66,7 @@ struct SceneViewController : UIViewRepresentable {
         let z = distance * cos(angle45)
         
         cameraNode.position = SCNVector3(x: x, y: 20, z: z)
-//        cameraNode.look(at: containerNode.position) old
+//        cameraNode.look(at: containerNode.position)
         scene.rootNode.addChildNode(cameraNode)
         
         context.coordinator.cameraNode = cameraNode
@@ -110,23 +110,60 @@ struct SceneViewController : UIViewRepresentable {
         node.addAnimation(spin, forKey: "spin")
     }
     
-    func addXYZAxes(to rootNode : SCNNode, basedOn objectNode : SCNNode) {
-        let length : CGFloat = 25.0
-        let thickness : CGFloat = 0.25
+    func addXYZAxes(to containerNode : SCNNode, basedOn objectNode : SCNNode) {
+        let length : CGFloat = 250.0
+        let thickness : CGFloat = 0.15
+        let step : CGFloat = 5.0 // distnace between scale marks
+        
+        let font = UIFont.systemFont(ofSize: 10)
+        
+        func makeLabel(_ text : String) -> SCNNode {
+            let textGeometry = SCNText(string : text, extrusionDepth: 0.5)
+            textGeometry.font = font
+            textGeometry.flatness = 0.1
+            textGeometry.firstMaterial?.diffuse.contents = UIColor.white
+            
+            let node = SCNNode(geometry: textGeometry)
+            let (min, max) = textGeometry.boundingBox
+            let width = max.x - min.x
+            node.pivot = SCNMatrix4MakeTranslation(width / 2, min.y, 0) // center the text
+            node.scale = SCNVector3(0.2, 0.2, 0.2)
+            return node
+        }
+        
+        func addScaleMarks(to parent: SCNNode, direction : SCNVector3, axis : Dimension) {
+            for i in 0...Int(length / step) {
+                let pos = Float(step) * Float(i)
+                let labelNode =  makeLabel("\(i * Int(step)) m")
+                labelNode.position = SCNVector3(
+                    axis == .x ? pos : 0,
+                    axis == .y ? pos : 0,
+                    axis == .z ? pos : 0
+                )
+                
+//                labelNode.eulerAngles = axis == .x ? SCNVector3(0, 0, -Float.pi / 2) :
+//                axis == .z ? SCNVector3(-Float.pi / 2, 0, 0) :
+//                                    SCNVector3Zero
+                if (axis == .x) {
+                    labelNode.eulerAngles = SCNVector3(0, Float.pi / 2, 0)
+                }
+                parent.addChildNode(labelNode)
+            }
+        }
         
         let xAxis = SCNCylinder(radius: thickness, height: length)
-        xAxis.firstMaterial?.diffuse.contents = UIColor.red
+        xAxis.firstMaterial?.diffuse.contents = UIColor.black
         let xNode = SCNNode(geometry: xAxis)
         xNode.eulerAngles = SCNVector3(0, 0, Float.pi / 2)
         xNode.position = SCNVector3(length / 2, 0, 0)
         
         let yAxis = SCNCylinder(radius: thickness, height: length)
-        yAxis.firstMaterial?.diffuse.contents = UIColor.green
+        yAxis.firstMaterial?.diffuse.contents = UIColor.black
         let yNode = SCNNode(geometry: yAxis)
         yNode.position = SCNVector3(0, length / 2, 0)
         
         let zAxis = SCNCylinder(radius: thickness, height: length)
-        zAxis.firstMaterial?.diffuse.contents = UIColor.blue
+        zAxis.firstMaterial?.diffuse.contents = UIColor.black
         let zNode = SCNNode(geometry: zAxis)
         zNode.eulerAngles = SCNVector3(Float.pi / 2, 0, 0)
         zNode.position = SCNVector3(0, 0, length / 2)
@@ -136,6 +173,10 @@ struct SceneViewController : UIViewRepresentable {
         axesContainer.addChildNode(yNode)
         axesContainer.addChildNode(zNode)
         
+        addScaleMarks(to: axesContainer, direction: SCNVector3(1,0,0), axis: .x)
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,1,0), axis: .y)
+        addScaleMarks(to: axesContainer, direction: SCNVector3(0,0,1), axis: .z)
+        
         // Position axesContainer at the front-left-bottom corner of objectNode
         var min = SCNVector3Zero
         var max = SCNVector3Zero
@@ -144,9 +185,7 @@ struct SceneViewController : UIViewRepresentable {
         
         
         // add to root
-        rootNode.addChildNode(axesContainer)
-        
-        
+        containerNode.addChildNode(axesContainer)
     }
 }
 

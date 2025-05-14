@@ -20,7 +20,7 @@ struct Compare: View {
                 
                 Spacer()
                 
-                Text("This is house is 20m long, same as your idol")
+                Text("This is house is 15m long, 10x longer than the plant")
                     .font(.headline)
             }
             .padding()

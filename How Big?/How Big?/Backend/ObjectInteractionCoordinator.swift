@@ -35,10 +35,6 @@ class ObjectInteractionCoordinator : NSObject {
             currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
-            
-        case .ended, .cancelled:
-//            currentNode = nil
-            break
         
         default:
             break
