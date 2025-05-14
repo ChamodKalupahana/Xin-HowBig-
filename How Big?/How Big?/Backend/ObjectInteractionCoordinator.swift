@@ -37,6 +37,8 @@ class ObjectInteractionCoordinator : NSObject {
         _ = gesture.location(in: sceneView)
         let translation = gesture.translation(in: sceneView)
         
+        let numberOfFingersRequired = 2
+        
         switch gesture.state {
         case .changed:
             
@@ -48,36 +50,6 @@ class ObjectInteractionCoordinator : NSObject {
             currentNode.transform = SCNMatrix4Mult(yRotation, currentNode.transform)
             
             gesture.setTranslation(.zero, in: sceneView)
-        
-        default:
-            break
-        }
-    }
-    
-    @objc func handlePinch(_ gesture : UIPinchGestureRecognizer) {
-        guard let node = currentNode else { return }
-        
-        switch gesture.state {
-        case .changed:
-            let numberOfFingersRequired = 3
-            if (gesture.numberOfTouches <= numberOfFingersRequired) {
-                let scale = Float(gesture.scale)
-                let newScale = SCNVector3(
-                    node.scale.x * scale,
-                    node.scale.y * scale,
-                    node.scale.z * scale
-                )
-                
-                let minScale : Float = 0.1
-                let maxScale : Float = 10.0
-                node.scale = SCNVector3(
-                    max(minScale, min(maxScale, newScale.x)),
-                    max(minScale, min(maxScale, newScale.y)),
-                    max(minScale, min(maxScale, newScale.z))
-                )
-                
-                gesture.scale = 1.0
-            }
             
             let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= numberOfFingersRequired)
             if (isAddingDoubleDragToPan) {
@@ -94,6 +66,34 @@ class ObjectInteractionCoordinator : NSObject {
                 cameraNode?.position.x -= deltaX * panSensitivity
                 cameraNode?.position.z += deltaY * panSensitivity
             }
+        
+        default:
+            break
+        }
+    }
+    
+    @objc func handlePinch(_ gesture : UIPinchGestureRecognizer) {
+        guard let node = currentNode else { return }
+        
+        switch gesture.state {
+        case .changed:
+            let scale = Float(gesture.scale)
+            let newScale = SCNVector3(
+                node.scale.x * scale,
+                node.scale.y * scale,
+                node.scale.z * scale
+            )
+            
+            let minScale : Float = 0.1
+            let maxScale : Float = 10.0
+            node.scale = SCNVector3(
+                max(minScale, min(maxScale, newScale.x)),
+                max(minScale, min(maxScale, newScale.y)),
+                max(minScale, min(maxScale, newScale.z))
+            )
+            
+            gesture.scale = 1.0
+            
         default:
             break
         }
