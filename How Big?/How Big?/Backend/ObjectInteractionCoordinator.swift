@@ -9,6 +9,19 @@ import SwiftUI
 import SceneKit
 
 class ObjectInteractionCoordinator : NSObject {
+    let initalisedCameraControlMethod : CameraControlMethod
+    
+    // auto generated init
+    init(initalisedCameraControlMethod: CameraControlMethod, sceneView: SCNView? = nil, currentNode: SCNNode? = nil, plantNode: SCNNode? = nil, cameraNode: SCNNode? = nil, focusTargetNode: SCNNode? = nil, cottageNode: SCNNode? = nil) {
+        self.initalisedCameraControlMethod = initalisedCameraControlMethod
+        self.sceneView = sceneView
+        self.currentNode = currentNode
+        self.plantNode = plantNode
+        self.cameraNode = cameraNode
+        self.focusTargetNode = focusTargetNode
+        self.cottageNode = cottageNode
+    }
+    
     var sceneView : SCNView?
     var currentNode : SCNNode?
     

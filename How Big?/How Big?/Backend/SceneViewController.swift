@@ -98,7 +98,7 @@ struct SceneViewController : UIViewRepresentable {
     }
     
     func makeCoordinator() -> ObjectInteractionCoordinator {
-        ObjectInteractionCoordinator()
+        ObjectInteractionCoordinator(initalisedCameraControlMethod: initalisedCameraControlMethod)
     }
     
     func rotate(node : SCNNode) {
