@@ -79,3 +79,7 @@ enum ReferenceObjectDimensionFilters : CaseIterable {
 enum Dimension {
     case x, y, z
 }
+
+enum CameraControlMethod {
+    
+}
