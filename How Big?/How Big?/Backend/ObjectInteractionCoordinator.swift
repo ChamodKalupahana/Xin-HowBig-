@@ -78,7 +78,17 @@ class ObjectInteractionCoordinator : NSObject {
             
             let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= 2)
             if (isAddingDoubleDragToPan) {
+                let translation = gesture.location(ofTouch: 0, in: gesture.view)
+                let previousTranslation = gesture.location(ofTouch: 1, in: gesture.view)
                 
+                // calculate the different
+                let deltaX = Float(translation.x - previousTranslation.x) * 0.01
+                let deltaY = Float(translation.y - previousTranslation.y) * 0.01
+                
+                let panSensitivity : Float = 0.5
+                
+                // Update the camera's position
+                cameraNode?.position.x -= deltaX * panSensitivity
             }
         default:
             break
