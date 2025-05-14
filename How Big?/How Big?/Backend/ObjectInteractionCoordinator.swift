@@ -75,6 +75,11 @@ class ObjectInteractionCoordinator : NSObject {
             )
             
             gesture.scale = 1.0
+            
+            let isAddingDoubleDragToPan : Bool = (initalisedCameraControlMethod == .doubleDragToPan) && (gesture.numberOfTouches >= 2)
+            if (isAddingDoubleDragToPan) {
+                
+            }
         default:
             break
         }
