@@ -31,7 +31,7 @@ class ObjectInteractionCoordinator : NSObject {
     var focusTargetNode : SCNNode?
     var cottageNode: SCNNode?
 
-    @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
+    @objc func handleRotate(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
         _ = gesture.location(in: sceneView)
