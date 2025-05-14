@@ -53,7 +53,7 @@ struct SceneViewController : UIViewRepresentable {
     
         // add in panning
         context.coordinator.sceneView = sceneView
-        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleRotate(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleRotateAndPan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
