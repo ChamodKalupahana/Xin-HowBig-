@@ -41,6 +41,15 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         guard let cameraNode = cameraNode else { return }
         
         let translation = gesture.translation(in: gesture.view)
+        let panSensitivity : Float = 0.05
+        
+        let deltaX = Float(translation.x) * panSensitivity
+        let deltaY = Float(translation.y) * panSensitivity
+        
+        cameraNode.position.x -= deltaX
+        cameraNode.position.y += deltaY
+        
+        gesture.setTranslation(.zero, in: gesture.view)
         return
     }
     
