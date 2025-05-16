@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SceneKit
 
 struct ReferenceObject : Identifiable{
     var id : String = UUID().uuidString
@@ -92,14 +93,16 @@ protocol InteractionCoordinator : NSObject {
     func handlePan(_ gesture : UIPanGestureRecognizer)
     func handleTap(_ gesture : UITapGestureRecognizer)
     
+    
     // for sceneview
-    var sceneView : SCNView?
-    var currentNode : SCNNode?
+    var sceneView : SCNView? { get set }
+    var currentNode : SCNNode? { get set }
     
-    var plantNode : SCNNode?
-    var cameraNode : SCNNode?
+    var plantNode : SCNNode? { get set }
+    var cameraNode : SCNNode? { get set }
     
-    var focusTargetNode : SCNNode?
-    var cottageNode: SCNNode?
+    var focusTargetNode : SCNNode? { get set }
+    var cottageNode: SCNNode? { get set }
+    
     func focusOnNode(on node: SCNNode)
 }
