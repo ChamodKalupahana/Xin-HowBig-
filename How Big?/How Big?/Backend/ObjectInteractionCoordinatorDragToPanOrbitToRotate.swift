@@ -54,6 +54,16 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     }
     
     @objc func handleOrbit(_ gesture: UIRotationGestureRecognizer) {
+        guard let cameraNode = cameraNode else { return }
+        
+        let rotation = Float(gesture.rotation)
+        
+        let orbitSensitivity : Float = 0.5
+        let rotationDelta = rotation * orbitSensitivity
+        
+        cameraNode.eulerAngles.y += rotationDelta
+        
+        gesture.rotation = 0
         return
     }
     
