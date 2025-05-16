@@ -15,7 +15,7 @@ struct SceneViewController : UIViewRepresentable {
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
     let initalisedCameraControlMethod : CameraControlMethod = .doubleDragToPan
-    let objectInteractionCoordinatorHandler : ObjectInteractionCoordinatorHandler = ObjectInteractionCoordinatorHandler(coordinator: ObjectInteractionCoordinator)
+    let objectInteractionCoordinator : InteractionCoordinator
     
     
     func makeUIView(context: Context) -> SCNView {
@@ -55,7 +55,7 @@ struct SceneViewController : UIViewRepresentable {
     
         // add in panning
         context.coordinator.sceneView = sceneView
-        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleRotateAndPan(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
@@ -99,7 +99,7 @@ struct SceneViewController : UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
     }
     
-    func makeCoordinator() -> ObjectInteractionCoordinator {
+    func makeCoordinator() -> InteractionCoordinator {
         ObjectInteractionCoordinator(initalisedCameraControlMethod: initalisedCameraControlMethod)
     }
     

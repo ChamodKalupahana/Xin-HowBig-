@@ -91,4 +91,15 @@ protocol InteractionCoordinator : NSObject {
     func handlePinch(_ gesture : UIPinchGestureRecognizer)
     func handlePan(_ gesture : UIPanGestureRecognizer)
     func handleTap(_ gesture : UITapGestureRecognizer)
+    
+    // for sceneview
+    var sceneView : SCNView?
+    var currentNode : SCNNode?
+    
+    var plantNode : SCNNode?
+    var cameraNode : SCNNode?
+    
+    var focusTargetNode : SCNNode?
+    var cottageNode: SCNNode?
+    func focusOnNode(on node: SCNNode)
 }
