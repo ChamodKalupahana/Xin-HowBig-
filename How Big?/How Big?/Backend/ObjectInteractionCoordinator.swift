@@ -32,7 +32,7 @@ class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
     var cottageNode: SCNNode?
     
     // works for tapToFocusAndDoubleDragToPan
-    @objc func handleRotateAndPan(_ gesture : UIPanGestureRecognizer) {
+    @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
         _ = gesture.location(in: sceneView)

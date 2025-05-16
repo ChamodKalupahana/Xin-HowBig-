@@ -6,5 +6,9 @@
 //
 
 class ObjectInteractionCoordinatorHandler {
+    var coordinator : InteractionCoordinator
     
+    init(coordinator: InteractionCoordinator) {
+        self.coordinator = coordinator
+    }
 }

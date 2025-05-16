@@ -86,4 +86,9 @@ enum CameraControlMethod {
 
 protocol InteractionCoordinator : NSObject {
     var initalisedCameraControlMethod : CameraControlMethod { get }
+    
+    // enforced gesture methods
+    func handlePinch(_ gesture : UIPinchGestureRecognizer)
+    func handlePan(_ gesture : UIPanGestureRecognizer)
+    func handleTap(_ gesture : UITapGestureRecognizer)
 }
