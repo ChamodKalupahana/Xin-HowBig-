@@ -92,6 +92,12 @@ struct SceneViewController : UIViewRepresentable {
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
         
+        if (initalisedCameraControlMethod == .dragToPanOrbitToRotate) {
+            // add in orbit to rotate gesture
+            let rotateGesture = UIRotationGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleOrbit(_:)))
+            sceneView.addGestureRecognizer(rotateGesture)
+        }
+        
         return sceneView
     }
     
