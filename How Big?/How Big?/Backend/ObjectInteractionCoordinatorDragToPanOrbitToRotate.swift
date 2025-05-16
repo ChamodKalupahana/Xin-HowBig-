@@ -32,12 +32,12 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         self.cottageNode = cottageNode
     }
     
-    func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
         return
     }
     
-    func handlePan(_ gesture: UIPanGestureRecognizer) {
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
         
         let translation = gesture.translation(in: gesture.view)
@@ -53,12 +53,12 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+    @objc func handleRotation(_ gesture: UIRotationGestureRecognizer) {
         return
     }
     
     // not used for dragToPanOrbitToRotate
-    func handleTap(_ gesture: UITapGestureRecognizer) {
+    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         return
     }
     

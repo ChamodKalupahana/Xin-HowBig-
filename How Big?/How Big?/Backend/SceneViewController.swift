@@ -54,7 +54,7 @@ struct SceneViewController : UIViewRepresentable {
     
         // add in panning
         context.coordinator.sceneView = sceneView
-        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePan(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
@@ -74,7 +74,7 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.focusOnNode(on: cottageNode)
         
         // add in scaling
-        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
         
         // add in lighting
@@ -89,7 +89,7 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(lightNode)
         
         // add in tap gesture
-        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
         
         return sceneView
@@ -99,7 +99,7 @@ struct SceneViewController : UIViewRepresentable {
     }
     
     func makeCoordinator() -> InteractionCoordinator {
-        ObjectInteractionCoordinator(initalisedCameraControlMethod: initalisedCameraControlMethod)
+        ObjectInteractionCoordinatorDragToPanOrbitToRotate(initalisedCameraControlMethod: initalisedCameraControlMethod)
     }
     
     func rotate(node : SCNNode) {
