@@ -9,6 +9,7 @@ import Foundation
 import SceneKit
 
 class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, InteractionCoordinator {
+
     var initalisedCameraControlMethod: CameraControlMethod
     
     var sceneView: SCNView?
@@ -32,13 +33,22 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     }
     
     func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let cameraNode = cameraNode else { return }
         return
     }
     
     func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let cameraNode = cameraNode else { return }
+        
+        let translation = gesture.translation(in: gesture.view)
         return
     }
     
+    func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+        return
+    }
+    
+    // not used for dragToPanOrbitToRotate
     func handleTap(_ gesture: UITapGestureRecognizer) {
         return
     }

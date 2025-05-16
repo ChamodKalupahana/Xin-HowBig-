@@ -137,6 +137,10 @@ class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
         cameraNode.runAction(move) {
             cameraNode.look(at: node.position)
         }
-
+    }
+    
+    // not used in this case
+    func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+        return
     }
 }
