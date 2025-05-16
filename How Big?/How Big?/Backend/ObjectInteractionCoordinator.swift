@@ -8,7 +8,7 @@
 import SwiftUI
 import SceneKit
 
-class ObjectInteractionCoordinator : NSObject {
+class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
     let initalisedCameraControlMethod : CameraControlMethod
     
     // auto generated init

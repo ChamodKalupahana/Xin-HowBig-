@@ -83,3 +83,7 @@ enum Dimension {
 enum CameraControlMethod {
     case tapToFocus, doubleDragToPan, toggleRotateAndPan, dragToPanOrbitToRotate
 }
+
+protocol InteractionCoordinator : NSObject {
+    var initalisedCameraControlMethod : CameraControlMethod { get }
+}
