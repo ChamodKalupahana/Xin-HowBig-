@@ -15,7 +15,6 @@ struct SceneViewController : UIViewRepresentable {
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
     let initalisedCameraControlMethod : CameraControlMethod = .doubleDragToPan
-    let objectInteractionCoordinator : InteractionCoordinator
     
     
     func makeUIView(context: Context) -> SCNView {
