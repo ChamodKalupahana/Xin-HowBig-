@@ -34,6 +34,12 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
+        
+        let scale = Float(gesture.scale)
+        let newZ = cameraNode.position.z / scale
+        
+        cameraNode.position.z = max(-50, min(50, newZ))
+        gesture.scale = 1.0
         return
     }
     
