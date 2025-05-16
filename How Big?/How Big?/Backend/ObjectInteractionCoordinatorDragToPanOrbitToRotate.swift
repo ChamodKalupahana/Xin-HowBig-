@@ -21,6 +21,9 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     var focusTargetNode: SCNNode?
     var cottageNode: SCNNode?
     
+    var distanceToObjects : Float = 50.0
+    var centerOfRotation : SCNVector3 = SCNVector3Zero
+    
     
     init(initalisedCameraControlMethod: CameraControlMethod, sceneView: SCNView? = nil, currentNode: SCNNode? = nil, plantNode: SCNNode? = nil, cameraNode: SCNNode? = nil, focusTargetNode: SCNNode? = nil, cottageNode: SCNNode? = nil) {
         self.initalisedCameraControlMethod = initalisedCameraControlMethod
@@ -82,7 +85,18 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    
+    func updateCenterOfRotation() {
+        guard let cameraNode else { return }
+        
+        let cameraPosition = cameraNode.position
+        
+        let forwardVector = SCNVector3(0, 0, -distanceToObjects)
+        let worldForwardVector = cameraNode.convertPosition(forwardVector, to: nil)
+        
+        
+        
+        
+    }
     
     
 }
