@@ -21,7 +21,6 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     var focusTargetNode: SCNNode?
     var cottageNode: SCNNode?
     
-    var rotationCenter: SCNVector3 = SCNVector3Zero
     
     init(initalisedCameraControlMethod: CameraControlMethod, sceneView: SCNView? = nil, currentNode: SCNNode? = nil, plantNode: SCNNode? = nil, cameraNode: SCNNode? = nil, focusTargetNode: SCNNode? = nil, cottageNode: SCNNode? = nil) {
         self.initalisedCameraControlMethod = initalisedCameraControlMethod
@@ -41,9 +40,6 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         
         cameraNode.position.z = max(-50, min(50, newZ))
         gesture.scale = 1.0
-        
-        // Update the rotation center after zoom
-        updateRotationCenter()
         return
     }
     
@@ -60,9 +56,6 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         cameraNode.position.y += deltaY
         
         gesture.setTranslation(.zero, in: gesture.view)
-        
-        // Initialize the rotation center
-        updateRotationCenter()
         return
     }
     
@@ -71,18 +64,10 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         
         let rotation = Float(gesture.rotation)
         
-        let orbitSensitivity: Float = 0.5
+        let orbitSensitivity : Float = 0.5
         let rotationDelta = rotation * orbitSensitivity
         
-        // Create a transform that represents rotation around the rotation center
-        let translationToFocus = SCNMatrix4MakeTranslation(-rotationCenter.x, -rotationCenter.y, -rotationCenter.z)
-        let translationBack = SCNMatrix4MakeTranslation(rotationCenter.x, rotationCenter.y, rotationCenter.z)
-        
-        let rotationMatrix = SCNMatrix4MakeRotation(rotationDelta, 0, 1, 0)
-        
-        let transform = SCNMatrix4Mult(SCNMatrix4Mult(translationToFocus, rotationMatrix), translationBack)
-        
-        cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, transform)
+        cameraNode.eulerAngles.y += rotationDelta
         
         gesture.rotation = 0
         return
@@ -97,17 +82,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    func updateRotationCenter() {
-        guard let cameraNode = cameraNode else { return }
-        // Calculate the point 50 units in front of the camera
-        let cameraPosition = cameraNode.position
-        
-        // Transform the forward direction by 50 units
-        let forwardVector = SCNVector3(0, 0, -50)
-        let worldForwardVector = cameraNode.convertPosition(forwardVector, to: nil)
-        
-        rotationCenter = worldForwardVector
-    }
+    
     
     
 }
