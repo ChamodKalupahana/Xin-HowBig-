@@ -14,8 +14,7 @@ struct SceneViewController : UIViewRepresentable {
     let plantObjectPath = "art.scnassets/indoor plant_02.scn"
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
-    let initalisedCameraControlMethod : CameraControlMethod = .doubleDragToPan
-    
+    let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
