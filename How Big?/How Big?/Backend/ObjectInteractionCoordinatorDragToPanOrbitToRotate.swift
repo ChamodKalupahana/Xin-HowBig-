@@ -53,7 +53,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    @objc func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+    @objc func handleOrbit(_ gesture: UIRotationGestureRecognizer) {
         return
     }
     

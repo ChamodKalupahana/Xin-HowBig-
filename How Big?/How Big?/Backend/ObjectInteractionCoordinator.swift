@@ -140,7 +140,7 @@ class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
     }
     
     // not used in this case
-    func handleRotation(_ gesture: UIRotationGestureRecognizer) {
+    func handleOrbit(_ gesture: UIRotationGestureRecognizer) {
         return
     }
 }
