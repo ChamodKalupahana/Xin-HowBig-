@@ -35,6 +35,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CE28E3FD2DD8ACE600ECC285 /* Exceptions for "How Big?" folder in "How Big?" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"How-Big--Info.plist",
+			);
+			target = CE5B128C2D1F3C8F00B780AA /* How Big? */;
+		};
 		CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -71,6 +78,7 @@
 		CE5B128F2D1F3C8F00B780AA /* How Big? */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				CE28E3FD2DD8ACE600ECC285 /* Exceptions for "How Big?" folder in "How Big?" target */,
 				CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */,
 				CE2925042DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?UITests" target */,
 			);
@@ -453,6 +461,7 @@
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "How-Big--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -490,6 +499,7 @@
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "How-Big--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
