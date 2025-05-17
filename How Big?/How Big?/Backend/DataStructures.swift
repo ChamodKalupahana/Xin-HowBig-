@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SceneKit
 
 struct ReferenceObject : Identifiable{
     var id : String = UUID().uuidString
@@ -81,5 +82,28 @@ enum Dimension {
 }
 
 enum CameraControlMethod {
-    case tapToFocus, doubleDragToPan, toggleRotateAndPan
+    case tapToFocus, doubleDragToPan, toggleRotateAndPan, dragToPanOrbitToRotate
+}
+
+protocol InteractionCoordinator : NSObject {
+    var initalisedCameraControlMethod : CameraControlMethod { get }
+    
+    // enforced gesture methods
+    func handlePinch(_ gesture : UIPinchGestureRecognizer)
+    func handlePan(_ gesture : UIPanGestureRecognizer)
+    func handleTap(_ gesture : UITapGestureRecognizer)
+    func handleOrbit(_ gesture : UIRotationGestureRecognizer)
+    
+    
+    // for sceneview
+    var sceneView : SCNView? { get set }
+    var currentNode : SCNNode? { get set }
+    
+    var plantNode : SCNNode? { get set }
+    var cameraNode : SCNNode? { get set }
+    
+    var focusTargetNode : SCNNode? { get set }
+    var cottageNode: SCNNode? { get set }
+    
+    func focusOnNode(on node: SCNNode)
 }

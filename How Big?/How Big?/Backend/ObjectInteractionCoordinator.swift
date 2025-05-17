@@ -8,7 +8,7 @@
 import SwiftUI
 import SceneKit
 
-class ObjectInteractionCoordinator : NSObject {
+class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
     let initalisedCameraControlMethod : CameraControlMethod
     
     // auto generated init
@@ -32,7 +32,7 @@ class ObjectInteractionCoordinator : NSObject {
     var cottageNode: SCNNode?
     
     // works for tapToFocusAndDoubleDragToPan
-    @objc func handleRotateAndPan(_ gesture : UIPanGestureRecognizer) {
+    @objc func handlePan(_ gesture : UIPanGestureRecognizer) {
         guard let sceneView = sceneView, let currentNode = currentNode, let focusTargetNode = focusTargetNode else { return }
         
         _ = gesture.location(in: sceneView)
@@ -137,6 +137,10 @@ class ObjectInteractionCoordinator : NSObject {
         cameraNode.runAction(move) {
             cameraNode.look(at: node.position)
         }
-
+    }
+    
+    // not used in this case
+    func handleOrbit(_ gesture: UIRotationGestureRecognizer) {
+        return
     }
 }

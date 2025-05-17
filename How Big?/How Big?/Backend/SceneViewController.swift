@@ -14,7 +14,7 @@ struct SceneViewController : UIViewRepresentable {
     let plantObjectPath = "art.scnassets/indoor plant_02.scn"
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
-    let initalisedCameraControlMethod : CameraControlMethod = .doubleDragToPan
+    let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
     
     func makeUIView(context: Context) -> SCNView {
         let sceneView = SCNView()
@@ -53,7 +53,7 @@ struct SceneViewController : UIViewRepresentable {
     
         // add in panning
         context.coordinator.sceneView = sceneView
-        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleRotateAndPan(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
@@ -73,7 +73,7 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.focusOnNode(on: cottageNode)
         
         // add in scaling
-        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
         
         // add in lighting
@@ -88,8 +88,14 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(lightNode)
         
         // add in tap gesture
-        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
+        
+        if (initalisedCameraControlMethod == .dragToPanOrbitToRotate) {
+            // add in orbit to rotate gesture
+            let rotateGesture = UIRotationGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleOrbit(_:)))
+            sceneView.addGestureRecognizer(rotateGesture)
+        }
         
         return sceneView
     }
@@ -97,8 +103,8 @@ struct SceneViewController : UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
     }
     
-    func makeCoordinator() -> ObjectInteractionCoordinator {
-        ObjectInteractionCoordinator(initalisedCameraControlMethod: initalisedCameraControlMethod)
+    func makeCoordinator() -> InteractionCoordinator {
+        ObjectInteractionCoordinatorDragToPanOrbitToRotate(initalisedCameraControlMethod: initalisedCameraControlMethod)
     }
     
     func rotate(node : SCNNode) {
