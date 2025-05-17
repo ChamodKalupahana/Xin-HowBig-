@@ -59,19 +59,22 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let deltaX = Float(translation.x) * panSensitivity
         let deltaY = Float(translation.y) * panSensitivity
         
-        if (translateAroundCenterOfRotation) {
-            let translationMatrix = SCNMatrix4MakeTranslation(deltaX, -deltaY, 0)
-            let toCenter = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
-            let backToPosition = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
-            
-            let panTransform = SCNMatrix4Mult(SCNMatrix4Mult(toCenter, translationMatrix), backToPosition)
-            
-            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
-            
-        } else {
-            cameraNode.position.x -= deltaX
-            cameraNode.position.y += deltaY
-        }
+//        if (translateAroundCenterOfRotation) {
+//            let translationMatrix = SCNMatrix4MakeTranslation(deltaX, -deltaY, 0)
+//            let toCenter = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
+//            let backToPosition = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
+//            
+//            let panTransform = SCNMatrix4Mult(SCNMatrix4Mult(toCenter, translationMatrix), backToPosition)
+//            
+//            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
+//            
+//        } else {
+//            cameraNode.position.x -= deltaX
+//            cameraNode.position.y += deltaY
+//        }
+        
+        cameraNode.position.x -= deltaX
+        cameraNode.position.y += deltaY
         
         gesture.setTranslation(.zero, in: gesture.view)
         
