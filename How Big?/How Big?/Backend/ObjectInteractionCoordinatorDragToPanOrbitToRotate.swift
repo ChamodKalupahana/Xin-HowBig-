@@ -88,7 +88,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let rotationDelta = rotation * orbitSensitivity
         
         // Create a transform that represents rotation around the rotation center
-        let translationToFocus = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, centerOfRotation.z)
+        let translationToFocus = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
         let translationBack = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
         
         let rotationMatrix = SCNMatrix4MakeRotation(rotationDelta, 0, 1, 0)
