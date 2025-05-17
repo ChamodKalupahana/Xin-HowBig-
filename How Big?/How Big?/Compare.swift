@@ -16,7 +16,8 @@ struct Compare: View {
             VStack(alignment: .leading){
                 Text("How Big?")
                     .font(.customTitle)
-                    .fontWeight(.bold)
+//                    .fontWeight(.bold)
+                    .bold()
                 
                 Spacer()
                 
