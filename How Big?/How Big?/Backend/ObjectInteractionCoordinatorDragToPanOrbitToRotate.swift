@@ -74,7 +74,14 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let orbitSensitivity : Float = 0.5
         let rotationDelta = rotation * orbitSensitivity
         
-        cameraNode.eulerAngles.y += rotationDelta
+        // Create a transform that represents rotation around the rotation center
+        let translationToFocus = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, centerOfRotation.z)
+        let translationBack = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
+        
+        let rotationMatrix = SCNMatrix4MakeRotation(rotationDelta, 0, 1, 0)
+        let transform = SCNMatrix4Mult(SCNMatrix4Mult(translationToFocus, rotationMatrix), translationBack)
+        
+        cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, transform)
         
         gesture.rotation = 0
         return
