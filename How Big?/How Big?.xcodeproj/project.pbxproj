@@ -35,6 +35,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Fonts/Xinfont20-Regular.otf",
+				"Fonts/Xinfont20-Regular.ttf",
+			);
+			target = CE5B129C2D1F3C9100B780AA /* How Big?Tests */;
+		};
+		CE2925042DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?UITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Fonts/Xinfont20-Regular.otf",
+				"Fonts/Xinfont20-Regular.ttf",
+			);
+			target = CE5B12A62D1F3C9100B780AA /* How Big?UITests */;
+		};
 		CEDAAD8F2DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -54,6 +70,10 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CE5B128F2D1F3C8F00B780AA /* How Big? */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */,
+				CE2925042DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?UITests" target */,
+			);
 			path = "How Big?";
 			sourceTree = "<group>";
 		};
