@@ -45,6 +45,7 @@
 		CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Fonts/Fonts.swift,
 				"Fonts/Xinfont20-Regular.otf",
 				"Fonts/Xinfont20-Regular.ttf",
 			);
@@ -53,6 +54,7 @@
 		CE2925042DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?UITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Fonts/Fonts.swift,
 				"Fonts/Xinfont20-Regular.otf",
 				"Fonts/Xinfont20-Regular.ttf",
 			);
