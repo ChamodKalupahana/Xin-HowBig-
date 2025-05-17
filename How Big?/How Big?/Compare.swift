@@ -17,7 +17,6 @@ struct Compare: View {
                 Text("How Big?")
                     .font(.customLargeTitle)
 //                    .fontWeight(.bold)
-                    .bold()
                 
                 Spacer()
                 
