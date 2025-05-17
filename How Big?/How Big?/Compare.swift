@@ -15,13 +15,14 @@ struct Compare: View {
             
             VStack(alignment: .leading){
                 Text("How Big?")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.customLargeTitle)
+//                    .fontWeight(.bold)
+                    .bold()
                 
                 Spacer()
                 
                 Text("This is house is 15m long, 10x longer than the plant")
-                    .font(.headline)
+                    .font(.customHeadline)
             }
             .padding()
         }
