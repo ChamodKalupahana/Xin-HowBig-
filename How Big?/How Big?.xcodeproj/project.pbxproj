@@ -38,6 +38,7 @@
 		CE2925032DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Fonts/Info.plist,
 				"Fonts/Xinfont20-Regular.otf",
 				"Fonts/Xinfont20-Regular.ttf",
 			);
@@ -46,6 +47,7 @@
 		CE2925042DD8A4EF00035899 /* Exceptions for "How Big?" folder in "How Big?UITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Fonts/Info.plist,
 				"Fonts/Xinfont20-Regular.otf",
 				"Fonts/Xinfont20-Regular.ttf",
 			);
@@ -452,7 +454,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"How Big?/Preview Content\"";
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -489,7 +491,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"How Big?/Preview Content\"";
 				DEVELOPMENT_TEAM = W9X826S4L7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_CFBundleDisplayName = "How Big?";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
