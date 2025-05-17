@@ -43,6 +43,8 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         
         cameraNode.position.z = max(-50, min(50, newZ))
         gesture.scale = 1.0
+        
+        updateCenterOfRotation()
         return
     }
     
@@ -59,6 +61,8 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         cameraNode.position.y += deltaY
         
         gesture.setTranslation(.zero, in: gesture.view)
+        
+        updateCenterOfRotation()
         return
     }
     
@@ -93,8 +97,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let forwardVector = SCNVector3(0, 0, -distanceToObjects)
         let worldForwardVector = cameraNode.convertPosition(forwardVector, to: nil)
         
-        
-        
+        centerOfRotation = worldForwardVector
         
     }
     
