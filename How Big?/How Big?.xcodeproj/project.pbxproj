@@ -35,13 +35,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CE28E44A2DD8B6A000ECC285 /* Exceptions for "How Big?" folder in "How Big?" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"How-Big--Info.plist",
-			);
-			target = CE5B128C2D1F3C8F00B780AA /* How Big? */;
-		};
 		CEDAAD8F2DC58EC500306FED /* Exceptions for "How Big?Tests" folder in "How Big?" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -61,9 +54,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CE5B128F2D1F3C8F00B780AA /* How Big? */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				CE28E44A2DD8B6A000ECC285 /* Exceptions for "How Big?" folder in "How Big?" target */,
-			);
 			path = "How Big?";
 			sourceTree = "<group>";
 		};
