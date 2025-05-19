@@ -68,7 +68,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
 //            
 //            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
             
-            let localTransform = SCNVector3(deltaX, deltaY, 0)
+            let localTransform = SCNVector3(-deltaX, deltaY, 0)
             let worldTransform = cameraNode.convertPosition(localTransform, to: nil)
             cameraNode.position = worldTransform
             
