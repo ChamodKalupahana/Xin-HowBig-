@@ -46,7 +46,6 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             let newZ = cameraNode.position.z / scale
             
             cameraNode.position.z = max(-50, min(50, newZ))
-            gesture.scale = 1.0
         } else {
             let zoomSensitivity : Float = 0.1
             
@@ -73,8 +72,10 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             } else if distanceFromOrigin < minDistance {
                 cameraNode.position = cameraNode.position.normalized() * minDistance
             }
+            
         }
         
+        gesture.scale = 1.0
         updateCenterOfRotation()
         return
     }
