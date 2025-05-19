@@ -93,6 +93,7 @@ protocol InteractionCoordinator : NSObject {
     func handlePan(_ gesture : UIPanGestureRecognizer)
     func handleTap(_ gesture : UITapGestureRecognizer)
     func handleOrbit(_ gesture : UIRotationGestureRecognizer)
+    func handleTilt(_ gesture : UIPanGestureRecognizer)
     
     
     // for sceneview
