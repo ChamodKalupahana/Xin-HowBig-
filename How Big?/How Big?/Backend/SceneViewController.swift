@@ -29,29 +29,11 @@ struct SceneViewController : UIViewRepresentable {
         
         scene.rootNode.addChildNode(containerNode)
         
-        // Load Object
-//                guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
-//                    print("Cottage_FREE not found")
-//                    return sceneView // return early to show erorr
-//                }
-//        
-//                containerNode.addChildNode(cottageNode)
-//                context.coordinator.cottageNode = cottageNode
-//        
-//                guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
-//                    print("plantNode not found")
-//                    return sceneView // return early to show erorr
-//                }
-//        //        print("plantNode children count: \(plantNode.childNodes.count)")
-//        
-//                plantNode.position = SCNVector3(12, 0, 0)
-//                containerNode.addChildNode(plantNode)
-        
         guard let cottageNode = addModelToSceneView(pathToModel: cottageObjectPath) else {
             return sceneView  // return early to show erorr
         }
         guard let plantNode = addModelToSceneView(pathToModel: plantObjectPath, positionFromCenter: SCNVector3(12, 0, 0)) else {
-            return sceneView  // return early to show erorr
+            return sceneView
         }
         
         context.coordinator.currentNode = containerNode
