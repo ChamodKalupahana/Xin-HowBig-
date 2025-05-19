@@ -157,11 +157,17 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let tiltSensitivity : Float = 0.002
         
         // vertical movement adjust the camera's pitch up and down
-        let deltaTilt = Floa(translation.y) * tiltSensitivity
+        let deltaTilt = Float(translation.y) * tiltSensitivity
         
         // limit the tilt to avoid filpping over
         let maxTilt : Float = .pi / 2.5
-        let maxTilt : Float = -.pi / 2.5
+        let minTilt : Float = -.pi / 2.5
+        
+        // find current camera orientation in euler angles
+        var currentEulerAngles = cameraNode.eulerAngles
+        currentEulerAngles.x = max(min(currentEulerAngles.x + deltaTilt, maxTilt), minTilt)
+        
+        // apply ro
         return
     }
     
