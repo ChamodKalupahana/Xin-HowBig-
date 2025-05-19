@@ -14,10 +14,12 @@ struct SceneViewController : UIViewRepresentable {
     let plantObjectPath = "art.scnassets/indoor plant_02.scn"
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
-    let initalisedCameraControlMethod : CameraControlMethod = .doubleDragToPan
+    let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
+    
+    let sceneView = SCNView()
+    let containerNode = SCNNode()
     
     func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
         
         // Create Scene
         let scene = SCNScene()
@@ -25,26 +27,15 @@ struct SceneViewController : UIViewRepresentable {
         sceneView.autoenablesDefaultLighting = true
         sceneView.backgroundColor = UIColor(resource: .background)
         
-        let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
-        // Load Object
-        guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
-            print("Cottage_FREE not found")
-            return sceneView // return early to show erorr
+        guard let cottageNode = addModelToSceneView(pathToModel: cottageObjectPath) else {
+            return sceneView  // return early to show erorr
+        }
+        guard let plantNode = addModelToSceneView(pathToModel: plantObjectPath, positionFromCenter: SCNVector3(12, 0, 0)) else {
+            return sceneView
         }
         
-        containerNode.addChildNode(cottageNode)
-        context.coordinator.cottageNode = cottageNode
-        
-        guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
-            print("plantNode not found")
-            return sceneView // return early to show erorr
-        }
-//        print("plantNode children count: \(plantNode.childNodes.count)")
-        
-        plantNode.position = SCNVector3(12, 0, 0)
-        containerNode.addChildNode(plantNode)
         context.coordinator.currentNode = containerNode
         context.coordinator.plantNode = plantNode
         
@@ -53,7 +44,7 @@ struct SceneViewController : UIViewRepresentable {
     
         // add in panning
         context.coordinator.sceneView = sceneView
-        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleRotateAndPan(_:)))
+        let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePan(_:)))
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
@@ -73,7 +64,7 @@ struct SceneViewController : UIViewRepresentable {
         context.coordinator.focusOnNode(on: cottageNode)
         
         // add in scaling
-        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handlePinch(_:)))
+        let pinchGesture = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePinch(_:)))
         sceneView.addGestureRecognizer(pinchGesture)
         
         // add in lighting
@@ -88,8 +79,14 @@ struct SceneViewController : UIViewRepresentable {
         scene.rootNode.addChildNode(lightNode)
         
         // add in tap gesture
-        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinator.handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
+        
+        if (initalisedCameraControlMethod == .dragToPanOrbitToRotate) {
+            // add in orbit to rotate gesture
+            let rotateGesture = UIRotationGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleOrbit(_:)))
+            sceneView.addGestureRecognizer(rotateGesture)
+        }
         
         return sceneView
     }
@@ -97,8 +94,8 @@ struct SceneViewController : UIViewRepresentable {
     func updateUIView(_ uiView: SCNView, context: Context) {
     }
     
-    func makeCoordinator() -> ObjectInteractionCoordinator {
-        ObjectInteractionCoordinator(initalisedCameraControlMethod: initalisedCameraControlMethod)
+    func makeCoordinator() -> InteractionCoordinator {
+        ObjectInteractionCoordinatorDragToPanOrbitToRotate(initalisedCameraControlMethod: initalisedCameraControlMethod)
     }
     
     func rotate(node : SCNNode) {
@@ -186,6 +183,20 @@ struct SceneViewController : UIViewRepresentable {
         
         // add to root
         containerNode.addChildNode(axesContainer)
+    }
+    
+    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3 = SCNVector3(0, 0, 0)) -> SCNNode? {
+        
+        // Load Object
+        guard let nodeToAdd = SCNScene(named: pathToModel)?.rootNode.clone() else {
+            print("\(pathToModel) not found")
+            return nil
+        }
+        
+        nodeToAdd.position = positionFromCenter
+        containerNode.addChildNode(nodeToAdd)
+        
+        return nodeToAdd
     }
 }
 
