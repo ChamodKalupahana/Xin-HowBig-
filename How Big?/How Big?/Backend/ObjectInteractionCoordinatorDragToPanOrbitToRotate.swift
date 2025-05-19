@@ -153,7 +153,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         guard let cameraNode = cameraNode else { return }
         
         let translation = gesture.translation(in: gesture.view)
-        let tiltSensitivity : Float = 0.002
+        let tiltSensitivity : Float = 0.2
         
         // vertical movement adjust the camera's pitch up and down
         let deltaTilt = Float(translation.y) * tiltSensitivity
