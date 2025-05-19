@@ -64,7 +64,15 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             let maxDistance : Float = 100
             let minDistance : Float = 1
             
-            let distanceFromOrigin = sqrt(pow(<#T##lhs: Float##Float#>, <#T##rhs: Float##Float#>))
+            let distanceFromOrigin = sqrt(pow(cameraNode.position.x, 2) +
+                                          pow(cameraNode.position.y, 2) +
+                                          pow(cameraNode.position.z, 2))
+            
+            if distanceFromOrigin > maxDistance {
+                cameraNode.position = cameraNode.position.normalized() * maxDistance
+            } else if distanceFromOrigin < minDistance {
+                cameraNode.position = cameraNode.position.normalized() * minDistance
+            }
         }
         
         updateCenterOfRotation()
