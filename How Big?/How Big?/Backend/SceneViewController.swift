@@ -15,7 +15,9 @@ struct SceneViewController : UIViewRepresentable {
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
     let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
+    
     let sceneView = SCNView()
+    let containerNode = SCNNode()
     
     func makeUIView(context: Context) -> SCNView {
         
@@ -25,26 +27,33 @@ struct SceneViewController : UIViewRepresentable {
         sceneView.autoenablesDefaultLighting = true
         sceneView.backgroundColor = UIColor(resource: .background)
         
-        let containerNode = SCNNode()
         scene.rootNode.addChildNode(containerNode)
         
         // Load Object
-        guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
-            print("Cottage_FREE not found")
-            return sceneView // return early to show erorr
+//                guard let cottageNode = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
+//                    print("Cottage_FREE not found")
+//                    return sceneView // return early to show erorr
+//                }
+//        
+//                containerNode.addChildNode(cottageNode)
+//                context.coordinator.cottageNode = cottageNode
+//        
+//                guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
+//                    print("plantNode not found")
+//                    return sceneView // return early to show erorr
+//                }
+//        //        print("plantNode children count: \(plantNode.childNodes.count)")
+//        
+//                plantNode.position = SCNVector3(12, 0, 0)
+//                containerNode.addChildNode(plantNode)
+        
+        guard let cottageNode = addModelToSceneView(pathToModel: cottageObjectPath) else {
+            return sceneView  // return early to show erorr
+        }
+        guard let plantNode = addModelToSceneView(pathToModel: plantObjectPath, positionFromCenter: SCNVector3(12, 0, 0)) else {
+            return sceneView  // return early to show erorr
         }
         
-        containerNode.addChildNode(cottageNode)
-        context.coordinator.cottageNode = cottageNode
-        
-        guard let plantNode = SCNScene(named: plantObjectPath)?.rootNode.clone() else {
-            print("plantNode not found")
-            return sceneView // return early to show erorr
-        }
-//        print("plantNode children count: \(plantNode.childNodes.count)")
-        
-        plantNode.position = SCNVector3(12, 0, 0)
-        containerNode.addChildNode(plantNode)
         context.coordinator.currentNode = containerNode
         context.coordinator.plantNode = plantNode
         
@@ -194,14 +203,19 @@ struct SceneViewController : UIViewRepresentable {
         containerNode.addChildNode(axesContainer)
     }
     
-//    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3) -> SCNNode {
-//        
-//        // Load Object    
-//        guard let nodeToAdd = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
-//            print("Cottage_FREE not found")
-//            return sceneView // return early to show erorr
-//        }
-//    }
+    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3 = SCNVector3(0, 0, 0)) -> SCNNode? {
+        
+        // Load Object
+        guard let nodeToAdd = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
+            print("\(pathToModel) not found")
+            return nil
+        }
+        
+        nodeToAdd.position = positionFromCenter
+        containerNode.addChildNode(nodeToAdd)
+        
+        return nodeToAdd
+    }
 }
 
 
