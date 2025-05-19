@@ -72,6 +72,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             } else if distanceFromOrigin < minDistance {
                 cameraNode.position = cameraNode.position.normalized() * minDistance
             }
+            
         }
         
         gesture.scale = 1.0
