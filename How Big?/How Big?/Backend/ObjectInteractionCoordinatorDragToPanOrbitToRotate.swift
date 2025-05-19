@@ -149,6 +149,12 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         
     }
     
+    // not used for dragToPanOrbitToRotate
+    @objc func handleTilt(_ gesture: UITapGestureRecognizer) {
+        return
+    }
+    
+    
     
 }
 
