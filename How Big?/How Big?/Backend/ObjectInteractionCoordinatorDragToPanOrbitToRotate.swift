@@ -38,7 +38,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
         
-        let scalingInZAxis = true
+        let scalingInZAxis = false
         
         let scale = Float(gesture.scale)
         
@@ -48,7 +48,23 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             cameraNode.position.z = max(-50, min(50, newZ))
             gesture.scale = 1.0
         } else {
-
+            let zoomSensitivity : Float = 0.1
+            
+            // calculate the zoom vector (camera's forward direction)
+            let cameraDirection = cameraNode.worldFront
+            let factor = (1 - scale)
+            let zoomVector = SCNVector3(cameraDirection.x * zoomSensitivity * factor,
+                                        cameraDirection.y * zoomSensitivity * factor,
+                                        cameraDirection.z * zoomSensitivity * factor)
+            
+            // Update the camera position in it's look direction
+            cameraNode.position = cameraNode.position + zoomVector
+            
+            // Limit the zoom range
+            let maxDistance : Float = 100
+            let minDistance : Float = 1
+            
+            let distanceFromOrigin = sqrt(pow(<#T##lhs: Float##Float#>, <#T##rhs: Float##Float#>))
         }
         
         updateCenterOfRotation()
@@ -125,4 +141,19 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     }
     
     
+}
+
+extension SCNVector3 {
+    static func + (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+        return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
+    }
+
+    static func * (vector: SCNVector3, scalar: Float) -> SCNVector3 {
+        return SCNVector3(vector.x * scalar, vector.y * scalar, vector.z * scalar)
+    }
+    
+    func normalized() -> SCNVector3 {
+        let length = sqrt(x * x + y * y + z * z)
+        return length == 0 ? self : SCNVector3(x / length, y / length, z / length)
+    }
 }
