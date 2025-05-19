@@ -15,6 +15,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "scale.3d")
                     Text("Compare")
+                        .font(.customBody)
                 }
         }
     }
