@@ -38,11 +38,18 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
         
-        let scale = Float(gesture.scale)
-        let newZ = cameraNode.position.z / scale
+        let scalingInZAxis = true
         
-        cameraNode.position.z = max(-50, min(50, newZ))
-        gesture.scale = 1.0
+        let scale = Float(gesture.scale)
+        
+        if (scalingInZAxis) {
+            let newZ = cameraNode.position.z / scale
+            
+            cameraNode.position.z = max(-50, min(50, newZ))
+            gesture.scale = 1.0
+        } else {
+
+        }
         
         updateCenterOfRotation()
         return
@@ -60,18 +67,9 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let deltaY = Float(translation.y) * panSensitivity
         
         if (translateAroundCenterOfRotation) {
-//            let translationMatrix = SCNMatrix4MakeTranslation(deltaX, -deltaY, 0)
-//            let toCenter = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
-//            let backToPosition = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
-//            
-//            let panTransform = SCNMatrix4Mult(SCNMatrix4Mult(toCenter, translationMatrix), backToPosition)
-//            
-//            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
-            
             let localTransform = SCNVector3(-deltaX, deltaY, 0)
             let worldTransform = cameraNode.convertPosition(localTransform, to: nil)
             cameraNode.position = worldTransform
-            
         } else {
             cameraNode.position.x -= deltaX
             cameraNode.position.y += deltaY
