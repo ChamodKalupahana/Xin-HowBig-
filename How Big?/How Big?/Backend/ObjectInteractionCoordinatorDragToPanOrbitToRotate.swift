@@ -158,7 +158,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         // vertical movement adjust the camera's pitch up and down
         let deltaTilt = Float(translation.y) * tiltSensitivity
         
-        // limit the tilt to avoid filpping over
+        // limit the tilt to avoid filpping over 
         let maxTilt : Float = .pi / 2.5
         let minTilt : Float = -.pi / 2.5
         
