@@ -206,7 +206,7 @@ struct SceneViewController : UIViewRepresentable {
     func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3 = SCNVector3(0, 0, 0)) -> SCNNode? {
         
         // Load Object
-        guard let nodeToAdd = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
+        guard let nodeToAdd = SCNScene(named: pathToModel)?.rootNode.clone() else {
             print("\(pathToModel) not found")
             return nil
         }
