@@ -15,9 +15,9 @@ struct SceneViewController : UIViewRepresentable {
 //    let plantObjectPath = "art.scnassets/Football.scn"
     
     let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
+    let sceneView = SCNView()
     
     func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
         
         // Create Scene
         let scene = SCNScene()
@@ -194,9 +194,14 @@ struct SceneViewController : UIViewRepresentable {
         containerNode.addChildNode(axesContainer)
     }
     
-    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3) -> SCNNode {
-        
-    }
+//    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3) -> SCNNode {
+//        
+//        // Load Object    
+//        guard let nodeToAdd = SCNScene(named: cottageObjectPath)?.rootNode.clone() else {
+//            print("Cottage_FREE not found")
+//            return sceneView // return early to show erorr
+//        }
+//    }
 }
 
 
