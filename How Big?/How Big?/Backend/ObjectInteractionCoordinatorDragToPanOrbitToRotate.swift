@@ -149,7 +149,6 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         
     }
     
-    // not used for dragToPanOrbitToRotate
     @objc func handleTilt(_ gesture: UIPanGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
         
@@ -168,7 +167,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         currentEulerAngles.x = max(min(currentEulerAngles.x + deltaTilt, maxTilt), minTilt)
         
         // apply rotation back to camera
-        cameraNode.eulerAngles = currentEulerAngles
+        currentNode?.eulerAngles = currentEulerAngles
         
         // reset the translation to zero for continous detection
         gesture.setTranslation(.zero, in: gesture.view)
