@@ -48,10 +48,8 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer, translateAroundCenterOfRotation : Bool = false) {
         guard let cameraNode = cameraNode else { return }
-        
-        let translateAroundCenterOfRotation = false
         
         let translation = gesture.translation(in: gesture.view)
         let panSensitivity : Float = 0.05
