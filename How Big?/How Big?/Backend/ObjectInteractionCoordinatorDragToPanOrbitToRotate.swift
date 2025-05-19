@@ -48,8 +48,10 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         return
     }
     
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer, translateAroundCenterOfRotation : Bool = false) {
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         guard let cameraNode = cameraNode else { return }
+        
+        let translateAroundCenterOfRotation = true
         
         let translation = gesture.translation(in: gesture.view)
         let panSensitivity : Float = 0.05
@@ -58,13 +60,17 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         let deltaY = Float(translation.y) * panSensitivity
         
         if (translateAroundCenterOfRotation) {
-            let translationMatrix = SCNMatrix4MakeTranslation(deltaX, -deltaY, 0)
-            let toCenter = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
-            let backToPosition = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
+//            let translationMatrix = SCNMatrix4MakeTranslation(deltaX, -deltaY, 0)
+//            let toCenter = SCNMatrix4MakeTranslation(-centerOfRotation.x, -centerOfRotation.y, -centerOfRotation.z)
+//            let backToPosition = SCNMatrix4MakeTranslation(centerOfRotation.x, centerOfRotation.y, centerOfRotation.z)
+//            
+//            let panTransform = SCNMatrix4Mult(SCNMatrix4Mult(toCenter, translationMatrix), backToPosition)
+//            
+//            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
             
-            let panTransform = SCNMatrix4Mult(SCNMatrix4Mult(toCenter, translationMatrix), backToPosition)
-            
-            cameraNode.transform = SCNMatrix4Mult(cameraNode.transform, panTransform)
+            let localTransform = SCNVector3(deltaX, deltaY, 0)
+            let worldTransform = cameraNode.convertPosition(localTransform, to: nil)
+            cameraNode.position = worldTransform
             
         } else {
             cameraNode.position.x -= deltaX
