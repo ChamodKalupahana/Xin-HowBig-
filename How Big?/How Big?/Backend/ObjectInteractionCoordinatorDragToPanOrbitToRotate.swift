@@ -57,7 +57,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
                                         cameraDirection.z * zoomSensitivity * factor)
             
             // Update the camera position in it's look direction
-            cameraNode.position = cameraNode.position + zoomVector
+            cameraNode.position = cameraNode.position - zoomVector
             
             // Limit the zoom range
             let maxDistance : Float = 100
@@ -155,6 +155,10 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
 extension SCNVector3 {
     static func + (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
         return SCNVector3(left.x + right.x, left.y + right.y, left.z + right.z)
+    }
+    
+    static func - (left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+        return SCNVector3(left.x - right.x, left.y - right.y, left.z - right.z)
     }
 
     static func * (vector: SCNVector3, scalar: Float) -> SCNVector3 {
