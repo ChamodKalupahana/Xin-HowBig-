@@ -151,7 +151,17 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
     
     // not used for dragToPanOrbitToRotate
     @objc func handleTilt(_ gesture: UIPanGestureRecognizer) {
+        guard let cameraNode = cameraNode else { return }
         
+        let translation = gesture.translation(in: gesture.view)
+        let tiltSensitivity : Float = 0.002
+        
+        // vertical movement adjust the camera's pitch up and down
+        let deltaTilt = Floa(translation.y) * tiltSensitivity
+        
+        // limit the tilt to avoid filpping over
+        let maxTilt : Float = .pi / 2.5
+        let maxTilt : Float = -.pi / 2.5
         return
     }
     
