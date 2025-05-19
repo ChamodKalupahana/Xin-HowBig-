@@ -167,7 +167,13 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
         var currentEulerAngles = cameraNode.eulerAngles
         currentEulerAngles.x = max(min(currentEulerAngles.x + deltaTilt, maxTilt), minTilt)
         
-        // apply ro
+        // apply rotation back to camera
+        cameraNode.eulerAngles = currentEulerAngles
+        
+        // reset the translation to zero for continous detection
+        gesture.setTranslation(.zero, in: gesture.view)
+        
+        updateCenterOfRotation()
         return
     }
     
