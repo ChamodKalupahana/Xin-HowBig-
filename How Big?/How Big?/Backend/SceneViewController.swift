@@ -45,6 +45,7 @@ struct SceneViewController : UIViewRepresentable {
         // add in panning
         context.coordinator.sceneView = sceneView
         let panGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handlePan(_:)))
+        panGesture.maximumNumberOfTouches = 1
         sceneView.addGestureRecognizer(panGesture)
         
         // add in camera
@@ -86,6 +87,11 @@ struct SceneViewController : UIViewRepresentable {
             // add in orbit to rotate gesture
             let rotateGesture = UIRotationGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleOrbit(_:)))
             sceneView.addGestureRecognizer(rotateGesture)
+            
+            // add in tilt
+            let tiltGesture = UIPanGestureRecognizer(target: context.coordinator, action: #selector(ObjectInteractionCoordinatorDragToPanOrbitToRotate.handleTilt(_:)))
+            tiltGesture.minimumNumberOfTouches = 2
+            sceneView.addGestureRecognizer(tiltGesture)
         }
         
         return sceneView
