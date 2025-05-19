@@ -47,7 +47,7 @@ class ObjectInteractionCoordinatorDragToPanOrbitToRotate : NSObject, Interaction
             
             cameraNode.position.z = max(-50, min(50, newZ))
         } else {
-            let zoomSensitivity : Float = 0.1
+            let zoomSensitivity : Float = 1
             
             // calculate the zoom vector (camera's forward direction)
             let cameraDirection = cameraNode.worldFront
