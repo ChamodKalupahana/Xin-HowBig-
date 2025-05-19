@@ -9,6 +9,7 @@ import SwiftUI
 import SceneKit
 
 class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
+    
     let initalisedCameraControlMethod : CameraControlMethod
     
     // auto generated init
@@ -141,6 +142,10 @@ class ObjectInteractionCoordinator : NSObject, InteractionCoordinator {
     
     // not used in this case
     func handleOrbit(_ gesture: UIRotationGestureRecognizer) {
+        return
+    }
+    
+    func handleTilt(_ gesture: UIPanGestureRecognizer) {
         return
     }
 }
