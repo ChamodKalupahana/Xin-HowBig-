@@ -193,6 +193,10 @@ struct SceneViewController : UIViewRepresentable {
         // add to root
         containerNode.addChildNode(axesContainer)
     }
+    
+    func addModelToSceneView(pathToModel : String, positionFromCenter : SCNVector3) -> SCNNode {
+        
+    }
 }
 
 
