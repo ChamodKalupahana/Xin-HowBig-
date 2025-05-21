@@ -10,9 +10,12 @@ import SwiftUI
 import SceneKit
 
 struct SceneViewController : UIViewRepresentable {
-    let cottageObjectPath = "art.scnassets/Cottage_FREE.scn"
-    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
-//    let plantObjectPath = "art.scnassets/Football.scn"
+//    let cottageObjectPath = "art.scnassets/Cottage_FREE.scn"
+//    let plantObjectPath = "art.scnassets/indoor plant_02.scn"
+    
+    let cottageObjectPath = "art.scnassets/fiction1.4_fixed.dae"
+    let plantObjectPath = "art.scnassets/苹果1.4_textured_patched.dae"
+    
     
     let initalisedCameraControlMethod : CameraControlMethod = .dragToPanOrbitToRotate
     
